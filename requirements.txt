@@ -1,0 +1,21 @@
+# Base requirements:
+#
+frozendict>=1.2
+typing-extensions>=3.7.4.1
+
+# Testing requirements:
+#
+mypy>=0.761
+pytest>=5.3.2
+pytest-cov>=2.8.1
+pytest-mypy>=0.4.2
+pytest-watch>=4.2.0
+
+# Doc-building requirements:
+#
+# sphinx>=2.3.1
+# sphinx-autobuild>=0.7.1
+# sphinx-autodoc-typehints>=1.10.3
+# sphinx-jsonschema>=1.12
+# sphinx-material>=0.0.19
+# sphinxcontrib-bibtex>=1.0.0
