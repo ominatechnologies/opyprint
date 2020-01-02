@@ -3,4 +3,4 @@ Changelog
 
 v0.1 - 2019-01-02
 +++++++++++++++++
-- Added 'PPContext' class.
+- Added the 'PPContext' class and the 'print' function.

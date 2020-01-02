@@ -2,6 +2,19 @@ WPyPrint Readme
 ===============
 An opinionated pretty-print library for Python.
 
+Design Goals
+------------
+- You want to pretty-print complex data-structures that do not only consist
+  of dicts, lists and other native data-structures and primitive values.
+- You want to be able to write functions that carefully pretty-print
+  your custom data types, with consistent indentation and wrapping when such
+  objects occur in another data structure.
+- You don't care about obtaining a pretty-printed form that can be used as
+  input to the interpreter. Human readability is your main (and only) concern.
+- You want some truncation control to limit the number of printed list
+  elements, or the number of printed lines in wrapped strings.
+
+
 Project Setup
 -------------
 We use pytest_ as testing framework and our code provides type hinting (see

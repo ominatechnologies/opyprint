@@ -41,7 +41,7 @@ class PPContext:
 
     # -- Class Initialization --------------- --- --  -
 
-    default_width: ClassVar[int] = 120
+    default_width: ClassVar[int] = 100
     """The default content width, including indentation and bullets."""
 
     default_truncate: ClassVar[int] = 7
@@ -56,6 +56,12 @@ class PPContext:
     """
     The default bullet prefix string that is used when using the
     :meth:`~bullet` context manager.
+    """
+
+    print_name_value_pairs: ClassVar[bool] = True
+    """
+    When true, calling the :meth:`~print` method with two arguments will
+    print them as a name-value pair. 
     """
 
     # -- Instance Initialization --------------- --- --  -
@@ -143,20 +149,19 @@ class PPContext:
             dict). When you provide three or more arguments, then these will be
             formatted as a list.
         """
-        if len(args) == 1:
+        if len(args) == 0:
+            result = "--"
+        elif len(args) == 1:
             arg = args[0]
-            if isinstance(arg, str):
-                result = arg
-            else:
-                result = self._format_aux(arg)
-        elif len(args) == 2:
+            result = self._format_aux(arg)
+        elif len(args) == 2 and self.print_name_value_pairs:
             result = self._format_aux({args[0]: args[1]})
         else:
             result = self._format_aux(args)
 
         if result is None:
             result = "--"
-        elif not isinstance(result, str) or isinstance(result, list):
+        elif not isinstance(result, str) and not isinstance(result, list):
             msg = "Got an unexpected result from format_aux: '{}'"
             raise ValueError(msg.format(result))
 
@@ -219,8 +224,10 @@ class PPContext:
 
         return str(val)
 
-    def _format_str(self, val, quote: str = "\"") -> str:
-        val = quote + val + quote
+    def _format_str(self, val) -> str:
+        if val == "":
+            return '""'
+
         if is_singleline(val) and len(val) > self._content_width:
             if self._truncate:
                 max_len = self._content_width * self._truncate
@@ -250,7 +257,7 @@ class PPContext:
             if not wrap:
                 return pal + res + par
 
-        with self.bullet():
+        with self.bullets():
             return "\n".join(self.format(el) for el in seq)
 
     def _format_dict(self, dct):
@@ -309,30 +316,35 @@ class PPContext:
 
     @contextmanager
     def indent(self, indent: str = "  "):
-        ori_indent = self._indent
-        self._indent = self._indent + indent
         ori_bullet = self._bullet
+        ori_indent = self._indent
+        if not self._bullet:
+            self._indent = self._indent + indent
         self._bullet = ""
         self._update()
         try:
             yield self
         finally:
-            self._indent = ori_indent
             self._bullet = ori_bullet
+            self._indent = ori_indent
             self._update()
 
     @contextmanager
-    def bullet(self, bullet: str = default_bullet):
+    def bullets(self, bullet: str = default_bullet):
         ori_bullet = self._bullet
+        ori_indent = self._indent
+        if self._bullet:
+            self._indent = self._indent + "  "
         self._bullet = self.normalize_bullet(bullet)
         self._update()
         try:
             yield self
         finally:
             self._bullet = ori_bullet
+            self._indent = ori_indent
             self._update()
 
-    # -- Callable and Flush Methods --------------- --- --  -
+    # -- Callable, print and flush Methods --------------- --- --  -
 
     def __call__(self, *args) -> str:
         """
@@ -358,12 +370,31 @@ class PPContext:
         self._lines = []
         return "\n".join(lines)
 
+    def print(self, *args) -> None:
+        """
+        Pretty-prints the given arguments or the pretty-printed content
+        collected by calling the context as a function.
+
+        :param args: When called without arguments the pretty-printed
+            content collected by calling the context as a function is printed.
+            When called with two argument and the
+            :attr:`~print_name_value_pairs` attributes is true, then the
+            arguments are printed as a name-value pair (in a dict). Otherwise
+            multiple arguments are printed as list.
+        """
+        if len(args) == 0:
+            print(self.flush())
+        else:
+            print(self.format(*args))
+
     # -- System Methods --------------- --- --  -
 
     @staticmethod
     def normalize_bullet(bullet: str) -> str:
-        if bullet and not bullet.endswith(" "):
+        if len(bullet) == 1:
             return bullet + " "
+        if len(bullet) == 2 and not bullet.endswith(" ") or len(bullet) > 2:
+            return bullet[:1] + " "
         return bullet
 
     def _squash(self):

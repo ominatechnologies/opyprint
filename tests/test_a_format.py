@@ -1,6 +1,20 @@
-# test_ppcontext
+# test_a_format
 
 from wpyprint import PPContext
+
+
+def test_empty_1():
+    ppc = PPContext()
+    result = ppc.format()
+    # print(result)
+    assert result == "--"
+
+
+def test_str_1():
+    ppc = PPContext()
+    result = ppc.format("")
+    # print(result)
+    assert result == '""'
 
 
 def test_list_1():
@@ -122,66 +136,3 @@ def test_composite_3():
     result = ppc.format(val)
     # print(result)
     assert result == """abc: [1, 2, 3]"""
-
-
-def test_call_1():
-    sources = frozenset({1, 2, 3})
-    ppc = PPContext()
-    ppc("Title")
-    ppc("* key", (x for x in sources))
-    result = ppc.flush()
-    # print(f"- result: {result}")
-    assert result == """Title
-* key: [1, 2, 3]"""
-
-
-def test_describe_1():
-    ppc = PPContext()
-    ppc("L1")
-    with ppc.bullet(bullet="#"):
-        ppc("foobar", Foobar())
-    ppc("L4")
-    result = ppc.flush()
-    # print(f"- result: {result}")
-    assert result == """L1
-# foobar: L2
-    - B1
-    - B2
-      I1
-      - I2
-    L3
-L4"""
-
-
-def test_describe_2():
-    ppc = PPContext()
-    ppc("L1")
-    ppc("foobar", Foobar())
-    ppc("L4")
-    result = ppc.flush()
-    # print(f"- result: {result}")
-    assert result == """L1
-foobar: L2
-  - B1
-  - B2
-    I1
-    - I2
-  L3
-L4"""
-
-
-class Foobar:
-    @staticmethod
-    def describe(ppc: PPContext = None):
-        ppc = ppc or PPContext()
-        ppc("L2")
-        with ppc.bullet():
-            ppc("B1")
-            with ppc.bullet():
-                ppc("B2")
-        with ppc.indent():
-            ppc("I1")
-            with ppc.bullet():
-                ppc("I2")
-        ppc("L3")
-        return ppc.flush()
