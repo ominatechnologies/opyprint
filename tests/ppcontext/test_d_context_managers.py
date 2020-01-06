@@ -1,4 +1,4 @@
-# test_c_context_managers
+# test_d_context_managers
 
 from wpyprint import PPContext
 
@@ -19,7 +19,7 @@ def test_indent():
         ppc("B7")
         ppc("B8")
     result = ppc.flush()
-    # print(result)
+    # print("\n" + result)
     assert result == """L1
   B1
   B2
@@ -31,7 +31,7 @@ def test_indent():
 > B8"""
 
 
-def test_bullets():
+def test_bullets_1():
     ppc = PPContext()
     ppc("L1")
     with ppc.bullets():
@@ -50,18 +50,44 @@ def test_bullets():
         ppc("B8")
         ppc("B9")
     result = ppc.flush()
-    # print(result)
+    # print("\n" + result)
     assert result == """L1
 - B1
 - B2
 * B3
 * B4
-  - B5
-  - B6
+  * B5
+  * B6
     + B7a
     + B7b
 > B8
 > B9"""
+
+
+def test_bullets_2():
+    ppc = PPContext(width=15)
+    ppc.newline()
+    with ppc.bullets("*"):
+        ppc("B1")
+        ppc([1, 2, 3])
+        ppc.newline()
+        ppc([111, 222, 333])
+        with ppc.bullets(">"):
+            ppc([1, 2, 3])
+            ppc([111, 222, 333])
+    result = ppc.flush()
+    # print("'" + result + "'")
+    assert result == """
+* B1
+* [1, 2, 3]
+
+* - 111
+  - 222
+  - 333
+  > [1, 2, 3]
+  > - 111
+    - 222
+    - 333"""
 
 
 def test_width():
@@ -86,6 +112,6 @@ def test_width():
                 ppc('foobar', txt2)
 
     result = ppc.flush()
-    # print(result)
+    # print("\n" + result)
     for line in result.splitlines():
         assert len(line) <= 20

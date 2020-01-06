@@ -1,13 +1,11 @@
 import textwrap
 from contextlib import contextmanager
 from dataclasses import dataclass
-from typing import Optional, Union, ClassVar
 from inspect import isgenerator, signature
 from re import compile
+from typing import ClassVar, Generator, List, Optional, Tuple, Union
 
-from .utils import is_dict, is_multiline, is_set, is_singleline
-
-bullet_regex = compile('^([-><#@*]{1,3} )')
+from .utils import is_dict, is_multiliner, is_oneliner, is_set, is_tuple
 
 
 # TODO: support custom formatters
@@ -24,6 +22,7 @@ class PPContext:
 
     2. When calling a PPContext object as a function, then the given arguments
        are formatted and collected. Use the :meth:`~flush` method to get (and
+       clear) the collected content or the :meth:`~print` method to print (and
        clear) the collected content.
 
        Example::
@@ -41,6 +40,12 @@ class PPContext:
 
     # -- Class Initialization --------------- --- --  -
 
+    bullet_regex = compile('^([-+=|:~<>#$%^&@*?!]{1,3} )')
+    """
+    A compiled regular expression that is used to determine if a formatted
+    string starts with a bullet.
+    """
+
     default_width: ClassVar[int] = 100
     """The default content width, including indentation and bullets."""
 
@@ -53,10 +58,10 @@ class PPContext:
     """
 
     default_bullet: ClassVar[str] = "- "
-    """
-    The default bullet prefix string that is used when using the
-    :meth:`~bullet` context manager.
-    """
+    """The default bullet prefix string."""
+
+    default_indent: ClassVar[str] = "  "
+    """The default single indentation string."""
 
     print_name_value_pairs: ClassVar[bool] = True
     """
@@ -69,6 +74,7 @@ class PPContext:
     __slots__ = [
         '_bullet',
         '_content_width',
+        '_default_bullet',
         '_indent',
         '_lines',
         '_prefix_0',
@@ -79,6 +85,7 @@ class PPContext:
 
     _bullet: Optional[str]
     _content_width: int
+    _default_bullet: str
     _indent: str
     _lines: list
     _prefix_0: str
@@ -90,7 +97,8 @@ class PPContext:
                  width: int = default_width,
                  truncate: int = default_truncate,
                  bullet: str = "",
-                 indent: str = ""):
+                 indent: str = "",
+                 default_bullet: str = default_bullet):
         """
         :param width: Total width in characters, including bullets and
             indentation. Defaults to the value of the :attr:`~default_width`
@@ -120,26 +128,35 @@ class PPContext:
             msg = "Expected a string as 'indent', got '{}'."
             raise TypeError(msg.format(indent))
 
-        self._bullet = self.normalize_bullet(bullet)
+        self._bullet = None
+        self._bullet = self._normalize_bullet(bullet) if bullet else ""
         self._indent = indent
         self._lines = list()
         self._truncate = truncate
         self._width = width
 
+        # Manage an instance-level default bullet to allow it to be customized,
+        # such as when providing the 'bullet' argument to the 'format' method:
+        self._default_bullet = default_bullet
+
         self._update()
 
-    def _update(self):
-        if self._bullet:
-            self._prefix_0 = self._indent + self._bullet
-            self._prefix_n = self._indent + " " * len(self._bullet)
-        else:
-            self._prefix_0 = self._indent
-            self._prefix_n = self._indent
-        self._content_width = self._width - len(self._prefix_0)
+    # -- Accessors --------------- --- --  -
+
+    @property
+    def indentation(self) -> str:
+        """The current indentation string."""
+        return self._indent
+
+    @indentation.setter
+    def indentation(self, indent: str):
+        """Set the current indentation string."""
+        self._indent = indent
+        self._update()
 
     # -- Format Method and Helpers --------------- --- --  -
 
-    def format(self, *args) -> str:
+    def format(self, *args, bullet: Union[str, bool] = None) -> str:
         """
         Returns a pretty-printed representation of the given arguments.
 
@@ -148,22 +165,46 @@ class PPContext:
             arguments, then they will be formatted as a name-value pair (in a
             dict). When you provide three or more arguments, then these will be
             formatted as a list.
+        :param bullet: When given, prefix the formatted result with a bullet,
+            when this is not yet the case. The argument may be either a
+            non-empty string, the first character of which is taken
+            as the bullet, or true to use the current or default bullet.
         """
         if len(args) == 0:
-            result = "--"
-        elif len(args) == 1:
-            arg = args[0]
-            result = self._format_aux(arg)
-        elif len(args) == 2 and self.print_name_value_pairs:
-            result = self._format_aux({args[0]: args[1]})
-        else:
-            result = self._format_aux(args)
+            return ""
 
-        if result is None:
-            result = "--"
-        elif not isinstance(result, str) and not isinstance(result, list):
-            msg = "Got an unexpected result from format_aux: '{}'"
-            raise ValueError(msg.format(result))
+        if len(args) == 1:
+            obj = args[0]
+        elif len(args) == 2 and self.print_name_value_pairs:
+            obj = {args[0]: args[1]}
+        else:
+            obj = args
+
+        if bullet:
+            bullet = self._normalize_bullet(bullet)
+            if self._is_bullettable(obj):
+                return self._format_aux(obj, force_bullet=bullet)
+            elif self._bullet != bullet:
+                ori_bullet = self._bullet
+                self._bullet = bullet
+                self._update()
+                result = self._format_aux(obj)
+                self._bullet = ori_bullet
+                self._update()
+                return result
+            else:
+                return self._format_aux(obj)
+        else:
+            return self._format_aux(obj)
+
+    def _format_aux(self, obj, force_bullet: str = None) -> str:
+        result = self._format_dispatch(obj, force_bullet=force_bullet)
+
+        if not isinstance(result, str) and not isinstance(result, list):
+            msg = ("Got an unexpected result of type '{}' from the formatter:"
+                   "\n  - the given object: {}"
+                   "\n  - the formatted result: {}")
+            raise ValueError(msg.format(type(result), obj, result))
 
         if self._bullet:
             if isinstance(result, str):
@@ -179,7 +220,8 @@ class PPContext:
 
         return result
 
-    def _format_aux(self, val) -> Union[str, list]:
+    def _format_dispatch(self, obj,
+                         force_bullet: str = None) -> Union[str, list]:
         if self._indent or self._bullet:
             # Use a squashed context to cleanly format content that should
             # then be indented or bulleted:
@@ -187,80 +229,42 @@ class PPContext:
         else:
             ppc = self
 
-        if isinstance(val, str):
-            return ppc._format_str(val)
-        if isinstance(val, list):
-            return ppc._format_seq(val, "[", "]")
-        if isgenerator(val):
-            return ppc._format_seq(list(val), "[", "]")
-        if isinstance(val, tuple):
-            return ppc._format_seq(val, "(", ")")
-        if is_set(val):
-            return ppc._format_seq(list(val), "{", "}")
-        if is_dict(val):
-            return ppc._format_dict(val)
+        if isinstance(obj, str):
+            return ppc._format_str(obj)
+        if is_dict(obj):
+            return ppc._format_dict(obj, force_bullet or self._default_bullet)
+        if self._is_bullettable(obj):
+            return ppc._format_bullettable(obj, bullet=force_bullet)
 
-        describe = getattr(val, 'describe', None)
+        describe = getattr(obj, 'describe', None)
         if callable(describe):
             params = tuple(signature(describe).parameters.keys())
             if 'ppc' in params:
                 if ppc == self:
                     # Use a fresh pp-context to pass to the describe method:
                     ppc = self._squash()
-                try:
-                    return val.describe(ppc=ppc)
-                except TypeError:
-                    pass
+                return obj.describe(ppc=ppc)
             elif 'width' in params:
-                try:
-                    return val.describe(width=ppc._content_width)
-                except TypeError:
-                    pass
+                return obj.describe(width=ppc._content_width)
             else:
-                try:
-                    return val.describe()
-                except TypeError:
-                    pass
+                return obj.describe()
 
-        return str(val)
+        return str(obj)
 
-    def _format_str(self, val) -> str:
-        if val == "":
-            return '""'
+    def _format_str(self, obj) -> str:
+        if obj == "":
+            return obj
 
-        if is_singleline(val) and len(val) > self._content_width:
+        if is_oneliner(obj) and len(obj) > self._content_width:
             if self._truncate:
                 max_len = self._content_width * self._truncate
-                if len(val) > max_len:
-                    val = textwrap.shorten(val, max_len)
-            return textwrap.wrap(val, self._content_width)
+                if len(obj) > max_len:
+                    obj = textwrap.shorten(obj, max_len)
+            return textwrap.wrap(obj, self._content_width)
 
-        return val
+        return obj
 
-    def _format_seq(self, seq, pal: str, par: str) -> str:
-        if len(seq) == 0:
-            return pal + par
-
-        if self._truncate and len(seq) > self._truncate:
-            seq = seq[:self._truncate].append("...")
-
-        # Try to fit the items on one line:
-        max_width = self._width - 2  # minus [], () or {}
-        res = self.format(seq[0])
-        if len(res) <= max_width and is_singleline(res):
-            wrap = False
-            for el in seq[1:]:
-                res = res + ", " + self.format(el)
-                if len(res) > max_width or is_multiline(res):
-                    wrap = True
-                    break
-            if not wrap:
-                return pal + res + par
-
-        with self.bullets():
-            return "\n".join(self.format(el) for el in seq)
-
-    def _format_dict(self, dct):
+    def _format_dict(self, dct, bullet: str):
         if len(dct) == 0:
             return "{}"
 
@@ -270,52 +274,130 @@ class PPContext:
         if self._truncate and len(kvs) > self._truncate:
             kvs = kvs[:self._truncate]
 
-        lines = [self._format_kv_pair(k, v) for k, v in kvs]
+        lines = [self._format_kv_pair(k, v, bullet) for k, v in kvs]
         if truncated:
             lines.append("...")
         return "\n".join(lines)
 
-    def _format_kv_pair(self, key, val):
-        if isinstance(val, str):
-            res = str(key) + ": " + val
-            if len(res) <= self._content_width:
-                return res
-
-            if self._truncate:
-                max_len = self._content_width * self._truncate
-                if len(res) > max_len:
-                    res = textwrap.shorten(res, max_len)
-
-            lines = textwrap.wrap(res, self._content_width - 2)
-            return "\n".join(lines[:1] + ["  " + line for line in lines[1:]])
-
+    def _format_kv_pair(self, key, value, bullet: str):
+        # Format the key, truncating it when it is too long:
         key = str(key)
-        with self.indent():
-            frm_val = self.format(val)
+        max_key_length = max(int((self._content_width - 2) / 2), 10)
+        if len(key) > max_key_length:
+            key = key[:max_key_length - 3] + "..."
 
-        lines = frm_val.splitlines()
-        if len(lines) == 1:
-            trimmed = frm_val.lstrip()
-            if not bullet_regex.match(trimmed):
-                res = key + ": " + trimmed
-                if len(res) <= self._content_width:
-                    return res
-        elif (not isinstance(val, list)
-              and not isinstance(val, tuple)
-              and not is_set(val)
-              and not is_dict(val)):
+        # Format a key-value pair with a string value, which is assumed to be
+        # regular text, as a oneliner or a wrapped and indented multiliner:
+        if isinstance(value, str):
+            # try to format the keyed string as a oneliner:
+            result = bullet + str(key) + ": " + value
+            if len(result) <= self._content_width:
+                return result
+
+            result = textwrap.wrap(result,
+                                   width=self._content_width - 2,
+                                   subsequent_indent=self.default_indent * 2,
+                                   max_lines=self._truncate)
+            return "\n".join(result)
+
+        # Try to format as a oneliner when the formatted value is a
+        # oneliner, except when the value is a key-value mapping or the
+        # formatted value seems to be bulletted:
+        if not is_dict(value):
+            result = self.format(value)
+            if is_oneliner(result) and not self.bullet_regex.match(result):
+                result = bullet + key + ": " + result
+                if len(result) <= self._content_width:
+                    return result
+
+        # Format multiline value with indentation:
+        with self.indent(self.default_indent * 2):
+            result = self.format(value)
+
+        # Try to fit the first line on the same line as the key, except when
+        # the value is a key-value mapping or the formatted value seems
+        # to be bulletted:
+        if not is_dict(value):
+            lines = result.splitlines()
             trimmed = lines[0].lstrip()
-            if not bullet_regex.match(trimmed):
-                res = key + ": " + lines[0].lstrip()
-                if len(res) <= self._content_width:
-                    return res + "\n" + "\n".join(lines[1:])
+            if not self.bullet_regex.match(trimmed):
+                first = bullet + key + ": " + trimmed
+                if len(first) <= self._content_width:
+                    return first + "\n" + "\n".join(lines[1:])
 
-        return key + ":\n" + frm_val
+        return bullet + key + ":\n" + result
+
+    def _format_bullettable(self, items, bullet: str = None) -> str:
+        if isgenerator(items):
+            items = self._generate_items(items)
+        elif self._truncate and len(items) > self._truncate:
+            items = items[:self._truncate].append("...")
+
+        if len(items) == 0:
+            brl, brr = self._brackets(items)
+            return brl + brr
+
+        # Try to format as a bracketed oneliner:
+        result = self._format_oneliner(items, bullet=bullet)
+        if result:
+            return result
+
+        # Format as bulletted items:
+        with self.bullets(bullet=bullet):
+            return "\n".join(self.format(el) for el in items)
+
+    def _format_oneliner(self, items, bullet: str = None) -> Optional[str]:
+        max_width = self._width - 2  # minus the _brackets
+        if bullet:
+            max_width -= len(bullet)  # minus the bullet
+
+        result = ""
+        for item in items:
+            frm_item = self.format(item)
+            if is_multiliner(frm_item):
+                return
+            if not result:
+                result = frm_item
+            else:
+                result = result + ", " + frm_item
+
+            if len(result) > max_width:
+                return
+
+        brl, brr = self._brackets(items)
+        if bullet:
+            return bullet + brl + result + brr
+        else:
+            return brl + result + brr
 
     # -- Context Managers --------------- --- --  -
 
     @contextmanager
-    def indent(self, indent: str = "  "):
+    def indent(self, indent: str = default_indent):
+        """
+        Indents the pretty-printing context.
+
+        Use this context-manager in a ``with`` statement as shown in the
+        following example::
+
+            ppc = PPContext()
+            ppc("v1")
+            with ppc.indent():
+                ppc("v2")
+                ppc("v3")
+            ppc("v4")
+            ppc.print()
+
+        The above will print the following::
+
+            v1
+              v2
+              v3
+            v4
+
+        :param indent: The optional indentation prefix string. Defaults to the
+            value of the static :attr:`~default_indent` attribute.
+        """
         ori_bullet = self._bullet
         ori_indent = self._indent
         if not self._bullet:
@@ -330,12 +412,39 @@ class PPContext:
             self._update()
 
     @contextmanager
-    def bullets(self, bullet: str = default_bullet):
+    def bullets(self, bullet: str = None):
+        """
+        Prefixes each formatted object in the pretty-printing context with a
+        bullet.
+
+        Use this context-manager in a ``with`` statement as shown in the
+        following example::
+
+            ppc = PPContext()
+            ppc("v1")
+            with ppc.bullet():
+                ppc("v2")
+                ppc("v3")
+            ppc("v4")
+            ppc.print()
+
+        The above will print the following::
+
+            v1
+            - v2
+            - v3
+            v4
+
+        :param bullet: The bullet prefix string. Defaults to the value of
+            the static :attr:`~default_bullet` attribute or when this context
+            is nested in another 'bullets' context, the bullet for that
+            context.
+        """
         ori_bullet = self._bullet
         ori_indent = self._indent
         if self._bullet:
             self._indent = self._indent + "  "
-        self._bullet = self.normalize_bullet(bullet)
+        self._bullet = self._normalize_bullet(bullet or True)
         self._update()
         try:
             yield self
@@ -346,20 +455,44 @@ class PPContext:
 
     # -- Callable, print and flush Methods --------------- --- --  -
 
-    def __call__(self, *args) -> str:
+    def __call__(self, *args, bullet: Union[str, bool] = None) -> None:
         """
         Formats the given arguments and collects the resulting pretty-printed
-        content. Call :meth:`~flush` to get the collected content.
+        content. Call :meth:`~flush` to get (and clear) the collected content
+        or :meth:`~print` to print (and clear) the collected content.
 
-        :param args: Values to be formatted. When you provide one argument,
+        Example::
+
+            ppc = PPContext()
+            ppc("v1")
+            ppc("v2")
+            ppc("v3")
+            ppc("v4")
+            ppc.print()
+
+        The above will print the following::
+
+            v1
+            v2
+            v3
+            v4
+
+        :param args: The values to format. When you provide one argument,
             then it will be pretty-printed normally. When you provide two
-            arguments, then they will be formatted as a name-value pair (in a
-            dict). When you provide three or more arguments, then these will be
-            formatted as a list.
+            arguments and the static :attr:`~print_name_value_pairs` attribute
+            is true, then they will be formatted as a name-value pair. When you
+            provide three or more arguments, then these will be formatted as a
+            (oneliner or bulletted) list.
+        :param bullet: When given, prefix the formatted result with a bullet
+            when this is not yet the case. The argument may be either a
+            non-empty string, the first character of which is taken
+            as the bullet, or true to use the current or default bullet.
         """
-        result = self.format(*args)
-        self._lines.append(result)
-        return result
+        self._lines.append(self.format(*args, bullet=bullet))
+
+    def newline(self) -> None:
+        """Adds a newline in the collected content."""
+        self._lines.append("")
 
     def flush(self) -> str:
         """
@@ -370,7 +503,7 @@ class PPContext:
         self._lines = []
         return "\n".join(lines)
 
-    def print(self, *args) -> None:
+    def print(self, *args, bullet: Union[str, bool] = None) -> None:
         """
         Pretty-prints the given arguments or the pretty-printed content
         collected by calling the context as a function.
@@ -381,21 +514,79 @@ class PPContext:
             :attr:`~print_name_value_pairs` attributes is true, then the
             arguments are printed as a name-value pair (in a dict). Otherwise
             multiple arguments are printed as list.
+        :param bullet: When given, prefix the formatted result with bullet,
+            when this is not yet the case. The argument may be either a
+            non-empty string, the first character of which is taken
+            as the bullet, or true to use the current or default bullet.
+            This parameter is ignored when this method is called with (other)
+            arguments.
         """
         if len(args) == 0:
             print(self.flush())
         else:
-            print(self.format(*args))
+            print(self.format(*args, bullet=bullet))
 
     # -- System Methods --------------- --- --  -
 
+    def _update(self):
+        if self._bullet:
+            self._prefix_0 = self._indent + self._bullet
+            self._prefix_n = self._indent + " " * len(self._bullet)
+        else:
+            self._prefix_0 = self._indent
+            self._prefix_n = self._indent
+        self._content_width = self._width - len(self._prefix_0)
+
     @staticmethod
-    def normalize_bullet(bullet: str) -> str:
-        if len(bullet) == 1:
-            return bullet + " "
-        if len(bullet) == 2 and not bullet.endswith(" ") or len(bullet) > 2:
-            return bullet[:1] + " "
-        return bullet
+    def _is_bullettable(obj) -> bool:
+        """
+        Checks if the pretty-printed representation of the given object is
+        normally bulletted.
+
+        :param obj: The value to check.
+        """
+        if (isinstance(obj, str)
+                or isinstance(obj, bytes)
+                or isinstance(obj, bytearray)
+                or isinstance(obj, memoryview)):
+            return False
+        else:
+            return hasattr(obj, '__iter__')
+
+    @staticmethod
+    def _brackets(obj) -> Tuple[str, str]:
+        """Gets the appropriate _brackets for the given bullettable object."""
+        if is_set(obj):
+            return "{", "}"
+        elif is_tuple(obj):
+            return "(", ")"
+        else:
+            return "[", "]"
+
+    def _normalize_bullet(self, bullet: Union[str, bool] = None) -> str:
+        """
+        Normalizes the given bullet string.
+
+        A normalized bullet string consists of one character followed by a
+        single space.
+
+        - When a non-empty string is given, the first character is taken as the
+          bullet.
+        - When true is given, the current or default bullet is used.
+        - When an empty string or false is given, a (falsy) empty string is
+          returned.
+        """
+        if isinstance(bullet, str):
+            if len(bullet) == 1:
+                return bullet + " "
+            if len(bullet) == 2 and not bullet.endswith(" ") or len(
+                    bullet) > 2:
+                return bullet[:1] + " "
+            return bullet
+        elif bullet:
+            return self._bullet or self._default_bullet
+        else:
+            return ""
 
     def _squash(self):
         """
@@ -403,4 +594,17 @@ class PPContext:
         the content-width of the current pp-context.
         """
         return PPContext(width=self._content_width,
-                         truncate=self._truncate)
+                         truncate=self._truncate,
+                         default_bullet=self._default_bullet)
+
+    def _generate_items(self, generator: Generator) -> List:
+        # Warning: The generator will be (partially) exhausted.
+        if self._truncate:
+            items = list()
+            try:
+                for i in range(self._truncate):
+                    items.append(next(generator))
+            except StopIteration:
+                pass
+            return items
+        return list(generator)

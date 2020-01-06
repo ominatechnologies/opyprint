@@ -11,11 +11,18 @@ def is_set(obj) -> bool:
     return isinstance(obj, set) or isinstance(obj, frozenset)
 
 
-def is_multiline(txt) -> bool:
+def is_tuple(obj) -> bool:
+    """Checks if the given object is a tuple."""
+    return isinstance(obj, tuple)
+
+
+def is_multiliner(txt) -> bool:
     """Checks if the given string contains newlines."""
+    assert isinstance(txt, str)
     return len(txt.splitlines()) > 1
 
 
-def is_singleline(txt) -> bool:
+def is_oneliner(txt) -> bool:
     """Checks if the given string contains no newlines."""
+    assert isinstance(txt, str)
     return len(txt.splitlines()) == 1

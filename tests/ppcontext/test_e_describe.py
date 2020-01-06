@@ -1,4 +1,4 @@
-# test_d_describe
+# test_e_describe
 
 from wpyprint import PPContext
 
@@ -6,11 +6,10 @@ from wpyprint import PPContext
 def test_describe_1():
     ppc = PPContext()
     ppc("L1")
-    with ppc.bullets(bullet="#"):
-        ppc("foobar", Foobar())
+    ppc("foobar", Foobar(), bullet="#")
     ppc("L4")
     result = ppc.flush()
-    # print(result)
+    # print("\n" + result)
     assert result == """L1
 # foobar: L2
     - B1
@@ -29,12 +28,12 @@ def test_describe_2():
     result = ppc.flush()
     # print(f"- result: {result}")
     assert result == """L1
-foobar: L2
-  - B1
-  - B2
-    I1
-    - I2
-  L3
+- foobar: L2
+    - B1
+    - B2
+      I1
+      - I2
+    L3
 L4"""
 
 

@@ -1,4 +1,5 @@
-# test_e_print
+# test_f_print
+
 import sys
 from io import StringIO
 
@@ -6,16 +7,16 @@ from wpyprint import PPContext, print as pprint
 
 
 def test_print_1():
-    target = "[1, 2, 3]\nkey: [4, 5]\n- 1234567\n- 2\n- 3\n"
+    target = "[1, 2, 3]\n- key: [4, 5]\n- 1234567\n- 2\n- 3\n"
     sys.stdout = StringIO()
-    ppc = PPContext(width=12)
+    ppc = PPContext(width=14)
     ppc([1, 2, 3])
     ppc("key", [4, 5])
     ppc(1234567, 2, 3)
     ppc.print()
     result = sys.stdout.getvalue()
     sys.stdout = sys.__stdout__
-    # print(result)
+    # print("\n" + result)
     assert result == target
     assert ppc.flush() == ""
 
@@ -31,19 +32,19 @@ def test_print_2():
     ppc.print()
     result = sys.stdout.getvalue()
     sys.stdout = sys.__stdout__
-    # print(result)
+    # print("\n" + result)
     assert result == target
     assert ppc.flush() == ""
     PPContext.print_name_value_pairs = True
 
 
 def test_print_3():
-    target = "key: [4, 5, 6]\n"
+    target = "- key: [4, 5, 6]\n"
     sys.stdout = StringIO()
     pprint("key", [4, 5, 6])
     result = sys.stdout.getvalue()
     sys.stdout = sys.__stdout__
-    # print(result)
+    # print("\n" + result)
     assert result == target
 
 
@@ -54,6 +55,6 @@ def test_print_4():
     pprint([4, 5, 6])
     result = sys.stdout.getvalue()
     sys.stdout = sys.__stdout__
-    # print(result)
+    # print("\n" + result)
     assert result == target
     PPContext.print_name_value_pairs = True
