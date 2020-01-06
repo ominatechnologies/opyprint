@@ -47,6 +47,32 @@ def test_list_1():
 - jkl"""
 
 
+def test_list_2():
+    ppc = PPContext(truncate=2)
+
+    result = ppc.format([1, 2, 3, 4, 5])
+    # print("\n" + result)
+    assert result == "[1, 2, ...]"
+
+    result = ppc.format((1, 2, 3, 4, 5))
+    # print("\n" + result)
+    assert result == "(1, 2, ...)"
+
+    result = ppc.format({5, 2, 1, 4, 3})
+    # print("\n" + result)
+    assert result == "{1, 2, ...}"
+
+    result = ppc.format((i for i in [1, 2, 3, 4, 5]))
+    # print("\n" + result)
+    assert result == "[1, 2, ...]"
+
+    result = ppc.format({"d": 4, "b": 2, "c": 3, "a": 1})
+    # print("\n" + result)
+    assert result == """- a: 1
+- b: 2
+- ..."""
+
+
 def test_dict_1():
     val = {}
     ppc = PPContext()
@@ -110,7 +136,8 @@ def test_dict_6():
     assert result == """- a: 1
 - b: 2
 - c: 3
-- d: 4"""
+- d: 4
+- ..."""
 
 
 def test_composite_1():
@@ -143,7 +170,8 @@ def test_composite_2():
     - a: 1
     - b: 2
     - c: 3
-    - d: 4"""
+    - d: 4
+    - ..."""
 
 
 def test_composite_3():

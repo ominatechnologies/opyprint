@@ -273,10 +273,11 @@ class PPContext:
         truncated = False
         if self._truncate and len(kvs) > self._truncate:
             kvs = kvs[:self._truncate]
+            truncated = True
 
         lines = [self._format_kv_pair(k, v, bullet) for k, v in kvs]
         if truncated:
-            lines.append("...")
+            lines.append(bullet + "...")
         return "\n".join(lines)
 
     def _format_kv_pair(self, key, value, bullet: str):
@@ -331,7 +332,24 @@ class PPContext:
         if isgenerator(items):
             items = self._generate_items(items)
         elif self._truncate and len(items) > self._truncate:
-            items = items[:self._truncate].append("...")
+            if is_set(items):
+                items = list(items)
+                try:
+                    items = sorted(items)
+                except Exception:
+                    pass
+                items = items[:self._truncate]
+                items.append("...")
+                items = set(items)
+            elif isinstance(items, tuple):
+                items = list(items)[:self._truncate]
+                items.append("...")
+                items = tuple(items)
+            elif is_dict(items):
+                raise Exception("Unexpected")
+            else:
+                items = items[:self._truncate]
+                items.append("...")
 
         if len(items) == 0:
             brl, brr = self._brackets(items)
@@ -604,6 +622,7 @@ class PPContext:
             try:
                 for i in range(self._truncate):
                     items.append(next(generator))
+                items.append("...")
             except StopIteration:
                 pass
             return items
