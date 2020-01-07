@@ -336,6 +336,7 @@ class PPContext:
         return bullet + key + ":\n" + result
 
     def _format_bullettable(self, items, bullet: str = None) -> str:
+        brl, brr = self._brackets(items)
         if isgenerator(items):
             items = self._generate_items(items)
         elif self._truncate and len(items) > self._truncate:
@@ -348,23 +349,27 @@ class PPContext:
                     pass
                 items = items[:self._truncate]
                 items.append("...")
-                items = set(items)
             elif isinstance(items, tuple):
                 items = list(items)[:self._truncate]
                 items.append("...")
-                items = tuple(items)
             elif is_dict(items):
                 raise Exception("Unexpected")
             else:
                 items = items[:self._truncate]
                 items.append("...")
+        elif is_set(items):
+            items = list(items)
+            # noinspection PyBroadException
+            try:
+                items = sorted(items)
+            except Exception:
+                pass
 
         if len(items) == 0:
-            brl, brr = self._brackets(items)
             return brl + brr
 
         # Try to format as a bracketed oneliner:
-        result = self._format_oneliner(items, bullet=bullet)
+        result = self._format_oneliner(items, brl, brr, bullet=bullet)
         if result:
             return result
 
@@ -372,7 +377,8 @@ class PPContext:
         with self.bullets(bullet=bullet):
             return "\n".join(self.format(el) for el in items)
 
-    def _format_oneliner(self, items, bullet: str = None) -> Optional[str]:
+    def _format_oneliner(self, items, brl, brr, bullet: str = None) -> \
+            Optional[str]:
         max_width = self._width - 2  # minus the _brackets
         if bullet:
             max_width -= len(bullet)  # minus the bullet
@@ -390,7 +396,6 @@ class PPContext:
             if len(result) > max_width:
                 return
 
-        brl, brr = self._brackets(items)
         if bullet:
             return bullet + brl + result + brr
         else:
