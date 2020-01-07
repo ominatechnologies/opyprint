@@ -73,6 +73,18 @@ def test_list_2():
 - ..."""
 
 
+def test_list_3():
+    ppc = PPContext(width=15)
+    str_1 = "1234567890\n1234567890"
+    str_2 = "1234567890\n1234567890"
+    result = ppc.format((str_1, str_2))
+    # print("\n" + result)
+    assert result == """- 1234567890
+  1234567890
+- 1234567890
+  1234567890"""
+
+
 def test_dict_1():
     val = {}
     ppc = PPContext()
@@ -150,7 +162,7 @@ def test_composite_1():
     # print("\n" + result)
     assert result == """- - abc: 123
   - def: 456
-- - ghi: 789"""
+- ghi: 789"""
 
 
 def test_composite_2():
@@ -181,7 +193,7 @@ def test_composite_3():
     ppc = PPContext(width=16, truncate=4)
     result = ppc.format(val)
     # print("\n" + result)
-    assert result == """- abc: [1, 2, 3]"""
+    assert result == """abc: [1, 2, 3]"""
 
 # def test_bullet_1():
 #     ppc = PPContext()

@@ -183,7 +183,7 @@ class PPContext:
         if bullet:
             bullet = self._normalize_bullet(bullet)
             if self._is_bullettable(obj):
-                return self._format_aux(obj, force_bullet=bullet)
+                return self._format_aux(obj, bullet=bullet)
             elif self._bullet != bullet:
                 ori_bullet = self._bullet
                 self._bullet = bullet
@@ -197,8 +197,8 @@ class PPContext:
         else:
             return self._format_aux(obj)
 
-    def _format_aux(self, obj, force_bullet: str = None) -> str:
-        result = self._format_dispatch(obj, force_bullet=force_bullet)
+    def _format_aux(self, obj, bullet: str = None) -> str:
+        result = self._format_dispatch(obj, bullet=bullet)
 
         if not isinstance(result, str) and not isinstance(result, list):
             msg = ("Got an unexpected result of type '{}' from the formatter:"
@@ -220,8 +220,7 @@ class PPContext:
 
         return result
 
-    def _format_dispatch(self, obj,
-                         force_bullet: str = None) -> Union[str, list]:
+    def _format_dispatch(self, obj, bullet: str = None) -> Union[str, list]:
         if self._indent or self._bullet:
             # Use a squashed context to cleanly format content that should
             # then be indented or bulleted:
@@ -232,9 +231,9 @@ class PPContext:
         if isinstance(obj, str):
             return ppc._format_str(obj)
         if is_dict(obj):
-            return ppc._format_dict(obj, force_bullet or self._default_bullet)
+            return ppc._format_dict(obj, bullet)
         if self._is_bullettable(obj):
-            return ppc._format_bullettable(obj, bullet=force_bullet)
+            return ppc._format_bullettable(obj, bullet=bullet)
 
         describe = getattr(obj, 'describe', None)
         if callable(describe):
@@ -264,26 +263,33 @@ class PPContext:
 
         return obj
 
-    def _format_dict(self, dct, bullet: str):
+    def _format_dict(self, dct, bullet: str = None):
         if len(dct) == 0:
             return "{}"
+        elif len(dct) == 1:
+            for key in dct:
+                return self._format_kv_pair(key, dct[key], bullet)
+        else:
+            kvs = [(key, dct[key]) for key in sorted(dct.keys())]
 
-        kvs = [(key, dct[key]) for key in sorted(dct.keys())]
+            truncated = False
+            if self._truncate and len(kvs) > self._truncate:
+                kvs = kvs[:self._truncate]
+                truncated = True
 
-        truncated = False
-        if self._truncate and len(kvs) > self._truncate:
-            kvs = kvs[:self._truncate]
-            truncated = True
+            bullet = bullet or self._default_bullet
+            lines = [self._format_kv_pair(k, v, bullet) for k, v in kvs]
+            if truncated:
+                lines.append(bullet + "...")
+            return "\n".join(lines)
 
-        lines = [self._format_kv_pair(k, v, bullet) for k, v in kvs]
-        if truncated:
-            lines.append(bullet + "...")
-        return "\n".join(lines)
+    def _format_kv_pair(self, key, value, bullet: str = ""):
+        bullet = bullet or ""
+        bullet_len = len(bullet)
 
-    def _format_kv_pair(self, key, value, bullet: str):
         # Format the key, truncating it when it is too long:
         key = str(key)
-        max_key_length = max(int((self._content_width - 2) / 2), 10)
+        max_key_length = max(int((self._content_width - bullet_len) / 2), 10)
         if len(key) > max_key_length:
             key = key[:max_key_length - 3] + "..."
 
@@ -295,10 +301,11 @@ class PPContext:
             if len(result) <= self._content_width:
                 return result
 
-            result = textwrap.wrap(result,
-                                   width=self._content_width - 2,
-                                   subsequent_indent=self.default_indent * 2,
-                                   max_lines=self._truncate)
+            result = textwrap.wrap(
+                result,
+                width=self._content_width - bullet_len,
+                subsequent_indent=self.default_indent + " " * bullet_len,
+                max_lines=self._truncate)
             return "\n".join(result)
 
         # Try to format as a oneliner when the formatted value is a
@@ -312,7 +319,7 @@ class PPContext:
                     return result
 
         # Format multiline value with indentation:
-        with self.indent(self.default_indent * 2):
+        with self.indent(self.default_indent + " " * bullet_len):
             result = self.format(value)
 
         # Try to fit the first line on the same line as the key, except when
@@ -334,6 +341,7 @@ class PPContext:
         elif self._truncate and len(items) > self._truncate:
             if is_set(items):
                 items = list(items)
+                # noinspection PyBroadException
                 try:
                     items = sorted(items)
                 except Exception:
