@@ -1,5 +1,7 @@
 # test_a_basics
 
+from pytest import raises
+
 from frozendict import frozendict
 
 from wpyprint import PPContext
@@ -57,3 +59,31 @@ def test_normalize_bullet():
     with ppc.bullets("*"):
         assert ppc._normalize_bullet(True) == "* "
         assert ppc._normalize_bullet("-") == "- "
+
+
+def test_init_error_1():
+    with raises(TypeError):
+        # noinspection PyTypeChecker
+        PPContext(width=1.5)
+
+    with raises(TypeError):
+        # noinspection PyTypeChecker
+        PPContext(truncate=1.5)
+
+    with raises(TypeError):
+        # noinspection PyTypeChecker
+        PPContext(indent=1.5)
+
+    with raises(TypeError):
+        # noinspection PyTypeChecker
+        PPContext(bullet=1.5)
+
+
+def test_indentation():
+    ppc = PPContext()
+    assert ppc.indentation == ""
+
+    ppc = PPContext(indent="    ")
+    assert ppc.indentation == "    "
+    ppc.indentation = "..."
+    assert ppc.indentation == "..."

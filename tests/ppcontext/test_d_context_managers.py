@@ -6,9 +6,11 @@ from wpyprint import PPContext
 def test_indent():
     ppc = PPContext()
     ppc("L1")
+    assert ppc.indentation == ""
     with ppc.indent():
         ppc("B1")
         ppc("B2")
+        assert ppc.indentation == "  "
         with ppc.indent():
             ppc("B3")
             ppc("B4")
