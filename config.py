@@ -1,10 +1,10 @@
 # Single-sourced project configuration values:
 
 # the full version, including alpha/beta/rc tags
-release = '0.3.1'
+release = '0.4.0'
 
 # the short X.Y version
-version = '0.3'
+version = '0.4'
 
 # distribution package name
 name = 'wpyprint'
