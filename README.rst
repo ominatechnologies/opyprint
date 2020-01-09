@@ -1,5 +1,8 @@
 WPyPrint Readme
 ===============
+
+.. inclusion-marker
+
 An opinionated pretty-printing library for Python.
 
 Design Goals
