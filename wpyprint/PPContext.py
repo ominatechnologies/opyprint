@@ -534,10 +534,13 @@ class PPContext:
         self._lines = []
         return "\n".join(lines)
 
-    def print(self, *args, bullet: Union[str, bool] = None) -> None:
+    def print(self, *args, bullet: Union[str, bool] = None, **kwargs) -> None:
         """
         Pretty-prints the given arguments or the pretty-printed content
         collected by calling the context as a function.
+
+        Additional keyword arguments are passed to the native Python 'print'
+        function.
 
         :param args: When called without arguments the pretty-printed
             content collected by calling the context as a function is printed.
@@ -553,9 +556,9 @@ class PPContext:
             arguments.
         """
         if len(args) == 0:
-            print(self.flush())
+            print(self.flush(), **kwargs)
         else:
-            print(self.format(*args, bullet=bullet))
+            print(self.format(*args, bullet=bullet), **kwargs)
 
     # -- System Methods --------------- --- --  -
 

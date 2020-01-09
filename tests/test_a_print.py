@@ -45,3 +45,14 @@ def test_print_4():
   12345 67890 12345
   67890
 """
+
+
+def test_print_5_example():
+    sys.stdout = StringIO()
+    pprint({'alpha': [1, 2, 3], 'beta': "satisfied"}, end="\n[END]")
+    result = sys.stdout.getvalue()
+    sys.stdout = sys.__stdout__
+    # print("\n" + result)
+    assert result == """- alpha: [1, 2, 3]
+- beta: satisfied
+[END]"""

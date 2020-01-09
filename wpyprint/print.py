@@ -7,14 +7,16 @@ _py_print = print
 
 def print(*args,
           bullet: str = None,
-          width: int = PPContext.default_width) -> None:
+          width: int = PPContext.default_width,
+          **kwargs) -> None:
     """
-    A replacement for the standard Python print function that pretty-prints
-    the given arguments.
+    A drop-in replacement for the standard Python print function that
+    pretty-prints the given arguments.
 
-    A shortcut for::
-
-        PPContext().print(*args)
+    >>> from wpyprint import print
+    >>> print({'alpha': [1, 2, 3], 'beta': "satisfied"})
+    - alpha: [1, 2, 3]
+    - beta: satisfied
 
     :param args: When called with two argument and the
         :attr:`wpyprint.PPContext.print_name_value_pairs` attribute is true,
@@ -28,7 +30,4 @@ def print(*args,
         indentation. Defaults to the value of the 'default_width' class
         attribute of the :class:`~wpyprint.PPContext.PPContext` class.
     """
-    if len(args) == 0:
-        _py_print()
-    else:
-        PPContext(width=width).print(*args, bullet=bullet)
+    PPContext(width=width).print(*args, bullet=bullet, **kwargs)
