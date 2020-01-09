@@ -27,12 +27,12 @@ class PPContext:
 
        Example::
 
-            def describe(pp: PPContext = None) -> str:
-                pp = pp or PPContext()
-                pp("A foobar object, with:")
-                pp("* alpha", alpha)
-                pp("* beta", beta)
-                return pp.flush()
+            def describe(ppc: PPContext = None) -> str:
+                ppc = ppc or PPContext()
+                ppc("A foobar object, with:")
+                ppc("* alpha", alpha)
+                ppc("* beta", beta)
+                return ppc.flush()
 
     3. The *context managers* (e.g. :meth:`~indent` or :meth:`~bullet`)
        temporarily adjust the pretty-print context.
