@@ -28,4 +28,4 @@ jobs:
       - name: Test with pytest
         run: |
           pip install mypy pytest pytest-mypy
-          python -m pytest -s --maxfail=1 --failed-first --mypy
+          python -m pytest

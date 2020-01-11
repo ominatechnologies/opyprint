@@ -78,10 +78,6 @@ For test-driven development, use::
 
     $ pytest-watch
 
-To run code QA, use::
-
-    $ flake8
-
 Pytest, mypy and flake8 are configured in the *setup.cfg* file.
 
 

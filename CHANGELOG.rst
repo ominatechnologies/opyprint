@@ -31,3 +31,4 @@ Next
 ++++
 - Added 'lt' and 'dict_lt' utilities.
 - Added Sphinx-based docs.
+- Added code linting using Flake8.
