@@ -96,6 +96,7 @@ html_context = sphinx_material.get_html_context()
 html_theme_options = {
     # Set the name of the project to appear in the navigation.
     'nav_title': project,
+    'logo_icon': 'local_offer',
 
     # Set you GA account ID to enable tracking
     # 'google_analytics_account': 'UA-XXXXX',

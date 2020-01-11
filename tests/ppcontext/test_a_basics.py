@@ -1,8 +1,7 @@
 # test_a_basics
 
-from pytest import raises
-
 from frozendict import frozendict
+from pytest import raises
 
 from wpyprint import PPContext
 
