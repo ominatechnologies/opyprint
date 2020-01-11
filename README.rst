@@ -58,9 +58,10 @@ Project Setup
 -------------
 We use pytest_ as testing framework and our code provides type hinting (see
 PEP-484_ and PEP-561_) to enable static type checking using mypy_. For
-test-driven development, we use pytest-watch_.
+test-driven development, we use pytest-watch_. Code quality is asserted with
+flake8_.
 
-To install the package, use::
+To install the package for use in your application, use::
 
     $ pip install .
 
@@ -69,7 +70,7 @@ To install the package for development, use::
     $ pip install -r requirements.txt
     $ pip install --editable . | { grep -v "already satisfied" || :; }
 
-To run the tests, use::
+To run the tests once, use::
 
     $ python -m pytest
 
@@ -77,11 +78,19 @@ For test-driven development, use::
 
     $ pytest-watch
 
+To run code QA, use::
+
+    $ flake8
+
+Pytest, mypy and flake8 are configured in the *setup.cfg* file.
+
+
 Roadmap
 -------
 See `<TODO.rst>`_.
 
 
+.. _flake8: http://flake8.pycqa.org
 .. _mypy: http://mypy-lang.org
 .. _PEP-484: https://www.python.org/dev/peps/pep-0484
 .. _PEP-561: https://www.python.org/dev/peps/pep-0561

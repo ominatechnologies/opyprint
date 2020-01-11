@@ -6,10 +6,12 @@ WPyPrint Documentation
    api/index
    changelog
 
+
 WPyPrint Readme
 ---------------
 .. include:: ../README.rst
    :start-after: inclusion-marker
+
 
 Indices and tables
 ------------------

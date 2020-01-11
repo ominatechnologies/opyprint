@@ -66,7 +66,7 @@ class PPContext:
     print_name_value_pairs: ClassVar[bool] = True
     """
     When true, calling the :meth:`~print` method with two arguments will
-    print them as a name-value pair. 
+    print them as a name-value pair.
     """
 
     # -- Instance Initialization --------------- --- --  -

@@ -3,8 +3,7 @@
 from frozendict import frozendict
 from pytest import raises
 
-# noinspection PyUnresolvedReferences
-from wpyprint import dict_lt, lt, print
+from wpyprint import dict_lt, lt
 
 
 def test_basics():
