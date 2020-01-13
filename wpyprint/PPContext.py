@@ -220,7 +220,8 @@ class PPContext:
 
         return result
 
-    def _format_dispatch(self, obj, bullet: str = None) -> Union[str, list]:
+    def _format_dispatch(self, obj,
+                         bullet: str = None) -> Union[str, List[str]]:
         if self._indent or self._bullet:
             # Use a squashed context to cleanly format content that should
             # then be indented or bulleted:
@@ -260,7 +261,7 @@ class PPContext:
 
         return str(obj)
 
-    def _format_str(self, obj) -> str:
+    def _format_str(self, obj) -> Union[str, List[str]]:
         if obj == "":
             return obj
 
@@ -273,12 +274,12 @@ class PPContext:
 
         return obj
 
-    def _format_dict(self, dct, bullet: str = None):
+    def _format_dict(self, dct, bullet: str = None) -> Union[str, List[str]]:
         if len(dct) == 0:
             return "{}"
         elif len(dct) == 1:
-            for key in dct:
-                return self._format_kv_pair(key, dct[key], bullet)
+            key = tuple(dct.keys())[0]
+            return self._format_kv_pair(key, dct[key], bullet or "")
         else:
             kvs = [(key, dct[key]) for key in sorted(dct.keys())]
 
@@ -288,12 +289,13 @@ class PPContext:
                 truncated = True
 
             bullet = bullet or self._default_bullet
-            lines = [self._format_kv_pair(k, v, bullet) for k, v in kvs]
+            lines: List[str] = [self._format_kv_pair(k, v, bullet)
+                                for k, v in kvs]
             if truncated:
                 lines.append(bullet + "...")
             return "\n".join(lines)
 
-    def _format_kv_pair(self, key, value, bullet: str = ""):
+    def _format_kv_pair(self, key, value, bullet: str = "") -> str:
         bullet = bullet or ""
         bullet_len = len(bullet)
 
@@ -311,12 +313,11 @@ class PPContext:
             if len(result) <= self._content_width:
                 return result
 
-            result = textwrap.wrap(
+            return "\n".join(textwrap.wrap(
                 result,
                 width=self._content_width - bullet_len,
                 subsequent_indent=self.default_indent + " " * bullet_len,
-                max_lines=self._truncate)
-            return "\n".join(result)
+                max_lines=self._truncate))
 
         # Try to format as a oneliner when the formatted value is a
         # oneliner, except when the value is a key-value mapping or the
@@ -345,7 +346,8 @@ class PPContext:
 
         return bullet + key + ":\n" + result
 
-    def _format_bullettable(self, items, bullet: str = None) -> str:
+    def _format_bullettable(self, items,
+                            bullet: str = None) -> Union[str, List[str]]:
         brl, brr = self._brackets(items)
         if isgenerator(items):
             items = self._generate_items(items)
@@ -397,14 +399,14 @@ class PPContext:
         for item in items:
             frm_item = self.format(item)
             if is_multiliner(frm_item):
-                return
+                return None
             if not result:
                 result = frm_item
             else:
                 result = result + ", " + frm_item
 
             if len(result) > max_width:
-                return
+                return None
 
         if bullet:
             return bullet + brl + result + brr
