@@ -83,12 +83,6 @@ To enforce code formatting, install the git hook::
     $ flake8 --install-hook git
     $ git config --bool flake8.strict true
 
-In Pycharm, install the following plugin: "Save Actions"
-    Help: you can find the marketplace in: Settings -> plugins
-
-In the plugin then activate automatic formatting on save, shortcut and batch.
-    Help: setup in: Settings -> Save Actions
-
 To build the docs as html, use::
 
     $ sphinx-build -b html docs build
