@@ -7,13 +7,13 @@ release = '0.5.2'
 version = '0.5'
 
 # distribution package name
-name = 'wpyprint'
+name = 'opyprint'
 
 # capitalized label
-project = 'WPYPRINT'
+project = 'OPYPRINT'
 
 description = "An opinionated pretty-print library for Python."
 author = "Wouter Van den Broeck"
 author_email = "wouter@addith.be"
 copyright = "2020, Wouter Van den Broeck"
-repo = "https://github.com/wouter-vdb/wpyprint"
+repo = "https://github.com/wouter-vdb/opyprint"

@@ -1,6 +1,6 @@
 # test_c_call
 
-from wpyprint import PPContext
+from opyprint import PPContext
 
 
 def test_1():

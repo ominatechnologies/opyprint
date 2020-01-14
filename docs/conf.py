@@ -174,7 +174,7 @@ latex_preamble = r"""
   % Update normal pages:
   \fancypagestyle{normal}{
     \fancyhf{}
-    \fancyhead[LE,RO]{{\py@HeaderFamily WPyPrint v\version}}
+    \fancyhead[LE,RO]{{\py@HeaderFamily OPyPrint v\version}}
     \fancyfoot[LE,RO]{{\py@HeaderFamily\thepage}}
     \fancyfoot[LO]{{\py@HeaderFamily\nouppercase{\rightmark}}}
     \fancyfoot[RE]{{\py@HeaderFamily\nouppercase{\leftmark}}}

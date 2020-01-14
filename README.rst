@@ -1,4 +1,4 @@
-WPyPrint Readme
+OPyPrint Readme
 ===============
 
 .. inclusion-marker
@@ -25,7 +25,7 @@ provided in this package instead of the native 'print' function provided in
 Python. This custom 'print' function is a drop-in replacement that support all
 the keyword-arguments supported by the native function.
 
->>> from wpyprint import print
+>>> from opyprint import print
 >>> print({'alpha': [1, 2, 3], 'beta': "satisfied"})
 - alpha: [1, 2, 3]
 - beta: satisfied

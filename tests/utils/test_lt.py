@@ -3,7 +3,7 @@
 from frozendict import frozendict
 from pytest import raises
 
-from wpyprint import dict_lt, lt
+from opyprint import dict_lt, lt
 
 
 def test_basics():

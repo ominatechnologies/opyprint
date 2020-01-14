@@ -1,7 +1,7 @@
 include AUTHORS.rst
 include CHANGELOG.rst
 recursive-include docs *
-include wpyprint/py.typed
+include opyprint/py.typed
 include LICENSE
 include README.rst
 include requirements.txt

@@ -1,6 +1,6 @@
 PPContext Class
 ===============
 
-.. module:: wpyprint.PPContext
+.. module:: opyprint.PPContext
 .. autoclass:: PPContext
     :members:

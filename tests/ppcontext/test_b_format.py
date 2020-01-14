@@ -1,6 +1,6 @@
 # test_b_format
 
-from wpyprint import PPContext
+from opyprint import PPContext
 
 
 def test_empty_1():

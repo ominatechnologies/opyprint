@@ -1,4 +1,4 @@
-name: Test wpyprint package
+name: Test opyprint package
 
 on: [push]
 

@@ -1,5 +1,5 @@
 print()
 =======
 
-.. automodule:: wpyprint.print
+.. automodule:: opyprint.print
    :members:

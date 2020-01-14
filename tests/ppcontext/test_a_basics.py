@@ -3,7 +3,7 @@
 from frozendict import frozendict
 from pytest import raises
 
-from wpyprint import PPContext
+from opyprint import PPContext
 
 
 def test_is_bullettable():

@@ -3,7 +3,7 @@
 import sys
 from io import StringIO
 
-from wpyprint import PPContext, print as pprint
+from opyprint import PPContext, print as pprint
 
 
 def test_print_1():

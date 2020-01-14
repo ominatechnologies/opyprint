@@ -2,7 +2,7 @@
 
 from frozendict import frozendict
 
-from wpyprint.utils.predicates import (is_dict, is_multiliner, is_oneliner,
+from opyprint.utils.predicates import (is_dict, is_multiliner, is_oneliner,
                                        is_set, is_tuple)
 
 

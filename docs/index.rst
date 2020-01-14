@@ -1,4 +1,4 @@
-WPyPrint Documentation
+OPyPrint Documentation
 ======================
 .. toctree::
    :maxdepth: 2
@@ -7,7 +7,7 @@ WPyPrint Documentation
    changelog
 
 
-WPyPrint Readme
+OPyPrint Readme
 ---------------
 .. include:: ../README.rst
    :start-after: inclusion-marker

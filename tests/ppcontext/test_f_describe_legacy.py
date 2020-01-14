@@ -1,6 +1,6 @@
 # test_e_describe
 
-from wpyprint import PPContext
+from opyprint import PPContext
 
 
 class Alpha:

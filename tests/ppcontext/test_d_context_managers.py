@@ -1,6 +1,6 @@
 # test_d_context_managers
 
-from wpyprint import PPContext
+from opyprint import PPContext
 
 
 def test_indent():

@@ -3,7 +3,7 @@
 import sys
 from io import StringIO
 
-from wpyprint import PPContext
+from opyprint import PPContext
 
 
 def test_ppc_print_1():
