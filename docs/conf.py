@@ -50,7 +50,6 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.mathjax',
     # 'sphinx-jsonschema',
-    'sphinxcontrib.bibtex',
     'sphinx_material',
 ]
 
