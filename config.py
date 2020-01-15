@@ -1,7 +1,7 @@
 # Single-sourced project configuration values:
 
 # the full version, including alpha/beta/rc tags
-release = '0.6.0'
+release = '0.6.1'
 
 # the short X.Y version
 version = '0.6'
@@ -16,4 +16,4 @@ description = "An opinionated pretty-print library for Python."
 author = "Wouter Van den Broeck"
 author_email = "wouter@addith.be"
 copyright = "2020, Wouter Van den Broeck"
-repo = "https://github.com/wouter-vdb/opyprint"
+repo = "https://github.com/ominatechnologies/opyprint"
