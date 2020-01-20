@@ -27,7 +27,7 @@ v0.4 - 2020-01-09
   optional 'PPContext' object as parameters.
 
 
-Next
+Head
 ++++
 - Added 'lt' and 'dict_lt' utilities.
 - Added Sphinx-based docs.
