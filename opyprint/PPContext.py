@@ -238,12 +238,16 @@ class PPContext:
 
         # pass the ppcontext to __str__ when possible:
         __str__ = getattr(obj, '__str__', None)
-        if (callable(__str__) and
+        if (__str__ and callable(__str__) and
                 'ppc' in tuple(signature(__str__).parameters.keys())):
             if ppc == self:
                 # Use a fresh pp-context to pass to the __str__ method:
                 ppc = self._squash()
-            return obj.__str__(ppc=ppc)
+            try:
+                # This might fail when 'obj' is a class object.
+                return obj.__str__(ppc=ppc)
+            except TypeError:
+                return str(obj)
 
         # use the 'describe' method when it is provided (deprecated):
         describe = getattr(obj, 'describe', None)
