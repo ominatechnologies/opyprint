@@ -16,7 +16,7 @@ pytest-watch>=4.2.0
 
 # Doc-building requirements:
 #
-sphinx>=2.3.1
+sphinx>=2.4.3
 sphinx-autobuild>=0.7.1
 sphinx-autodoc-typehints>=1.10.3
-sphinx-material>=0.0.22
+sphinx-material>=0.0.23

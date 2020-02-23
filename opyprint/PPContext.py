@@ -40,11 +40,13 @@ class PPContext:
 
     # -- Class Initialization --------------- --- --  -
 
-    bullet_regex = compile('^([-+=|:~<>#$%^&@*?!]{1,3} )')
+    bullet_regex = compile(r"^([-+=|:~<>#$%^&@*?!]{1,3} )")
     """
     A compiled regular expression that is used to determine if a formatted
     string starts with a bullet.
     """
+
+    key_end_regex = compile(r"^.*[:;=-]$")
 
     default_width: ClassVar[int] = 100
     """The default content width, including indentation and bullets."""
@@ -244,7 +246,7 @@ class PPContext:
                 # Use a fresh pp-context to pass to the __str__ method:
                 ppc = self._squash()
             try:
-                # This might fail when 'obj' is a class object.
+                # This might fail when 'obj' is a class object (-> TypeError).
                 return obj.__str__(ppc=ppc)
             except TypeError:
                 return str(obj)
@@ -263,7 +265,7 @@ class PPContext:
             else:
                 return obj.describe()
 
-        return str(obj)
+        return ppc._format_str(str(obj))
 
     def _format_str(self, obj) -> Union[str, List[str]]:
         if obj == "":
@@ -309,11 +311,15 @@ class PPContext:
         if len(key) > max_key_length:
             key = key[:max_key_length - 3] + "..."
 
+        if not self.key_end_regex.match(key):
+            key = f"{key}:"
+
         # Format a key-value pair with a string value, which is assumed to be
         # regular text, as a oneliner or a wrapped and indented multiliner:
         if isinstance(value, str):
             # try to format the keyed string as a oneliner:
-            result = bullet + str(key) + ": " + value
+
+            result = bullet + key + " " + value
             if len(result) <= self._content_width:
                 return result
 
@@ -329,7 +335,7 @@ class PPContext:
         if not is_dict(value):
             result = self.format(value)
             if is_oneliner(result) and not self.bullet_regex.match(result):
-                result = bullet + key + ": " + result
+                result = bullet + key + " " + result
                 if len(result) <= self._content_width:
                     return result
 
@@ -344,11 +350,11 @@ class PPContext:
             lines = result.splitlines()
             trimmed = lines[0].lstrip()
             if not self.bullet_regex.match(trimmed):
-                first = bullet + key + ": " + trimmed
+                first = bullet + key + " " + trimmed
                 if len(first) <= self._content_width:
                     return first + "\n" + "\n".join(lines[1:])
 
-        return bullet + key + ":\n" + result
+        return bullet + key + "\n" + result
 
     def _format_bullettable(self, items,
                             bullet: str = None) -> Union[str, List[str]]:
