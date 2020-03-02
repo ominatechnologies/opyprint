@@ -1,9 +1,9 @@
 # test_predicates
 
 from frozendict import frozendict
-
-from opyprint.utils.predicates import (is_dict, is_multiliner, is_oneliner,
-                                       is_set, is_tuple)
+import numpy as np
+from opyprint.utils.predicates import (is_bullettable, is_dict, is_multiliner,
+                                       is_oneliner, is_set, is_tuple)
 
 
 def test_is_dict():
@@ -56,3 +56,34 @@ def test_is_multiliner():
 def test_is_oneliner():
     assert is_oneliner("abc")
     assert not is_oneliner("aa\nbb")
+
+
+def test_is_bullettable():
+    bullettables = (
+        list(),
+        [1, 2, 3],
+        (1, 2, 3),
+        {1, 2, 3},
+        (v for v in [1, 2, 3]),
+        range(0, 10),
+        dict(),
+        {'a': 1},
+        frozendict({'a': 1}),
+    )
+    for obj in bullettables:
+        assert is_bullettable(obj)
+
+    not_bullettables = (
+        "abc",
+        b'\x00\x10',
+        bytes(),
+        bytes(10),
+        bytearray(),
+        bytearray(10),
+        memoryview(b'abc'),
+        123,
+        np.array([1, 2, 3]),
+        np.array([[1, 2, 3], [4, 5, 6]]),
+    )
+    for obj in not_bullettables:
+        assert not is_bullettable(obj)

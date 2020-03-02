@@ -5,10 +5,10 @@ from inspect import isgenerator, signature
 from re import compile
 from typing import ClassVar, Generator, List, Optional, Tuple, Union
 
-from .utils import is_dict, is_multiliner, is_oneliner, is_set, is_tuple
+from .utils import (is_bullettable, is_dict, is_multiliner, is_oneliner,
+                    is_set, is_tuple)
 
 
-# TODO: support custom formatters
 @dataclass
 class PPContext:
     """
@@ -51,7 +51,7 @@ class PPContext:
     default_width: ClassVar[int] = 100
     """The default content width, including indentation and bullets."""
 
-    default_truncate: ClassVar[int] = 7
+    default_truncate: ClassVar[int] = 14
     """
     The default truncation setting. When this value is 0, no truncation is
     applied. When any other positive integer value *n* is given, then no more
@@ -184,7 +184,7 @@ class PPContext:
 
         if bullet:
             bullet = self._normalize_bullet(bullet)
-            if self._is_bullettable(obj):
+            if is_bullettable(obj):
                 return self._format_aux(obj, bullet=bullet)
             elif self._bullet != bullet:
                 ori_bullet = self._bullet
@@ -235,7 +235,7 @@ class PPContext:
             return ppc._format_str(obj)
         if is_dict(obj):
             return ppc._format_dict(obj, bullet)
-        if self._is_bullettable(obj):
+        if is_bullettable(obj):
             return ppc._format_bullettable(obj, bullet=bullet)
 
         # pass the ppcontext to __str__ when possible:
@@ -592,22 +592,6 @@ class PPContext:
             self._prefix_0 = self._indent
             self._prefix_n = self._indent
         self._content_width = self._width - len(self._prefix_0)
-
-    @staticmethod
-    def _is_bullettable(obj) -> bool:
-        """
-        Checks if the pretty-printed representation of the given object is
-        normally bulletted.
-
-        :param obj: The value to check.
-        """
-        if (isinstance(obj, str)
-                or isinstance(obj, bytes)
-                or isinstance(obj, bytearray)
-                or isinstance(obj, memoryview)):
-            return False
-        else:
-            return hasattr(obj, '__iter__')
 
     @staticmethod
     def _brackets(obj) -> Tuple[str, str]:

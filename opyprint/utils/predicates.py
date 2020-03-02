@@ -1,4 +1,5 @@
 from frozendict import frozendict
+from typing import Generator
 
 
 def is_dict(obj) -> bool:
@@ -26,3 +27,26 @@ def is_oneliner(txt) -> bool:
     """Checks if the given string contains no newlines."""
     assert isinstance(txt, str)
     return len(txt.splitlines()) == 1
+
+
+BULLETTABLE_TYPES = (
+    Generator,
+    dict,
+    frozendict,
+    frozenset,
+    list,
+    range,
+    set,
+    tuple,
+)
+
+
+def is_bullettable(obj) -> bool:
+    """
+    Checks if the given object can be pretty-printed as a "bulletted" list
+    and supports slicing and appending to afford truncation with an added
+    ellipsis.
+
+    :param obj: The object to check.
+    """
+    return any(isinstance(obj, bt) for bt in BULLETTABLE_TYPES)

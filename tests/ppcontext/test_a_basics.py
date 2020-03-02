@@ -1,30 +1,8 @@
 # test_a_basics
 
-from frozendict import frozendict
 from pytest import raises
 
 from opyprint import PPContext
-
-
-def test_is_bullettable():
-    assert PPContext._is_bullettable(list())
-    assert PPContext._is_bullettable([1, 2, 3])
-    assert PPContext._is_bullettable((1, 2, 3))
-    assert PPContext._is_bullettable({1, 2, 3})
-    assert PPContext._is_bullettable((v for v in [1, 2, 3]))
-    assert PPContext._is_bullettable(range(0, 10))
-    assert PPContext._is_bullettable(dict())
-    assert PPContext._is_bullettable({'a': 1})
-    assert PPContext._is_bullettable(frozendict({'a': 1}))
-
-    assert not PPContext._is_bullettable("abc")
-    assert not PPContext._is_bullettable(b'\x00\x10')
-    assert not PPContext._is_bullettable(bytes())
-    assert not PPContext._is_bullettable(bytes(10))
-    assert not PPContext._is_bullettable(bytearray())
-    assert not PPContext._is_bullettable(bytearray(10))
-    assert not PPContext._is_bullettable(memoryview(b'abc'))
-    assert not PPContext._is_bullettable(123)
 
 
 def test_brackets():
