@@ -1,7 +1,7 @@
 # Single-sourced project configuration values:
 
 # the full version, including alpha/beta/rc tags
-release = '0.6.4'
+release = '0.6.5'
 
 # the short X.Y version
 version = '0.6'
