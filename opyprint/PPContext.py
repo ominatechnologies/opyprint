@@ -5,8 +5,15 @@ from inspect import isgenerator, signature
 from re import compile
 from typing import ClassVar, Generator, List, Optional, Tuple, Union
 
+from colorama import init as init_colorama
+
+from .apply_style import apply_style
+from .typing import StyleOptions
 from .utils import (is_bullettable, is_dict, is_multiliner, is_oneliner,
                     is_set, is_tuple)
+
+# Support ANSI-based formatting on Windows:
+init_colorama()
 
 
 @dataclass
@@ -40,7 +47,7 @@ class PPContext:
 
     # -- Class Initialization --------------- --- --  -
 
-    bullet_regex = compile(r"^([-+=|:~<>#$%^&@*?!]{1,3} )")
+    bullet_regex = compile(r"^([-+=|:~<>#$%^&@*\[\]?!]{1,3} )")
     """
     A compiled regular expression that is used to determine if a formatted
     string starts with a bullet.
@@ -158,7 +165,9 @@ class PPContext:
 
     # -- Format Method and Helpers --------------- --- --  -
 
-    def format(self, *args, bullet: Union[str, bool] = None) -> str:
+    def format(self, *args,
+               bullet: Union[str, bool] = None,
+               style: StyleOptions = None) -> str:
         """
         Returns a pretty-printed representation of the given arguments.
 
@@ -171,6 +180,7 @@ class PPContext:
             when this is not yet the case. The argument may be either a
             non-empty string, the first character of which is taken
             as the bullet, or true to use the current or default bullet.
+        :param style: Optional style specifications.
         """
         if len(args) == 0:
             return ""
@@ -185,22 +195,24 @@ class PPContext:
         if bullet:
             bullet = self._normalize_bullet(bullet)
             if is_bullettable(obj):
-                return self._format_aux(obj, bullet=bullet)
+                return self._format_aux(obj, bullet=bullet, style=style)
             elif self._bullet != bullet:
                 ori_bullet = self._bullet
                 self._bullet = bullet
                 self._update()
-                result = self._format_aux(obj)
+                result = self._format_aux(obj, style=style)
                 self._bullet = ori_bullet
                 self._update()
                 return result
             else:
-                return self._format_aux(obj)
+                return self._format_aux(obj, style=style)
         else:
-            return self._format_aux(obj)
+            return self._format_aux(obj, style=style)
 
-    def _format_aux(self, obj, bullet: str = None) -> str:
-        result = self._format_dispatch(obj, bullet=bullet)
+    def _format_aux(self, obj,
+                    bullet: str = None,
+                    style: StyleOptions = None) -> str:
+        result = self._format_dispatch(obj, bullet=bullet, style=style)
 
         if not isinstance(result, str) and not isinstance(result, list):
             msg = ("Got an unexpected result of type '{}' from the formatter:"
@@ -223,7 +235,8 @@ class PPContext:
         return result
 
     def _format_dispatch(self, obj,
-                         bullet: str = None) -> Union[str, List[str]]:
+                         bullet: str = None,
+                         style: StyleOptions = None) -> Union[str, List[str]]:
         if self._indent or self._bullet:
             # Use a squashed context to cleanly format content that should
             # then be indented or bulleted:
@@ -232,11 +245,11 @@ class PPContext:
             ppc = self
 
         if isinstance(obj, str):
-            return ppc._format_str(obj)
+            return ppc._format_str(obj, style)
         if is_dict(obj):
-            return ppc._format_dict(obj, bullet)
+            return ppc._format_dict(obj, bullet, style)
         if is_bullettable(obj):
-            return ppc._format_bullettable(obj, bullet=bullet)
+            return ppc._format_bullettable(obj, bullet=bullet, style=style)
 
         # pass the ppcontext to __str__ when possible:
         __str__ = getattr(obj, '__str__', None)
@@ -247,9 +260,9 @@ class PPContext:
                 ppc = self._squash()
             try:
                 # This might fail when 'obj' is a class object (-> TypeError).
-                return obj.__str__(ppc=ppc)
+                return apply_style(obj.__str__(ppc=ppc), style)
             except TypeError:
-                return str(obj)
+                return apply_style(str(obj), style)
 
         # use the 'describe' method when it is provided (deprecated):
         describe = getattr(obj, 'describe', None)
@@ -259,15 +272,17 @@ class PPContext:
                 if ppc == self:
                     # Use a fresh pp-context to pass to the describe method:
                     ppc = self._squash()
-                return obj.describe(ppc=ppc)
+                return apply_style(obj.describe(ppc=ppc), style)
             elif 'width' in params:
-                return obj.describe(width=ppc._content_width)
+                return apply_style(obj.describe(width=ppc._content_width),
+                                   style)
             else:
-                return obj.describe()
+                return apply_style(obj.describe(), style)
 
-        return ppc._format_str(str(obj))
+        return ppc._format_str(str(obj), style)
 
-    def _format_str(self, obj) -> Union[str, List[str]]:
+    def _format_str(self, obj,
+                    style: StyleOptions = None) -> Union[str, List[str]]:
         if obj == "":
             return obj
 
@@ -276,16 +291,19 @@ class PPContext:
                 max_len = self._content_width * self._truncate
                 if len(obj) > max_len:
                     obj = textwrap.shorten(obj, max_len)
-            return textwrap.wrap(obj, self._content_width)
+            return [apply_style(line, style)
+                    for line in textwrap.wrap(obj, self._content_width)]
 
-        return obj
+        return apply_style(obj, style)
 
-    def _format_dict(self, dct, bullet: str = None) -> Union[str, List[str]]:
+    def _format_dict(self, dct,
+                     bullet: str = None,
+                     style: StyleOptions = None) -> Union[str, List[str]]:
         if len(dct) == 0:
-            return "{}"
+            return apply_style("{}", style)
         elif len(dct) == 1:
             key = tuple(dct.keys())[0]
-            return self._format_kv_pair(key, dct[key], bullet or "")
+            return self._format_kv_pair(key, dct[key], bullet or "", style)
         else:
             kvs = [(key, dct[key]) for key in sorted(dct.keys())]
 
@@ -295,69 +313,103 @@ class PPContext:
                 truncated = True
 
             bullet = bullet or self._default_bullet
-            lines: List[str] = [self._format_kv_pair(k, v, bullet)
+            lines: List[str] = [self._format_kv_pair(k, v, bullet, style)
                                 for k, v in kvs]
             if truncated:
                 lines.append(bullet + "...")
             return "\n".join(lines)
 
-    def _format_kv_pair(self, key, value, bullet: str = "") -> str:
+    def _format_kv_pair(self, key, value,
+                        bullet: str = "",
+                        style: StyleOptions = None) -> str:
         bullet = bullet or ""
-        bullet_len = len(bullet)
+        blt_len = len(bullet)
 
         # Format the key, truncating it when it is too long:
         key = str(key)
-        max_key_length = max(int((self._content_width - bullet_len) / 2), 10)
+        max_key_length = max(int((self._content_width - blt_len) / 2), 10)
         if len(key) > max_key_length:
             key = key[:max_key_length - 3] + "..."
 
         if not self.key_end_regex.match(key):
             key = f"{key}:"
 
+        key_len = len(key)
+        pre_len = blt_len + key_len + 1
+
         # Format a key-value pair with a string value, which is assumed to be
         # regular text, as a oneliner or a wrapped and indented multiliner:
         if isinstance(value, str):
             # try to format the keyed string as a oneliner:
+            if pre_len + len(value) <= self._content_width:
+                # Case KVP-1:
+                # print("--> Case KVP-1")
+                return bullet + apply_style(f"{key} {value}", style)
 
-            result = bullet + key + " " + value
-            if len(result) <= self._content_width:
-                return result
+            subsequent_indent = self.default_indent + " " * blt_len
+            lines = textwrap.wrap(f"{key} {value}",
+                                  width=self._content_width - blt_len,
+                                  subsequent_indent=subsequent_indent,
+                                  max_lines=self._truncate)
 
-            return "\n".join(textwrap.wrap(
-                result,
-                width=self._content_width - bullet_len,
-                subsequent_indent=self.default_indent + " " * bullet_len,
-                max_lines=self._truncate))
+            # lines = [apply_style(line, style) for line in lines]
+            lines = [apply_style(lines[0], style),
+                     *[subsequent_indent + apply_style(line.lstrip(), style)
+                       for line in lines[1:]]]
+            # Case KVP-2:
+            # print("--> Case KVP-2")
+            return bullet + "\n".join(lines)
 
         # Try to format as a oneliner when the formatted value is a
         # oneliner, except when the value is a key-value mapping or the
         # formatted value seems to be bulletted:
         if not is_dict(value):
-            result = self.format(value)
-            if is_oneliner(result) and not self.bullet_regex.match(result):
-                result = bullet + key + " " + result
-                if len(result) <= self._content_width:
-                    return result
+            if isgenerator(value):
+                # "render" as list to avoid that the generator is exhausted
+                # when the styled representation is formatted:
+                value = self._generate_items(value)
+            unstyled = self.format(value)
+            if is_oneliner(unstyled) and not self.bullet_regex.match(unstyled):
+                if pre_len + len(unstyled) <= self._content_width:
+                    # Case KVP-3:
+                    # print("--> Case KVP-3")
+                    return "{}{} {}".format(bullet,
+                                            apply_style(key, style),
+                                            self.format(value, style=style))
 
         # Format multiline value with indentation:
-        with self.indent(self.default_indent + " " * bullet_len):
-            result = self.format(value)
+        with self.indent(self.default_indent + " " * blt_len):
+            unstyled = self.format(value)
 
         # Try to fit the first line on the same line as the key, except when
         # the value is a key-value mapping or the formatted value seems
         # to be bulletted:
         if not is_dict(value):
-            lines = result.splitlines()
+            lines = unstyled.splitlines()
             trimmed = lines[0].lstrip()
-            if not self.bullet_regex.match(trimmed):
-                first = bullet + key + " " + trimmed
-                if len(first) <= self._content_width:
-                    return first + "\n" + "\n".join(lines[1:])
+            if (not self.bullet_regex.match(trimmed) and
+                    pre_len + len(trimmed) <= self._content_width):
+                # Case KVP-4:
+                # print(f"--> Case KVP-4")
+                lines = [apply_style(line, style) for line in lines[1:]]
+                return "{}{} {}\n{}".format(bullet,
+                                            apply_style(key, style),
+                                            apply_style(trimmed, style),
+                                            "\n".join(lines))
 
-        return bullet + key + "\n" + result
+        # Case KVP-5:
+        # print(f"--> Case KVP-5")
+        # print(self.format(value, style=style))
+        with self.indent(self.default_indent + " " * blt_len):
+            return "{}{}\n{}".format(bullet,
+                                     apply_style(key, style),
+                                     self.format(value, style=style))
 
     def _format_bullettable(self, items,
-                            bullet: str = None) -> Union[str, List[str]]:
+                            bullet: str = None,
+                            style: StyleOptions = None) \
+            -> Union[str, List[str]]:
+        # print(">> format_bullettable()")
         brl, brr = self._brackets(items)
         if isgenerator(items):
             items = self._generate_items(items)
@@ -393,11 +445,11 @@ class PPContext:
         # Try to format as a bracketed oneliner:
         result = self._format_oneliner(items, brl, brr, bullet=bullet)
         if result:
-            return result
+            return apply_style(result, style)
 
         # Format as bulletted items:
         with self.bullets(bullet=bullet):
-            return "\n".join(self.format(el) for el in items)
+            return "\n".join(self.format(el, style=style) for el in items)
 
     def _format_oneliner(self, items, brl, brr, bullet: str = None) -> \
             Optional[str]:
@@ -508,7 +560,9 @@ class PPContext:
 
     # -- Callable, print and flush Methods --------------- --- --  -
 
-    def __call__(self, *args, bullet: Union[str, bool] = None) -> None:
+    def __call__(self, *args,
+                 bullet: Union[str, bool] = None,
+                 style: StyleOptions = None) -> None:
         """
         Formats the given arguments and collects the resulting pretty-printed
         content. Call :meth:`~flush` to get (and clear) the collected content
@@ -540,8 +594,9 @@ class PPContext:
             when this is not yet the case. The argument may be either a
             non-empty string, the first character of which is taken
             as the bullet, or true to use the current or default bullet.
+        :param style: Optional style specifications.
         """
-        self._lines.append(self.format(*args, bullet=bullet))
+        self._lines.append(self.format(*args, bullet=bullet, style=style))
 
     def newline(self) -> None:
         """Adds a newline in the collected content."""

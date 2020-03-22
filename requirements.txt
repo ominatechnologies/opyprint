@@ -1,5 +1,6 @@
 # Base requirements:
 #
+colorama>=0.4.3
 frozendict>=1.2
 typing-extensions>=3.7.4.1
 

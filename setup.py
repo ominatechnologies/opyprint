@@ -10,6 +10,7 @@ def readme():
 
 # 3rd-party run-time requirements:
 install_requires = [
+    'colorama>=0.4.3',
     'frozendict>=1.2',
     'typing-extensions>=3.7.4.1',
 ]
