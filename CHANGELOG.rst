@@ -27,8 +27,19 @@ v0.4 - 2020-01-09
   optional 'PPContext' object as parameters.
 
 
-Head
-++++
-- Added 'lt' and 'dict_lt' utilities.
+v0.5 - 2020-01-11
++++++++++++++++++
 - Added Sphinx-based docs.
+- Added 'lt' and 'dict_lt' utilities.
 - Added code linting using Flake8.
+
+
+v0.6 - 2020-01-14
++++++++++++++++++
+- Renamed 'wpyprint' to 'opyprint'.
+- Various improvements.
+
+
+v0.7 - 2020-03-23
++++++++++++++++++
+- Add support for styled formatting.
