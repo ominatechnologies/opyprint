@@ -7,7 +7,7 @@ class Foo:
     def __str__(self, ppc: PPContext = None):
         ppc = ppc or PPContext()
         ppc("A Foo with:")
-        ppc({'k_1': 'v_1', 'k_2': 'v_2'}, style='yellow')
+        ppc({'k_1': "v_1", 'k_2': "v_2"}, style='yellow')
         return ppc.flush()
 
 

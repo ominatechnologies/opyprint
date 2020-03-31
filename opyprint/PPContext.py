@@ -486,11 +486,11 @@ class PPContext:
         following example::
 
             ppc = PPContext()
-            ppc("v1")
+            ppc("v_1")
             with ppc.indent():
-                ppc("v2")
-                ppc("v3")
-            ppc("v4")
+                ppc("v_2")
+                ppc("v_3")
+            ppc("v_4")
             ppc.print()
 
         The above will print the following::
@@ -526,11 +526,11 @@ class PPContext:
         following example::
 
             ppc = PPContext()
-            ppc("v1")
+            ppc("v_1")
             with ppc.bullet():
-                ppc("v2")
-                ppc("v3")
-            ppc("v4")
+                ppc("v_2")
+                ppc("v_3")
+            ppc("v_4")
             ppc.print()
 
         The above will print the following::
@@ -571,10 +571,10 @@ class PPContext:
         Example::
 
             ppc = PPContext()
-            ppc("v1")
-            ppc("v2")
-            ppc("v3")
-            ppc("v4")
+            ppc("v_1")
+            ppc("v_2")
+            ppc("v_3")
+            ppc("v_4")
             ppc.print()
 
         The above will print the following::
