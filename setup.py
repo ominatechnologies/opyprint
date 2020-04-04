@@ -12,7 +12,7 @@ def readme():
 install_requires = [
     'colorama>=0.4.3',
     'frozendict @ git+https://github.com/ominatechnologies/'
-    'frozendict.git@1.0.0#egg=frozendict',
+    'frozendict.git@1.0.1#egg=frozendict',
     'typing-extensions>=3.7.4.2',
 ]
 
