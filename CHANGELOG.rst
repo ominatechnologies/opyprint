@@ -44,3 +44,4 @@ v0.7 - 2020-03-23
 +++++++++++++++++
 - Add support for styled formatting.
 - Upgrade to Python v3.8.
+- Migrated to our own frozendict.

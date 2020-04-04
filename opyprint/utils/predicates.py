@@ -1,10 +1,11 @@
-from frozendict import frozendict
 from typing import Generator
+
+from frozendict import FrozenDict
 
 
 def is_dict(obj) -> bool:
     """Checks if the given object is either a dict or a frozendict."""
-    return isinstance(obj, dict) or isinstance(obj, frozendict)
+    return isinstance(obj, dict) or isinstance(obj, FrozenDict)
 
 
 def is_set(obj) -> bool:
@@ -32,7 +33,7 @@ def is_oneliner(txt) -> bool:
 BULLETTABLE_TYPES = (
     Generator,
     dict,
-    frozendict,
+    FrozenDict,
     frozenset,
     list,
     range,

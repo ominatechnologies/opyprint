@@ -1,6 +1,4 @@
-from typing import Dict, Union
-
-from frozendict import frozendict
+from frozendict import AbstractDict
 
 from .predicates import is_dict
 
@@ -21,8 +19,7 @@ def lt(obj_1, obj_2) -> bool:
         raise error
 
 
-def dict_lt(dct_1: Union[Dict, frozendict],
-            dct_2: Union[Dict, frozendict]) -> bool:
+def dict_lt(dct_1: AbstractDict, dct_2: AbstractDict) -> bool:
     """
     Checks if dct_1 < dct_2.
 

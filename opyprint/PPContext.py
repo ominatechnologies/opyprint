@@ -80,7 +80,7 @@ class PPContext:
 
     # -- Instance Initialization --------------- --- --  -
 
-    __slots__ = [
+    __slots__ = (
         '_bullet',
         '_content_width',
         '_default_bullet',
@@ -90,7 +90,7 @@ class PPContext:
         '_prefix_n',
         '_truncate',
         '_width',
-    ]
+    )
 
     _bullet: Optional[str]
     _content_width: int
