@@ -1,4 +1,4 @@
-from frozendict import AbstractDict
+from typing import Mapping
 
 from .predicates import is_dict
 
@@ -19,7 +19,7 @@ def lt(obj_1, obj_2) -> bool:
         raise error
 
 
-def dict_lt(dct_1: AbstractDict, dct_2: AbstractDict) -> bool:
+def dict_lt(dct_1: Mapping, dct_2: Mapping) -> bool:
     """
     Checks if dct_1 < dct_2.
 
