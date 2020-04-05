@@ -2,7 +2,7 @@
 #
 colorama>=0.4.3
 typing-extensions>=3.7.4.2
--e git+https://github.com/ominatechnologies/frozendict.git@1.0.1#egg=frozendict
+# -e git://github.com/ominatechnologies/frozendict.git#egg=frozendict
 
 # Testing requirements:
 #
@@ -13,7 +13,7 @@ pytest>=5.4.1
 pytest-asyncio>=0.10.0
 pytest-cov>=2.8.1
 pytest-flake8>=1.0.4
-pytest-mypy>=0.6.0
+pytest-mypy>=0.6.1
 # pytest-watch>=4.2.0
 -e git+https://github.com/wouter-vdb/pytest-watch#egg=pytest-watch
 
