@@ -41,7 +41,7 @@ setup(
         name: ['py.typed'],
     },
     packages=find_packages(),
-    python_requires='>=3.8',
+    python_requires='>=3.7',
     url=repo,
     version=release,
     zip_safe=False,
