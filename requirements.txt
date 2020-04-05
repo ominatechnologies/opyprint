@@ -2,7 +2,6 @@
 #
 colorama>=0.4.3
 typing-extensions>=3.7.4.2
-# -e git://github.com/ominatechnologies/frozendict.git#egg=frozendict
 
 # Testing requirements:
 #
