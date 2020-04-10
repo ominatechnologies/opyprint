@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Configuration file for the Sphinx documentation builder.
+
 import os
 import sys
 from importlib.util import module_from_spec, spec_from_file_location
@@ -36,15 +37,15 @@ repo = config.repo
 version = config.version
 
 # If your documentation needs a minimal Sphinx version, state it here.
-needs_sphinx = '2.4.4'
+needs_sphinx = '3.0.0'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx_autodoc_typehints',  # this should come after 'sphinx.ext.autodoc'
     'sphinx.ext.autosummary',
     'sphinx.ext.coverage',
+    'sphinx.ext.todo',
     'sphinx.ext.doctest',
     'sphinx.ext.extlinks',
     'sphinx.ext.intersphinx',
@@ -79,8 +80,22 @@ exclude_patterns = ['_build', 'build', 'Thumbs.db', '.DS_Store']
 pygments_style = 'sphinx'
 
 # default_role = 'any'
-
 # suppress_warnings = ['app.add_directive']
+
+# add option to include to do boxes
+todo_include_todos = True
+
+# -- Options for sphinx.ext.autodoc --------------- --- --  -
+
+autoclass_content = 'both'
+autodoc_default_options = {
+    # 'inherited-members': True,
+    'members': True,
+    'show-inheritance': True,
+    'undoc-members': True,
+}
+autodoc_member_order = 'bysource'
+autodoc_typehints = "description"
 
 # -- Options for HTML output --------------- --- --  -
 # See http://www.sphinx-doc.org/en/master/usage/configuration.html#options-
@@ -262,21 +277,6 @@ mathjax_config = {
         'Macros': latex_commands,
     },
 }
-
-# -- Options for sphinx.ext.autodoc --------------- --- --  -
-
-autoclass_content = 'both'
-autodoc_default_options = {
-    # 'inherited-members': True,
-    'members': True,
-    'show-inheritance': True,
-    'undoc-members': True,
-}
-autodoc_member_order = 'groupwise'
-
-# The following is an option for sphinx-autodoc-typehints, it sets
-# `typing.TYPE_CHECKING` to True to import all types.
-set_type_checking_flag = True
 
 # -- Options for sphinx.ext.intersphinx --------------- --- --  -
 

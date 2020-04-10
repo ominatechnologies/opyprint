@@ -18,7 +18,6 @@ pytest-mypy>=0.6.1
 
 # Doc-building requirements:
 #
-sphinx>=2.4.4
+sphinx>=3.0.0
 sphinx-autobuild>=0.7.1
-sphinx-autodoc-typehints>=1.10.3
 sphinx-material>=0.0.23
