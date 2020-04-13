@@ -611,7 +611,11 @@ class PPContext:
         self._lines = []
         return "\n".join(lines)
 
-    def print(self, *args, bullet: Union[str, bool] = None, **kwargs) -> None:
+    def print(self,
+              *args,
+              bullet: Union[str, bool] = None,
+              style: StyleOptions = None,
+              **kwargs) -> None:
         """
         Pretty-prints the given arguments or the pretty-printed content
         collected by calling the context as a function.
@@ -631,11 +635,12 @@ class PPContext:
             as the bullet, or true to use the current or default bullet.
             This parameter is ignored when this method is called with (other)
             arguments.
+        :param style: Optional style specifications.
         """
         if len(args) == 0:
             print(self.flush(), **kwargs)
         else:
-            print(self.format(*args, bullet=bullet), **kwargs)
+            print(self.format(*args, bullet=bullet, style=style), **kwargs)
 
     # -- System Methods --------------- --- --  -
 

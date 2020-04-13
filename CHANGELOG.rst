@@ -45,3 +45,9 @@ v0.7 - 2020-03-23
 - Add support for styled formatting.
 - Upgrade to Python v3.8.
 - Migrated to our own frozendict.
+
+
+v0.8 - 2020-04-13
++++++++++++++++++
+- Add support for 'indent', 'style' and 'truncate' parameters in the 'print'
+  function replacement.
