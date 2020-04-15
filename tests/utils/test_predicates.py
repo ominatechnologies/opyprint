@@ -1,6 +1,6 @@
 # test_predicates
 
-from frozendict import FrozenDict
+from frozendict import NoCopyFrozenDict as FrozenDict
 import numpy as np
 from opyprint.utils.predicates import (is_bullettable, is_dict, is_multiliner,
                                        is_oneliner, is_set, is_tuple)

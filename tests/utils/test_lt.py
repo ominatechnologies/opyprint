@@ -1,6 +1,6 @@
 # test_lt
 
-from frozendict import FrozenDict
+from frozendict import NoCopyFrozenDict as FrozenDict
 from pytest import raises
 
 from opyprint import dict_lt, lt
