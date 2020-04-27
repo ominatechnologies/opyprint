@@ -9,8 +9,14 @@ from colorama import init as init_colorama
 
 from .apply_style import apply_style
 from .typing import StyleOptions
-from .utils import (is_bullettable, is_dict, is_multiliner, is_oneliner,
-                    is_set, is_tuple)
+from .utils import (
+    is_bullettable,
+    is_dict,
+    is_multiliner,
+    is_oneliner,
+    is_set,
+    is_tuple,
+)
 
 # Support ANSI-based formatting on Windows:
 init_colorama()
@@ -246,9 +252,9 @@ class PPContext:
 
         if isinstance(obj, str):
             return ppc._format_str(obj, style)
-        if is_dict(obj):
-            return ppc._format_dict(obj, bullet, style)
-        if is_bullettable(obj):
+        elif is_dict(obj):
+            return ppc._format_dict(dict(obj), bullet, style)
+        elif is_bullettable(obj):
             return ppc._format_bullettable(obj, bullet=bullet, style=style)
 
         # pass the ppcontext to __str__ when possible:
@@ -272,12 +278,13 @@ class PPContext:
                 if ppc == self:
                     # Use a fresh pp-context to pass to the describe method:
                     ppc = self._squash()
-                return apply_style(obj.describe(ppc=ppc), style)
+                result = obj.describe(ppc=ppc)
             elif 'width' in params:
-                return apply_style(obj.describe(width=ppc._content_width),
-                                   style)
+                result = obj.describe(width=ppc._content_width)
             else:
-                return apply_style(obj.describe(), style)
+                result = obj.describe()
+            if isinstance(result, str):
+                return apply_style(result, style)
 
         return ppc._format_str(str(obj), style)
 

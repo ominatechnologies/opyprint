@@ -51,3 +51,9 @@ v0.8 - 2020-04-13
 +++++++++++++++++
 - Add support for 'indent', 'style' and 'truncate' parameters in the 'print'
   function replacement.
+
+
+Head
+++++
+- fix: Handle classes that implement a 'describe' method that does not return
+  a string.

@@ -1,9 +1,16 @@
 # test_predicates
 
+from numpy import array
+
 from frozendict import NoCopyFrozenDict as FrozenDict
-import numpy as np
-from opyprint.utils.predicates import (is_bullettable, is_dict, is_multiliner,
-                                       is_oneliner, is_set, is_tuple)
+from opyprint.utils.predicates import (
+    is_bullettable,
+    is_dict,
+    is_multiliner,
+    is_oneliner,
+    is_set,
+    is_tuple,
+)
 
 
 def test_is_dict():
@@ -82,8 +89,8 @@ def test_is_bullettable():
         bytearray(10),
         memoryview(b'abc'),
         123,
-        np.array([1, 2, 3]),
-        np.array([[1, 2, 3], [4, 5, 6]]),
+        array([1, 2, 3]),
+        array([[1, 2, 3], [4, 5, 6]]),
     )
     for obj in not_bullettables:
         assert not is_bullettable(obj)
