@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Collection, Union
 
-from .PPStyles import PPStyles
+from .pp_styles import PPStyles
 
 StyleOptions = Union[PPStyles, str, int,
                      Collection[Union[PPStyles, str, int,
