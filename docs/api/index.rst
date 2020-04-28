@@ -3,5 +3,6 @@ API
 .. toctree::
    :maxdepth: 2
 
-   PPContext
+   pp_context
+   pp_styles
    print

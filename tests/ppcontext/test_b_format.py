@@ -253,6 +253,16 @@ def test_dict_4():
 - ..."""
 
 
+# TODO:
+# def test_dict_5():
+#     v_1 = "L1\n  L2"
+#     ppc = PPContext()
+#     result = ppc.format({'k_1': v_1})
+#     print("\n" + result)
+#     assert result == """- k_1: L1
+#       L2"""
+
+
 def test_composite_1():
     val = [
         {'abc': 123, 'def': 456},
