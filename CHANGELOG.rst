@@ -55,5 +55,7 @@ v0.8 - 2020-04-13
 
 Head
 ++++
+- feat: Explicitly support the parameters for the native 'print' function for
+  its drop-in replacement to improve auto-completion and documentation.
 - fix: Handle classes that implement a 'describe' method that does not return
   a string.

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import sys
+
 from .pp_context import PPContext
 from .typing import StyleOptions
 
@@ -8,10 +10,14 @@ _py_print = print
 
 def print(*args,
           bullet: str = None,
+          end='\n',
+          file=sys.stdout,
+          flush=False,
           indent: str = "",
           style: StyleOptions = None,
           truncate: int = PPContext.default_truncate,
           width: int = PPContext.default_width,
+          sep=' ',
           **kwargs) -> None:
     """
     A drop-in replacement for the standard Python print function that
@@ -30,7 +36,11 @@ def print(*args,
         when this is not yet the case. The argument may be either a
         non-empty string, the first character of which is taken
         as the bullet, or true to use the current or default bullet.
+    :param end: See native 'print' function.
+    :param file: See native 'print' function.
+    :param flush: See native 'print' function.
     :param indent: The indentation prefix string.
+    :param sep: See native 'print' function.
     :param style: Optional style specifications.
     :param truncate: The truncation setting. When this value is 0, no
         truncation is applied. When any other positive integer value *n* is
@@ -46,5 +56,9 @@ def print(*args,
               width=width,
               truncate=truncate).print(*args,
                                        bullet=bullet,
+                                       end=end,
+                                       file=file,
+                                       flush=flush,
+                                       sep=sep,
                                        style=style,
                                        **kwargs)
