@@ -173,7 +173,8 @@ class PPContext:
 
     def format(self, *args,
                bullet: Union[str, bool] = None,
-               style: StyleOptions = None) -> str:
+               style: StyleOptions = None,
+               key_style: StyleOptions = None) -> str:
         """
         Returns a pretty-printed representation of the given arguments.
 
@@ -187,6 +188,8 @@ class PPContext:
             non-empty string, the first character of which is taken
             as the bullet, or true to use the current or default bullet.
         :param style: Optional style specifications.
+        :param key_style: Optional style specifications for the key part of
+            key-value pairs.
         """
         if len(args) == 0:
             return ""
@@ -201,24 +204,28 @@ class PPContext:
         if bullet:
             bullet = self._normalize_bullet(bullet)
             if is_bullettable(obj):
-                return self._format_aux(obj, bullet=bullet, style=style)
+                return self._format_aux(obj, bullet=bullet, style=style,
+                                        key_style=key_style)
             elif self._bullet != bullet:
                 ori_bullet = self._bullet
                 self._bullet = bullet
                 self._update()
-                result = self._format_aux(obj, style=style)
+                result = self._format_aux(obj, style=style,
+                                          key_style=key_style)
                 self._bullet = ori_bullet
                 self._update()
                 return result
             else:
-                return self._format_aux(obj, style=style)
+                return self._format_aux(obj, style=style, key_style=key_style)
         else:
-            return self._format_aux(obj, style=style)
+            return self._format_aux(obj, style=style, key_style=key_style)
 
     def _format_aux(self, obj,
                     bullet: str = None,
-                    style: StyleOptions = None) -> str:
-        result = self._format_dispatch(obj, bullet=bullet, style=style)
+                    style: StyleOptions = None,
+                    key_style: StyleOptions = None) -> str:
+        result = self._format_dispatch(obj, bullet=bullet, style=style,
+                                       key_style=key_style)
 
         if not isinstance(result, str) and not isinstance(result, list):
             msg = ("Got an unexpected result of type '{}' from the formatter:"
@@ -242,7 +249,9 @@ class PPContext:
 
     def _format_dispatch(self, obj,
                          bullet: str = None,
-                         style: StyleOptions = None) -> Union[str, List[str]]:
+                         style: StyleOptions = None,
+                         key_style: StyleOptions = None) \
+            -> Union[str, List[str]]:
         if self._indent or self._bullet:
             # Use a squashed context to cleanly format content that should
             # then be indented or bulleted:
@@ -253,7 +262,8 @@ class PPContext:
         if isinstance(obj, str):
             return ppc._format_str(obj, style)
         elif is_dict(obj):
-            return ppc._format_dict(dict(obj), bullet, style)
+            return ppc._format_dict(dict(obj), bullet=bullet, style=style,
+                                    key_style=key_style)
         elif is_bullettable(obj):
             return ppc._format_bullettable(obj, bullet=bullet, style=style)
 
@@ -305,12 +315,14 @@ class PPContext:
 
     def _format_dict(self, dct,
                      bullet: str = None,
-                     style: StyleOptions = None) -> Union[str, List[str]]:
+                     style: StyleOptions = None,
+                     key_style: StyleOptions = None) -> Union[str, List[str]]:
         if len(dct) == 0:
             return apply_style("{}", style)
         elif len(dct) == 1:
             key = tuple(dct.keys())[0]
-            return self._format_kv_pair(key, dct[key], bullet or "", style)
+            return self._format_kv_pair(key, dct[key], bullet or "",
+                                        style=style, key_style=key_style)
         else:
             kvs = [(key, dct[key]) for key in sorted(dct.keys())]
 
@@ -320,17 +332,23 @@ class PPContext:
                 truncated = True
 
             bullet = bullet or self._default_bullet
-            lines: List[str] = [self._format_kv_pair(k, v, bullet, style)
-                                for k, v in kvs]
+            lines: List[str] = [
+                self._format_kv_pair(key, val, bullet, style=style,
+                                     key_style=key_style)
+                for key, val in kvs
+            ]
             if truncated:
                 lines.append(bullet + "...")
             return "\n".join(lines)
 
     def _format_kv_pair(self, key, value,
                         bullet: str = "",
-                        style: StyleOptions = None) -> str:
+                        style: StyleOptions = None,
+                        key_style: StyleOptions = None) -> str:
         bullet = bullet or ""
         blt_len = len(bullet)
+        if key_style is None:
+            key_style = style
 
         # Format the key, truncating it when it is too long:
         key = str(key)
@@ -351,21 +369,22 @@ class PPContext:
             if pre_len + len(value) <= self._content_width:
                 # Case KVP-1:
                 # print("--> Case KVP-1")
-                return bullet + apply_style(f"{key} {value}", style)
+                return "{} {}".format(apply_style(bullet + key, key_style),
+                                      apply_style(value, style))
 
             subsequent_indent = self.default_indent + " " * blt_len
-            lines = textwrap.wrap(f"{key} {value}",
+            lines = textwrap.wrap(f"{bullet}{key} {value}",
                                   width=self._content_width - blt_len,
                                   subsequent_indent=subsequent_indent,
                                   max_lines=self._truncate)
-
-            # lines = [apply_style(line, style) for line in lines]
-            lines = [apply_style(lines[0], style),
+            bkl = len(bullet) + len(key)
+            lines = [(apply_style(lines[0][:bkl], key_style)
+                      + apply_style(lines[0][bkl:], style)),
                      *[subsequent_indent + apply_style(line.lstrip(), style)
                        for line in lines[1:]]]
             # Case KVP-2:
             # print("--> Case KVP-2")
-            return bullet + "\n".join(lines)
+            return "\n".join(lines)
 
         # Try to format as a oneliner when the formatted value is a
         # oneliner, except when the value is a key-value mapping or the
@@ -380,9 +399,8 @@ class PPContext:
                 if pre_len + len(unstyled) <= self._content_width:
                     # Case KVP-3:
                     # print("--> Case KVP-3")
-                    return "{}{} {}".format(bullet,
-                                            apply_style(key, style),
-                                            self.format(value, style=style))
+                    return "{} {}".format(apply_style(bullet + key, key_style),
+                                          self.format(value, style=style))
 
         # Format multiline value with indentation:
         with self.indent(self.default_indent + " " * blt_len):
@@ -399,18 +417,16 @@ class PPContext:
                 # Case KVP-4:
                 # print(f"--> Case KVP-4")
                 lines = [apply_style(line, style) for line in lines[1:]]
-                return "{}{} {}\n{}".format(bullet,
-                                            apply_style(key, style),
-                                            apply_style(trimmed, style),
-                                            "\n".join(lines))
+                return "{} {}\n{}".format(apply_style(bullet + key, key_style),
+                                          apply_style(trimmed, style),
+                                          "\n".join(lines))
 
         # Case KVP-5:
         # print(f"--> Case KVP-5")
         # print(self.format(value, style=style))
         with self.indent(self.default_indent + " " * blt_len):
-            return "{}{}\n{}".format(bullet,
-                                     apply_style(key, style),
-                                     self.format(value, style=style))
+            return "{}\n{}".format(apply_style(bullet + key, key_style),
+                                   self.format(value, style=style))
 
     def _format_bullettable(self, items,
                             bullet: str = None,
@@ -569,7 +585,8 @@ class PPContext:
 
     def __call__(self, *args,
                  bullet: Union[str, bool] = None,
-                 style: StyleOptions = None) -> None:
+                 style: StyleOptions = None,
+                 key_style: StyleOptions = None) -> None:
         """
         Formats the given arguments and collects the resulting pretty-printed
         content. Call :meth:`~flush` to get (and clear) the collected content
@@ -602,8 +619,11 @@ class PPContext:
             non-empty string, the first character of which is taken
             as the bullet, or true to use the current or default bullet.
         :param style: Optional style specifications.
+        :param key_style: Optional style specifications for the key part of
+            key-value pairs.
         """
-        self._lines.append(self.format(*args, bullet=bullet, style=style))
+        self._lines.append(self.format(*args, bullet=bullet,
+                                       style=style, key_style=key_style))
 
     def newline(self) -> None:
         """Adds a newline in the collected content."""
@@ -622,6 +642,7 @@ class PPContext:
               *args,
               bullet: Union[str, bool] = None,
               style: StyleOptions = None,
+              key_style: StyleOptions = None,
               **kwargs) -> None:
         """
         Pretty-prints the given arguments or the pretty-printed content
@@ -643,11 +664,15 @@ class PPContext:
             This parameter is ignored when this method is called with (other)
             arguments.
         :param style: Optional style specifications.
+        :param key_style: Optional style specifications for the key part of
+            key-value pairs.
         """
         if len(args) == 0:
             print(self.flush(), **kwargs)
         else:
-            print(self.format(*args, bullet=bullet, style=style), **kwargs)
+            print(self.format(*args, bullet=bullet,
+                              style=style, key_style=key_style),
+                  **kwargs)
 
     # -- System Methods --------------- --- --  -
 

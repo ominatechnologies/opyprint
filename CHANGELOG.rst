@@ -53,8 +53,10 @@ v0.8 - 2020-04-13
   function replacement.
 
 
-Head
-++++
+v0.9 - 2020-05-26
++++++++++++++++++
+- feat: Add 'key_style' option.
+- feat: Add additional style terms.
 - feat: Explicitly support the parameters for the native 'print' function for
   its drop-in replacement to improve auto-completion and documentation.
 - fix: Handle classes that implement a 'describe' method that does not return

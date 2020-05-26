@@ -14,6 +14,7 @@ def print(*args,
           file=sys.stdout,
           flush=False,
           indent: str = "",
+          key_style: StyleOptions = None,
           style: StyleOptions = None,
           truncate: int = PPContext.default_truncate,
           width: int = PPContext.default_width,
@@ -40,6 +41,8 @@ def print(*args,
     :param file: See native 'print' function.
     :param flush: See native 'print' function.
     :param indent: The indentation prefix string.
+    :param key_style: Optional style specifications for the key part of
+        key-value pairs.
     :param sep: See native 'print' function.
     :param style: Optional style specifications.
     :param truncate: The truncation setting. When this value is 0, no
@@ -59,6 +62,7 @@ def print(*args,
                                        end=end,
                                        file=file,
                                        flush=flush,
+                                       key_style=key_style,
                                        sep=sep,
                                        style=style,
                                        **kwargs)
