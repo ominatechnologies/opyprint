@@ -35,12 +35,13 @@ ansi_codes = {
     'italic': '3',
     'underline': '4',
     'blink': '5',
-    'invert': '7',
     'inverse': '7',
+    'invert': '7',
     'strike': '9',
     'default': '10',
     'normal': '22',  # normal color intensity - neither "bold" nor "dim"
     'blink_end': '25',
+    'inverse_end': '27',
     'invert_end': '27',
     'strike_end': '29',
 
