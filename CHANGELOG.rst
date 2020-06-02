@@ -56,8 +56,13 @@ v0.8 - 2020-04-13
 v0.9 - 2020-05-26
 +++++++++++++++++
 - feat: Add 'key_style' option.
-- feat: Add additional style terms.
+- feat: Add additional styling options.
 - feat: Explicitly support the parameters for the native 'print' function for
   its drop-in replacement to improve auto-completion and documentation.
 - fix: Handle classes that implement a 'describe' method that does not return
   a string.
+
+
+v0.10 - 2020-06-02
+++++++++++++++++++
+- feat: Add additional color styling options.

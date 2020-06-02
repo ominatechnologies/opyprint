@@ -204,13 +204,16 @@ class PPContext:
         if bullet:
             bullet = self._normalize_bullet(bullet)
             if is_bullettable(obj):
-                return self._format_aux(obj, bullet=bullet, style=style,
+                return self._format_aux(obj,
+                                        bullet=bullet,
+                                        style=style,
                                         key_style=key_style)
             elif self._bullet != bullet:
                 ori_bullet = self._bullet
                 self._bullet = bullet
                 self._update()
-                result = self._format_aux(obj, style=style,
+                result = self._format_aux(obj,
+                                          style=style,
                                           key_style=key_style)
                 self._bullet = ori_bullet
                 self._update()
@@ -224,7 +227,9 @@ class PPContext:
                     bullet: str = None,
                     style: StyleOptions = None,
                     key_style: StyleOptions = None) -> str:
-        result = self._format_dispatch(obj, bullet=bullet, style=style,
+        result = self._format_dispatch(obj,
+                                       bullet=bullet,
+                                       style=style,
                                        key_style=key_style)
 
         if not isinstance(result, str) and not isinstance(result, list):
@@ -629,7 +634,7 @@ class PPContext:
         """Adds a newline in the collected content."""
         self._lines.append("")
 
-    def flush(self) -> str:
+    def dump(self) -> str:
         """
         Returns (and clears) the pretty-printed content collected by calling
         the context as a function.
@@ -637,6 +642,9 @@ class PPContext:
         lines = self._lines
         self._lines = []
         return "\n".join(lines)
+
+    def flush(self) -> str:
+        return self.dump()
 
     def print(self,
               *args,

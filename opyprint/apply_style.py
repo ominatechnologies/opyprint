@@ -5,20 +5,6 @@ from typing import Sequence
 from .typing import StyleOptions
 from .utils import is_oneliner
 
-# ANSI Codes:
-# - 0: reset
-# - 1: bold
-# - 2: dim
-# - 4: underline
-# - 5: blink
-# - 22: normal brightness
-# - 30-37: normal fg colors
-# - 38: use color from extended set - see below for more details
-# - 40-47: normal bg colors
-# - 48: use color from extended set - see below for more details
-# - 90-97: bright fg colors
-# - 100-107: bright bg colors
-#
 # Codes can be combined, e.g.:
 # - "3;33": italic yellow
 # - "3;4;33": italic underlined yellow
@@ -27,81 +13,110 @@ from .utils import is_oneliner
 # - ansi pattern: "\033[38;5;{color}m{content}\033[0m"
 #
 # For more info: https://en.wikipedia.org/wiki/ANSI_escape_code
-#
-ansi_codes = {
-    # styles:
-    'bold': '1',
-    'dim': '2',
-    'italic': '3',
-    'underline': '4',
-    'blink': '5',
-    'inverse': '7',
-    'invert': '7',
-    'strike': '9',
-    'default': '10',
-    'normal': '22',  # normal color intensity - neither "bold" nor "dim"
-    'blink_end': '25',
-    'inverse_end': '27',
-    'invert_end': '27',
-    'strike_end': '29',
 
+fg_colors = {
     # text/fg colors:
-    'black': '30',
-    'red': '31',
-    'green': '32',
-    'yellow': '33',
-    'blue': '34',
-    'magenta': '35',
-    'cyan': '36',
-    'white': '37',
+    "black": "30",
+    "blue": "38;5;117",  # iso "34"
+    "blue_d1": "38;5;75",
+    "blue_d2": "38;5;32",
+    "blue_d3": "38;5;25",
+    "cyan": "38;5;123",  # iso "36"
+    "cyan_d1": "38;5;44",
+    "cyan_d2": "38;5;37",
+    "cyan_d3": "38;5;30",
+    "green": "38;5;119",  # iso "32"
+    "green_d1": "38;5;46",
+    "green_d2": "38;5;34",
+    "green_d3": "38;5;28",
+    "magenta": "38;5;207",  # iso "35"
+    "magenta_d1": "38;5;201",
+    "magenta_d2": "38;5;127",
+    "magenta_d3": "38;5;90",
+    "pink": "38;5;219",
+    "pink_d1": "38;5;213",
+    "pink_d2": "38;5;170",
+    "pink_d3": "38;5;133",
+    "orange": "38;5;214",
+    "orange_d1": "38;5;208",
+    "orange_d2": "38;5;202",
+    "orange_d3": "38;5;130",
+    "red": "38;5;210",  # iso "31"
+    "red_d1": "38;5;203",
+    "red_d2": "38;5;196",
+    "red_d3": "38;5;124",
+    "yellow": "38;5;229",  # iso "33"
+    "yellow_d1": "38;5;227",
+    "yellow_d2": "38;5;184",
+    "yellow_d3": "38;5;142",
+    "white": "37",
+    "grey": "38;5;244",
+    "grey_0": "38;5;232",  # == black
+    "grey_1": "38;5;236",
+    "grey_2": "38;5;240",
+    "grey_3": "38;5;244",
+    "grey_4": "38;5;248",
+    "grey_5": "38;5;252",
+}
 
-    # bold text/fg colors:
-    'b_black': '1;30',
-    'b_red': '1;31',
-    'b_green': '1;32',
-    'b_yellow': '1;33',
-    'b_blue': '1;34',
-    'b_magenta': '1;35',
-    'b_cyan': '1;36',
-    'b_white': '1;37',
+bg_colors = {
+    "black": "40",
+    "blue": "48;5;20",
+    "blue_d1": "48;5;19",
+    "blue_d2": "48;5;18",
+    "blue_d3": "48;5;17",
+    "cyan": "48;5;37",  # iso: "46"
+    "cyan_d1": "48;5;30",
+    "cyan_d2": "48;5;23",
+    "default": "49",
+    "green": "48;5;34",  # iso: "42"
+    "green_d1": "48;5;28",
+    "green_d2": "48;5;22",
+    "grey": "48;5;243",
+    "grey_d1": "48;5;241",
+    "grey_d2": "48;5;239",
+    "grey_d3": "48;5;237",
+    "grey_d4": "48;5;235",
+    "magenta": "48;5;164",
+    "magenta_d1": "48;5;127",
+    "magenta_d2": "48;5;90",
+    "magenta_d3": "48;5;53",
+    "orange": "48;5;202",
+    "orange_d1": "48;5;166",
+    "orange_d2": "48;5;130",
+    "orange_d3": "48;5;94",
+    "red": "48;5;160",  # iso "41"
+    "red_d1": "48;5;124",
+    "red_d2": "48;5;88",
+    "red_d3": "48;5;52",
+    "yellow": "48;5;142",  # iso "43"
+    "yellow_d1": "48;5;100",
+    "yellow_d2": "48;5;58",
+    "white": "47",
+}
 
-    # background colors:
-    'bg_black': '40',
-    'bg_red': '41',
-    'bg_green': '42',
-    'bg_yellow': '43',
-    'bg_blue': '44',
-    'bg_magenta': '45',
-    'bg_cyan': '46',
-    'bg_white': '47',
+ansi_codes = {
+    "reset": "0",
+    "bold": "1",
+    "dim": "2",
+    "italic": "3",
+    "underline": "4",
+    "blink": "5",
+    "inverse": "7",
+    "invert": "7",
+    "strike": "9",
+    "default": "10",
+    "normal": "22",  # normal color intensity - neither "bold" nor "dim"
+    "blink_end": "25",
+    "inverse_end": "27",
+    "invert_end": "27",
+    "strike_end": "29",
 
-    # background colors:
-    'bg_b_black': '1;40',
-    'bg_b_red': '1;41',
-    'bg_b_green': '1;42',
-    'bg_b_yellow': '1;43',
-    'bg_b_blue': '1;44',
-    'bg_b_magenta': '1;45',
-    'bg_b_cyan': '1;46',
-    'bg_b_white': '1;47',
+    **fg_colors,
+    **{f"b_{color}": f"1;{code}" for color, code in fg_colors.items()},
 
-    # extended colors:
-    'grey': '38;5;244',
-    'grey_0': '38;5;232',  # == black
-    'grey_1': '38;5;236',
-    'grey_2': '38;5;240',
-    'grey_3': '38;5;244',
-    'grey_4': '38;5;248',
-    'grey_5': '38;5;252',
-
-    # extended colors:
-    'b_grey': '1;38;5;244',
-    'b_grey_0': '1;38;5;232',  # == black
-    'b_grey_1': '1;38;5;236',
-    'b_grey_2': '1;38;5;240',
-    'b_grey_3': '1;38;5;244',
-    'b_grey_4': '1;38;5;248',
-    'b_grey_5': '1;38;5;252',
+    **{f"bg_{color}": code for color, code in bg_colors.items()},
+    **{f"bg_b_{color}": f"1;{code}" for color, code in bg_colors.items()},
 }
 
 ansi_pattern = "\x1b[{}m{}\x1b[0m"

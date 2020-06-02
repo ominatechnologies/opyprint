@@ -1,3 +1,4 @@
+from .apply_style import apply_style
 from .pp_context import PPContext
 from .pp_styles import PPStyles
 from .print import print
@@ -7,6 +8,7 @@ from .utils import (
 )
 
 __all__ = (
+    'apply_style',
     'PPContext',
     'PPStyles',
     'StyleOptions',
