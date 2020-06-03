@@ -15,5 +15,5 @@ project = 'OPYPRINT'
 description = "An opinionated pretty-print library for Python."
 author = "Wouter Van den Broeck"
 author_email = "wouter@addith.be"
-copyright = "2020, Wouter Van den Broeck"
+copyright = "2020, Omina Technologies"
 repo = "https://github.com/ominatechnologies/opyprint"
