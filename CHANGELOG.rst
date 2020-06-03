@@ -66,3 +66,8 @@ v0.9 - 2020-05-26
 v0.10 - 2020-06-02
 ++++++++++++++++++
 - feat: Add additional color styling options.
+
+
+v0.11 - 2020-06-03
+++++++++++++++++++
+- refactor: Change the color naming scheme.
