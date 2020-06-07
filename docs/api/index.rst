@@ -6,3 +6,4 @@ API
    pp_context
    pp_styles
    print
+   logger/index
