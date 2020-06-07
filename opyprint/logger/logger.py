@@ -169,14 +169,63 @@ class Logger:
 
     @contextmanager
     def indent(self):
-        """Increase the indentation for the subsequent log calls."""
-        prev_indent = self._indent
-        self._indent += 1
-        try:
-            with self._ppc.indent():
+        """
+        Increase the indentation for the subsequent log calls if the log level
+        is info or higher.
+        """
+        if self.info_enabled:
+            prev_indent = self._indent
+            self._indent += 1
+            try:
+                with self._ppc.indent():
+                    yield
+            finally:
+                self._indent = prev_indent
+        else:
+            try:
                 yield
-        finally:
-            self._indent = prev_indent
+            finally:
+                pass
+
+    @contextmanager
+    def debug_indent(self):
+        """
+        Increase the indentation for the subsequent log calls if the log level
+        is debug or higher.
+        """
+        if self.debug_enabled:
+            prev_indent = self._indent
+            self._indent += 1
+            try:
+                with self._ppc.indent():
+                    yield
+            finally:
+                self._indent = prev_indent
+        else:
+            try:
+                yield
+            finally:
+                pass
+
+    @contextmanager
+    def trace_indent(self):
+        """
+        Increase the indentation for the subsequent log calls if the log level
+        is debug or higher.
+        """
+        if self.trace_enabled:
+            prev_indent = self._indent
+            self._indent += 1
+            try:
+                with self._ppc.indent():
+                    yield
+            finally:
+                self._indent = prev_indent
+        else:
+            try:
+                yield
+            finally:
+                pass
 
     def indent_once(self, to: int = None):
         """Increase the indentation for the subsequent log calls."""
