@@ -77,3 +77,8 @@ v0.12 - 2020-06-03
 ++++++++++++++++++
 - feat: Add 'Logger', 'PrintLogger' and 'VoidLogger' classes (copied from
   'hails').
+
+
+Head
+++++
+- feat: Add 'LoggedMixin' mixin class.
