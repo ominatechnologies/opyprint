@@ -83,3 +83,4 @@ Head
 ++++
 - feat: Add 'LoggedMixin' mixin class.
 - feat: Add 'debug_indent' and 'trace_indent' methods in the 'Logger' class.
+- feat: Add 'format' utility.

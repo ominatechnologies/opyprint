@@ -590,6 +590,7 @@ class PPContext:
 
     def __call__(self, *args,
                  bullet: Union[str, bool] = None,
+                 indent: str = "",
                  style: StyleOptions = None,
                  key_style: StyleOptions = None) -> None:
         """
@@ -623,12 +624,22 @@ class PPContext:
             when this is not yet the case. The argument may be either a
             non-empty string, the first character of which is taken
             as the bullet, or true to use the current or default bullet.
+        :param indent: Optional indentation prefix string.
         :param style: Optional style specifications.
         :param key_style: Optional style specifications for the key part of
             key-value pairs.
         """
-        self._lines.append(self.format(*args, bullet=bullet,
-                                       style=style, key_style=key_style))
+        if indent != "":
+            with self.indent(indent):
+                self._lines.append(self.format(*args,
+                                               bullet=bullet,
+                                               style=style,
+                                               key_style=key_style))
+        else:
+            self._lines.append(self.format(*args,
+                                           bullet=bullet,
+                                           style=style,
+                                           key_style=key_style))
 
     def newline(self) -> None:
         """Adds a newline in the collected content."""
@@ -678,8 +689,10 @@ class PPContext:
         if len(args) == 0:
             print(self.flush(), **kwargs)
         else:
-            print(self.format(*args, bullet=bullet,
-                              style=style, key_style=key_style),
+            print(self.format(*args,
+                              bullet=bullet,
+                              style=style,
+                              key_style=key_style),
                   **kwargs)
 
     # -- System Methods --------------- --- --  -
