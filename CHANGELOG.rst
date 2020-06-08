@@ -73,14 +73,10 @@ v0.11 - 2020-06-03
 - refactor: Change the color naming scheme.
 
 
-v0.12 - 2020-06-03
+v0.12 - 2020-06-08
 ++++++++++++++++++
 - feat: Add 'Logger', 'PrintLogger' and 'VoidLogger' classes (copied from
   'hails').
-
-
-Head
-++++
 - feat: Add 'LoggedMixin' mixin class.
 - feat: Add 'debug_indent' and 'trace_indent' methods in the 'Logger' class.
 - feat: Add 'format' utility.
