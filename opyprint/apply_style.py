@@ -115,8 +115,10 @@ ansi_codes = {
     **fg_colors,
     **{f"b_{color}": f"1;{code}" for color, code in fg_colors.items()},
 
-    **{f"bg_{color}": f"0;{code}" for color, code in bg_colors.items()},
-    **{f"bg_b_{color}": f"0;1;{code}" for color, code in bg_colors.items()},
+    **{f"bg_{color}": f"0;38;5;15;{code}"
+       for color, code in bg_colors.items()},
+    **{f"bg_b_{color}": f"0;1;38;5;15;{code}"
+       for color, code in bg_colors.items()},
 }
 
 ansi_pattern = "\x1b[{}m{}\x1b[0m"
