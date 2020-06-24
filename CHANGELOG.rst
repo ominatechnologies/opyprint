@@ -75,8 +75,16 @@ v0.11 - 2020-06-03
 
 v0.12 - 2020-06-08
 ++++++++++++++++++
-- feat: Add 'Logger', 'PrintLogger' and 'VoidLogger' classes (copied from
+- feat: Add the 'Logger', 'PrintLogger' and 'VoidLogger' classes (copied from
   'hails').
-- feat: Add 'LoggedMixin' mixin class.
-- feat: Add 'debug_indent' and 'trace_indent' methods in the 'Logger' class.
-- feat: Add 'format' utility.
+- feat: Add the 'LoggedMixin' mixin class.
+- feat: Add the 'debug_indent' and the 'trace_indent' methods in the 'Logger'
+  class.
+- feat: Add the 'format' utility.
+
+
+Head
+++++
+- feat: Add the 'truncate' parameter for the 'Logger' constructor.
+- fix: Use white text instead of default text color on colored background in
+  the logging.

@@ -42,23 +42,29 @@ class Logger:
                  level: int = 2,
                  log_history: bool = False,
                  log_resolve_state: bool = True,
-                 width: int = 100,
-                 parent: Logger = None):
+                 parent: Logger = None,
+                 truncate: int = 0,
+                 width: int = 100):
         """
 
         :param level: log level
         :param log_history: See 'log_connectum' method.
         :param log_resolve_state: See 'log_connectum' method.
-        :param width: max content width
         :param parent: When given, the indentation of this parent logger is
             added to the indentation of this "dependent" logger.
+        :param truncate: The truncation setting. When this value is 0, no
+            truncation is applied. When any other positive integer value *n* is
+            given, then no more than *n* list/tuple/set elements or dictionary
+            items will be included and no more than *n* lines of a wrapped
+            string will be included.
+        :param width: max content width
         """
         self._indent = 0
         self._level = level
         self._log_history = log_history
         self._log_resolve_state = log_resolve_state
         self._parent = parent
-        self._ppc = PPContext(width=width)
+        self._ppc = PPContext(width=width, truncate=truncate)
         self._width = width
 
     # -- Accessors ---------------- --- --  -
