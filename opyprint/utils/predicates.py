@@ -5,12 +5,12 @@ from frozendict import FrozenDict
 
 def is_dict(obj) -> bool:
     """Checks if the given object is either a dict or a frozendict."""
-    return isinstance(obj, dict) or isinstance(obj, FrozenDict)
+    return isinstance(obj, (dict, FrozenDict))
 
 
 def is_set(obj) -> bool:
     """Checks if the given object is either a set or a frozenset."""
-    return isinstance(obj, set) or isinstance(obj, frozenset)
+    return isinstance(obj, (set, frozenset))
 
 
 def is_tuple(obj) -> bool:
@@ -50,4 +50,4 @@ def is_bullettable(obj) -> bool:
 
     :param obj: The object to check.
     """
-    return any(isinstance(obj, bt) for bt in BULLETTABLE_TYPES)
+    return isinstance(obj, BULLETTABLE_TYPES)

@@ -22,6 +22,10 @@ class LoggedMixin(Generic[T]):
     def logger(self) -> T:
         return self._logger
 
+    @logger.setter
+    def logger(self, logger: T) -> None:
+        self._logger = logger
+
     @property
     def debug_enabled(self) -> bool:
         return self._logger.debug_enabled
