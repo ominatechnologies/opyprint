@@ -86,17 +86,17 @@ class PPContext:
 
     # -- Instance Initialization --------------- --- --  -
 
-    __slots__ = (
-        '_bullet',
-        '_content_width',
-        '_default_bullet',
-        '_indent',
-        '_lines',
-        '_prefix_0',
-        '_prefix_n',
-        '_truncate',
-        '_width',
-    )
+    __slots__ = [
+        "_bullet",
+        "_content_width",
+        "_default_bullet",
+        "_indent",
+        "_lines",
+        "_prefix_0",
+        "_prefix_n",
+        "_truncate",
+        "_width",
+    ]
 
     _bullet: Optional[str]
     _content_width: int
@@ -273,9 +273,9 @@ class PPContext:
             return ppc._format_bullettable(obj, bullet=bullet, style=style)
 
         # pass the ppcontext to __str__ when possible:
-        __str__ = getattr(obj, '__str__', None)
+        __str__ = getattr(obj, "__str__", None)
         if (__str__ and callable(__str__) and
-                'ppc' in tuple(signature(__str__).parameters.keys())):
+                "ppc" in tuple(signature(__str__).parameters.keys())):
             if ppc == self:
                 # Use a fresh pp-context to pass to the __str__ method:
                 ppc = self._squash()
@@ -286,15 +286,15 @@ class PPContext:
                 return apply_style(str(obj), style)
 
         # use the 'describe' method when it is provided (deprecated):
-        describe = getattr(obj, 'describe', None)
+        describe = getattr(obj, "describe", None)
         if callable(describe):
             params = tuple(signature(describe).parameters.keys())
-            if 'ppc' in params:
+            if "ppc" in params:
                 if ppc == self:
                     # Use a fresh pp-context to pass to the describe method:
                     ppc = self._squash()
                 result = obj.describe(ppc=ppc)
-            elif 'width' in params:
+            elif "width" in params:
                 result = obj.describe(width=ppc._content_width)
             else:
                 result = obj.describe()

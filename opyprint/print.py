@@ -10,7 +10,7 @@ _py_print = print
 
 def print(*args,
           bullet: str = None,
-          end='\n',
+          end="\n",
           file=sys.stdout,
           flush=False,
           indent: str = "",
@@ -18,14 +18,14 @@ def print(*args,
           style: StyleOptions = None,
           truncate: int = PPContext.default_truncate,
           width: int = PPContext.default_width,
-          sep=' ',
+          sep=" ",
           **kwargs) -> None:
     """
     A drop-in replacement for the standard Python print function that
     pretty-prints the given arguments.
 
     >>> from opyprint import print
-    >>> print({'alpha': [1, 2, 3], 'beta': "satisfied"})
+    >>> print({"alpha": [1, 2, 3], "beta": "satisfied"})
     - alpha: [1, 2, 3]
     - beta: satisfied
 

@@ -23,15 +23,15 @@ class Logger:
 
     # -- Instance Initialization ---------------- --- --  -
 
-    __slots__ = (
-        '_indent',
-        '_level',
-        '_log_history',
-        '_log_resolve_state',
-        '_parent',
-        '_ppc',
-        '_width',
-    )
+    __slots__ = [
+        "_indent",
+        "_level",
+        "_log_history",
+        "_log_resolve_state",
+        "_parent",
+        "_ppc",
+        "_width",
+    ]
 
     _indent: int
     _level: int
@@ -164,7 +164,7 @@ class Logger:
     # -- Methods ---------------- --- --  -
 
     def enable(self, level: int = 2) -> Logger:
-        """Enable the LOGGER and set the given log level (default: 'trade')."""
+        """Enable the LOGGER and set the given log level (default: "trade")."""
         self._level = level
         return self
 
