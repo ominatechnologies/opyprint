@@ -113,11 +113,11 @@ class Logger:
             return self.ppc.indentation
 
     @property
-    def level(self):
+    def level(self) -> int:
         return self._level
 
     @level.setter
-    def level(self, level):
+    def level(self, level: int) -> None:
         self._level = level
 
     @property
@@ -129,7 +129,7 @@ class Logger:
         return self._parent
 
     @parent.setter
-    def parent(self, parent: Logger):
+    def parent(self, parent: Logger) -> None:
         self._parent = parent
 
     @property

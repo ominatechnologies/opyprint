@@ -164,7 +164,7 @@ class PPContext:
         return self._indent
 
     @indentation.setter
-    def indentation(self, indent: str):
+    def indentation(self, indent: str) -> None:
         """Set the current indentation string."""
         self._indent = indent
         self._update()
