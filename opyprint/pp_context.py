@@ -169,6 +169,16 @@ class PPContext:
         self._indent = indent
         self._update()
 
+    @property
+    def truncation(self) -> int:
+        """The current indentation string."""
+        return self._truncate
+
+    @truncation.setter
+    def truncation(self, truncate: int) -> None:
+        """Set the current truncation level."""
+        self._truncate = truncate
+
     # -- Format Method and Helpers --------------- --- --  -
 
     def format(self, *args,
@@ -545,6 +555,18 @@ class PPContext:
             self._update()
 
     @contextmanager
+    def truncate(self, truncation: int = default_truncate):
+        """
+        Use the given truncation for the wrapped pp-context commands.
+        """
+        ori_truncate = self._truncate
+        self._truncate = truncation
+        try:
+            yield self
+        finally:
+            self._truncate = ori_truncate
+
+    @contextmanager
     def bullets(self, bullet: str = None):
         """
         Prefixes each formatted object in the pretty-printing context with a
@@ -588,11 +610,13 @@ class PPContext:
 
     # -- Callable, print and flush Methods --------------- --- --  -
 
-    def __call__(self, *args,
+    def __call__(self,
+                 *args,
                  bullet: Union[str, bool] = None,
                  indent: str = "",
+                 key_style: StyleOptions = None,
                  style: StyleOptions = None,
-                 key_style: StyleOptions = None) -> None:
+                 truncate: int = None) -> None:
         """
         Formats the given arguments and collects the resulting pretty-printed
         content. Call :meth:`~flush` to get (and clear) the collected content
@@ -604,7 +628,6 @@ class PPContext:
             ppc("v_1")
             ppc("v_2")
             ppc("v_3")
-            ppc("v_4")
             ppc.print()
 
         The above will print the following::
@@ -612,7 +635,6 @@ class PPContext:
             v1
             v2
             v3
-            v4
 
         :param args: The values to format. When you provide one argument,
             then it will be pretty-printed normally. When you provide two
@@ -625,21 +647,37 @@ class PPContext:
             non-empty string, the first character of which is taken
             as the bullet, or true to use the current or default bullet.
         :param indent: Optional indentation prefix string.
-        :param style: Optional style specifications.
         :param key_style: Optional style specifications for the key part of
             key-value pairs.
+        :param style: Optional style specifications.
+        :param truncate: Optional truncation.
         """
         if indent != "":
-            with self.indent(indent):
+            if truncate is not None:
+                with self.truncate(truncate):
+                    with self.indent(indent):
+                        self._lines.append(self.format(*args,
+                                                       bullet=bullet,
+                                                       style=style,
+                                                       key_style=key_style))
+            else:
+                with self.indent(indent):
+                    self._lines.append(self.format(*args,
+                                                   bullet=bullet,
+                                                   style=style,
+                                                   key_style=key_style))
+        else:
+            if truncate is not None:
+                with self.truncate(truncate):
+                    self._lines.append(self.format(*args,
+                                                   bullet=bullet,
+                                                   style=style,
+                                                   key_style=key_style))
+            else:
                 self._lines.append(self.format(*args,
                                                bullet=bullet,
                                                style=style,
                                                key_style=key_style))
-        else:
-            self._lines.append(self.format(*args,
-                                           bullet=bullet,
-                                           style=style,
-                                           key_style=key_style))
 
     def newline(self) -> None:
         """Adds a newline in the collected content."""

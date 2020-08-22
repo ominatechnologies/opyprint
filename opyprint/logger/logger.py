@@ -146,18 +146,24 @@ class Logger:
                    key_style: StyleOptions = None,
                    level: int = TRACE,
                    margin: int = 0,
-                   style: StyleOptions = None) -> None:
+                   style: StyleOptions = None,
+                   truncate: int = None) -> None:
         """
         Handle a log message.
 
         :param msgs: The messages.
-        :param bullet: Optional bullet.
-        :param indent: The indentation prefix string.
+        :param bullet: Optional bullet.  See opyprint.PPContext for more
+            details.
+        :param indent: The indentation prefix string. See opyprint.PPContext
+            for more details.
         :param key_style: Optional style specifications for the key part of
-            key-value pairs.
+            key-value pairs. See opyprint.PPContext for more details.
         :param level: Optional log level.
         :param margin: Optional margin.
-        :param style: Optional styling.
+        :param style: Optional styling. See opyprint.PPContext for more
+            details.
+        :param truncate: Optional truncation. See opyprint.PPContext for more
+            details.
         """
         pass
 
@@ -252,7 +258,8 @@ class Logger:
               indent: str = "",
               key_style: StyleOptions = None,
               margin: int = 0,
-              style: StyleOptions = None) -> None:
+              style: StyleOptions = None,
+              truncate: int = None) -> None:
         """
         Log at level 1.
 
@@ -263,6 +270,7 @@ class Logger:
             key-value pairs.
         :param margin: Optional margin.
         :param style: Optional styling.
+        :param truncate: Optional truncation.
         """
         if style is None:
             style = PPStyles.grey_3
@@ -272,7 +280,8 @@ class Logger:
                  key_style=key_style,
                  level=Logger.DEBUG,
                  margin=margin,
-                 style=style)
+                 style=style,
+                 truncate=truncate)
 
     def trace(self,
               *msgs,
@@ -280,7 +289,8 @@ class Logger:
               indent: str = "",
               key_style: StyleOptions = None,
               margin: int = 0,
-              style: StyleOptions = None) -> None:
+              style: StyleOptions = None,
+              truncate: int = None) -> None:
         """
         Log at level 2.
 
@@ -291,6 +301,7 @@ class Logger:
             key-value pairs.
         :param margin: Optional margin.
         :param style: Optional styling.
+        :param truncate: Optional truncation.
         """
         if style is None:
             style = PPStyles.grey_4
@@ -300,7 +311,8 @@ class Logger:
                  key_style=key_style,
                  level=Logger.TRACE,
                  margin=margin,
-                 style=style)
+                 style=style,
+                 truncate=truncate)
 
     def info(self,
              *msgs,
@@ -308,7 +320,8 @@ class Logger:
              indent: str = "",
              key_style: StyleOptions = None,
              margin: int = 0,
-             style: StyleOptions = None) -> None:
+             style: StyleOptions = None,
+             truncate: int = None) -> None:
         """
         Log at level 3.
 
@@ -319,6 +332,7 @@ class Logger:
             key-value pairs.
         :param margin: Optional margin.
         :param style: Optional styling.
+        :param truncate: Optional truncation.
         """
         self.log(*msgs,
                  bullet=bullet,
@@ -326,7 +340,8 @@ class Logger:
                  key_style=key_style,
                  level=Logger.INFO,
                  margin=margin,
-                 style=style)
+                 style=style,
+                 truncate=truncate)
 
     def log(self,
             *msgs,
@@ -335,7 +350,8 @@ class Logger:
             key_style: StyleOptions = None,
             level: int = TRACE,
             margin: int = 0,
-            style: StyleOptions = None) -> None:
+            style: StyleOptions = None,
+            truncate: int = None) -> None:
         """
         Log at the given level.
 
@@ -351,6 +367,7 @@ class Logger:
         :param level: Optional log level.
         :param margin: Optional margin.
         :param style: Optional styling.
+        :param truncate: Optional truncation.
         """
         if 0 < self._level <= level:
             self.handle_log(*msgs,
@@ -359,7 +376,8 @@ class Logger:
                             key_style=key_style,
                             level=level,
                             margin=margin,
-                            style=style)
+                            style=style,
+                            truncate=truncate)
 
     def reset(self) -> None:
         """Resets the LOGGER, i.e. resets indentation to 0."""

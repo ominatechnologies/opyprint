@@ -13,21 +13,21 @@ class PrintLogger(Logger):
                    key_style=None,
                    level=Logger.TRACE,
                    margin=0,
-                   style=None):
+                   style=None,
+                   truncate=None):
         if margin:
             for i in range(margin):
                 self.ppc.newline()
 
         if self.parent:
             indent += self.parent.indentation
-        if indent:
-            with self.ppc.indent(indent):
-                self.ppc(*msgs,
-                         bullet=bullet,
-                         key_style=key_style,
-                         style=style)
-        else:
-            self.ppc(*msgs, bullet=bullet, key_style=key_style, style=style)
+
+        self.ppc(*msgs,
+                 bullet=bullet,
+                 indent=indent,
+                 key_style=key_style,
+                 style=style,
+                 truncate=truncate)
 
         if margin:
             for i in range(margin):

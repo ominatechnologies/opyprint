@@ -13,7 +13,8 @@ class VoidLogger(Logger):
               key_style=None,
               level=Logger.TRACE,
               margin=0,
-              style=None):
+              style=None,
+              truncate=None):
         pass
 
     def trace(self,
@@ -23,7 +24,8 @@ class VoidLogger(Logger):
               key_style=None,
               level=Logger.TRACE,
               margin=0,
-              style=None):
+              style=None,
+              truncate=None):
         pass
 
     def info(self,
@@ -33,7 +35,8 @@ class VoidLogger(Logger):
              key_style=None,
              level=Logger.TRACE,
              margin=0,
-             style=None):
+             style=None,
+             truncate=None):
         pass
 
     def log(self,
@@ -43,7 +46,8 @@ class VoidLogger(Logger):
             key_style=None,
             level=Logger.TRACE,
             margin=0,
-            style=None):
+            style=None,
+            truncate=None):
         pass
 
     def handle_log(self,
@@ -53,7 +57,8 @@ class VoidLogger(Logger):
                    key_style=None,
                    level=Logger.TRACE,
                    margin=0,
-                   style=None):
+                   style=None,
+                   truncate=None):
         pass
 
 
