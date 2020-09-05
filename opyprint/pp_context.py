@@ -274,7 +274,9 @@ class PPContext:
         else:
             ppc = self
 
-        if isinstance(obj, str):
+        if isinstance(obj, type):
+            return str(obj)
+        elif isinstance(obj, str):
             return ppc._format_str(obj, style)
         elif is_dict(obj):
             return ppc._format_dict(dict(obj), bullet=bullet, style=style,
