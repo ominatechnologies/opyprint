@@ -83,8 +83,19 @@ v0.12 - 2020-06-08
 - feat: Add the 'format' utility.
 
 
-Head
-++++
+v0.13 - 2020-09-06
+++++++++++++++++++
 - feat: Add the 'truncate' parameter for the 'Logger' constructor.
+- feat: Add the `with PPContext.truncate` context manager, add the
+  `PPContext.truncation` property, and add support for the `truncate` parameter
+  in `PPContext.__call__`, `Logger.debug`, `Logger.trace` and `Logger.info`.
+- feat: Accept `>` as key demarcation character.
 - fix: Use white text instead of default text color on colored background in
   the logging.
+- fix: Use the default string representation for class objects and do not try
+  to delegate to the describe method.
+- chore: Update dependencies.
+
+
+Head
+++++

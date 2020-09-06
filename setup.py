@@ -11,13 +11,13 @@ def readme():
 # 3rd-party run-time requirements:
 install_requires = [
     "colorama==0.4.3",
-    "typing-extensions==3.7.4.2",
+    "typing-extensions==3.7.4.3",
 ]
 
 # 1st-party run-time requirements:
 install_requires += [
     "frozendict @ git+https://github.com/ominatechnologies/"
-    "frozendict.git@1.2.3#egg=frozendict",
+    "frozendict.git@1.2.4#egg=frozendict",
 ]
 
 setup(
