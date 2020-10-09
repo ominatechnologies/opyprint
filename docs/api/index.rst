@@ -1,5 +1,5 @@
-API
-===
+OPyPrint API
+============
 .. toctree::
    :maxdepth: 2
 

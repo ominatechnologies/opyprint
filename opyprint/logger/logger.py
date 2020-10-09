@@ -152,17 +152,17 @@ class Logger:
         Handle a log message.
 
         :param msgs: The messages.
-        :param bullet: Optional bullet.  See opyprint.PPContext for more
+        :param bullet: Optional bullet.  See opyprint.pp_context for more
             details.
-        :param indent: The indentation prefix string. See opyprint.PPContext
+        :param indent: The indentation prefix string. See opyprint.pp_context
             for more details.
         :param key_style: Optional style specifications for the key part of
-            key-value pairs. See opyprint.PPContext for more details.
+            key-value pairs. See opyprint.pp_context for more details.
         :param level: Optional log level.
         :param margin: Optional margin.
-        :param style: Optional styling. See opyprint.PPContext for more
+        :param style: Optional styling. See opyprint.pp_context for more
             details.
-        :param truncate: Optional truncation. See opyprint.PPContext for more
+        :param truncate: Optional truncation. See opyprint.pp_context for more
             details.
         """
         pass

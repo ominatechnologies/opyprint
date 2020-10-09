@@ -16,7 +16,7 @@ def format(*args,
     Utility for getting the pp-formatted string.
 
     :param args: When called with two argument and the
-        :attr:`opyprint.PPContext.print_name_value_pairs` attribute is true,
+        :attr:`opyprint.pp_context.print_name_value_pairs` attribute is true,
         then the arguments are printed as a name-value pair (in a dict).
         Otherwise multiple arguments are printed as list.
     :param bullet: When given, prefix the formatted result with a bullet,
@@ -35,7 +35,7 @@ def format(*args,
         :attr:`PPContext.default_truncate` class attribute.
     :param width: Total width in characters, including bullets and
         indentation. Defaults to the value of the 'default_width' class
-        attribute of the :class:`~opyprint.PPContext.PPContext` class.
+        attribute of the :class:`~opyprint.pp_context.PPContext` class.
     """
     PPContext(indent=indent,
               width=width,
