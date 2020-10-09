@@ -1,0 +1,39 @@
+name: Build and publish documentation.
+
+on: [ push ]
+#on:
+#  push:
+#    branches:
+#      - master
+jobs:
+  build:
+    name: Build and publish the docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements.docs.txt
+          pip install . | { grep -v "already satisfied" || :; }
+      - name: Build the docs
+        run: |
+          sphinx-build -W --keep-going -T -E -b html docs build
+          ls -la build
+          ls -la build/_static
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@3.6.2
+        with:
+          BASE_BRANCH: main
+          BRANCH: docs # The branch the action should deploy to.
+          #          CLEAN: true # Automatically remove deleted files from the deploy branch
+          FOLDER: build # The folder the action should deploy.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

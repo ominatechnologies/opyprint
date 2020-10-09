@@ -5,6 +5,8 @@ OPyPrint Readme
 
 An opinionated pretty-printing library for Python.
 
+`API-Docs <https://ominatechnologies.github.io/opyprint>`_
+
 Design Goals
 ------------
 - You want to pretty-print complex data-structures that do not only consist
@@ -68,6 +70,8 @@ To install the package for use in your application, use::
 To install the package for development, use::
 
     $ pip install -r requirements.txt
+    $ pip install -r requirements.test.txt
+    $ pip install -r requirements.docs.txt
     $ pip install --editable . | { grep -v "already satisfied" || :; }
 
 To run the tests once, use::
@@ -103,3 +107,5 @@ See `<TODO.rst>`_.
 .. _pytest: https://docs.pytest.org
 .. _pytest-watch: https://github.com/joeyespo/pytest-watch
 .. _setuptools: https://setuptools.readthedocs.io
+
+

@@ -2,22 +2,3 @@
 #
 colorama==0.4.3
 typing-extensions==3.7.4.3
-
-# Testing requirements:
-#
-flake8==3.8.4
-mypy==0.782
-numpy==1.19.2
-pytest==6.1.1
-pytest-asyncio==0.14.0
-pytest-cov==2.10.1
-pytest-flake8==1.0.6
-pytest-mypy==0.7.0
-# pytest-watch==4.2.0
--e git+https://github.com/wouter-vdb/pytest-watch@4.3.0-fork#egg=pytest-watch
-
-# Doc-building requirements:
-#
-sphinx==3.2.1
-sphinx-autobuild==2020.9.1
-sphinx-material==0.0.32
