@@ -1,10 +1,10 @@
 name: Build and publish documentation.
 
-on: [ push ]
-#on:
-#  push:
-#    branches:
-#      - master
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   build:
     name: Build and publish the docs
@@ -34,6 +34,7 @@ jobs:
         with:
           BASE_BRANCH: main
           BRANCH: docs # The branch the action should deploy to.
-          #          CLEAN: true # Automatically remove deleted files from the deploy branch
+          CLEAN: true # Automatically remove deleted files from the deploy branch
+          SINGLE_COMMIT: true
           FOLDER: build # The folder the action should deploy.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
