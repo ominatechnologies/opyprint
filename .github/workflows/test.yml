@@ -1,6 +1,8 @@
 name: Test package
 
-on: [ push ]
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   test:
@@ -11,7 +13,10 @@ jobs:
         python-version: [ 3.7, 3.8 ]
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:

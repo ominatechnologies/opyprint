@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,8 +28,6 @@ jobs:
       - name: Build the docs
         run: |
           sphinx-build -W --keep-going -T -E -b html docs build
-          ls -la build
-          ls -la build/_static
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
