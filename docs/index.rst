@@ -1,20 +1,19 @@
+:notoc:
+
+.. module:: opyprint
+
 OPyPrint Documentation
 ======================
 .. toctree::
    :maxdepth: 2
 
+   readme
    api/index
    changelog
 
+.. only:: html
 
-Readme
-------
-.. include:: ../README.rst
-   :start-after: inclusion-marker
-
-
-Indices and tables
-------------------
-- :ref:`genindex`
-- :ref:`modindex`
-- :ref:`search`
+    Indices and tables
+    ------------------
+    * :ref:`genindex`
+    * :ref:`modindex`

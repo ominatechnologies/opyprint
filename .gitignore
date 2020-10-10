@@ -5,8 +5,10 @@ __pycache__/
 .eggs/
 .env/
 .idea/
-.mypy_cache
-.pytest_cache
+.mypy_cache/
+.pytest_cache/
+.tox*
+.vscode/
 *.egg
 *.egg-info/
 *.ipynb_checkpoints

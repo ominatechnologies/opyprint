@@ -7,3 +7,4 @@ OPyPrint API
    pp_styles
    print
    logger/index
+   utils/index

@@ -1,11 +1,10 @@
 OPyPrint Readme
 ===============
-
 .. inclusion-marker
 
 An opinionated pretty-printing library for Python.
 
-`API-Docs <https://ominatechnologies.github.io/opyprint>`_
+`API-Docs <https://ominatechnologies.github.io/opyprint/>`_
 
 Design Goals
 ------------

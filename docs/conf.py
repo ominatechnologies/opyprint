@@ -7,8 +7,6 @@ import sys
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
 
-import sphinx_material
-
 # -- Load Single-Sourced Config --------------- --- --  -
 
 path = Path(__file__, '../../config.py').resolve()
@@ -51,7 +49,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.mathjax',
     # 'sphinx-jsonschema',
-    'sphinx_material',
+    'pydata_sphinx_theme',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -89,7 +87,7 @@ todo_include_todos = True
 
 autoclass_content = 'both'
 autodoc_default_options = {
-    # 'inherited-members': True,
+    'inherited-members': True,
     'members': True,
     'show-inheritance': True,
     'undoc-members': True,
@@ -101,42 +99,20 @@ autodoc_typehints = "description"
 # See http://www.sphinx-doc.org/en/master/usage/configuration.html#options-
 # for-html-help-output
 
-# The theme to use for HTML and HTML Help pages.
-
-# Material theme setup:
-html_theme = 'sphinx_material'
-html_theme_path = sphinx_material.html_theme_path()
-html_baseurl = "https://ominatechnologies.github.io/opyprint/"
-html_context = sphinx_material.get_html_context()
+html_theme = "pydata_sphinx_theme"
 html_theme_options = {
-    # Set the name of the project to appear in the navigation.
-    'nav_title': project,
-    'logo_icon': 'local_offer',
-
-    # Set you GA account ID to enable tracking
-    # 'google_analytics_account': 'UA-XXXXX',
-
-    # Specify a base_url used to generate sitemap.xml. If not
-    # specified, then no sitemap will be built.
-    'base_url': "https://ominatechnologies.github.io/opyprint/",
-
-    # Set the color and the accent color
-    'theme_color': '304FFE',
-    'color_primary': 'amber',
-    'color_accent': 'light-blue',
-
-    # Set the repo location to get a badge with stats
-    'repo_url': repo,
-    'repo_name': name,
-
-    # Visible levels of the global TOC; -1 means unlimited
-    'globaltoc_depth': 2,
-    # If False, expand all TOC entries
-    'globaltoc_collapse': False,
-    # If True, show hidden TOC entries
-    # 'globaltoc_includehidden': False,
+    "external_links": [],
+    # "github_url": "https://github.com/pandas-dev/pandas",
+    # "twitter_url": "https://twitter.com/pandas_dev",
+    # "google_analytics_id": "UA-27880019-2",
 }
+html_logo = "_static/logo_small.png"
 
+# html_baseurl = "https://ominatechnologies.github.io/opyprint/"
+
+# Add any paths that contain custom static files (such as style sheets) here,
+# relative to this directory. They are copied after the builtin static files,
+# so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static", "_static/.nojekyll"]
 html_extra_path = [".nojekyll"]
 
@@ -281,6 +257,7 @@ mathjax_config = {
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3', None),
+    'frozendict': ('https://ominatechnologies.github.io/frozendict', None),
 }
 
 # -- Options for manual page output --------------- --- --  -
