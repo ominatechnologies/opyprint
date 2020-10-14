@@ -1,10 +1,8 @@
 # Single-sourced project configuration values:
 
 # the full version, including alpha/beta/rc tags
-release = "0.13.0"
-
-# the short X.Y version
-version = "0.13"
+release = "2020.10.14"
+version = release
 
 # distribution package name
 name = "opyprint"

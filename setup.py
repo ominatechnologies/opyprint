@@ -17,7 +17,7 @@ install_requires = [
 # 1st-party run-time requirements:
 install_requires += [
     "frozendict @ git+https://github.com/ominatechnologies/"
-    "frozendict.git@1.2.4#egg=frozendict",
+    "frozendict.git@2020.10.14#egg=frozendict",
 ]
 
 setup(
