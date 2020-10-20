@@ -11,13 +11,12 @@ def readme():
 # 3rd-party run-time requirements:
 install_requires = [
     "colorama==0.4.4",
+    "numpy==1.19.2",
     "typing-extensions==3.7.4.3",
-]
 
-# 1st-party run-time requirements:
-install_requires += [
-    "frozendict @ git+https://github.com/ominatechnologies/"
-    "frozendict.git@2020.10.14#egg=frozendict",
+    # 1st-party run-time requirements:
+    ("frozendict @ git+https://github.com/ominatechnologies/"
+     "frozendict.git@2020.10.14#egg=frozendict"),
 ]
 
 setup(
@@ -25,7 +24,9 @@ setup(
     author_email=author_email,
     classifiers=[
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
     data_files=[
         ("", ["AUTHORS.rst", "CHANGELOG.rst", "LICENSE", "README.rst"])

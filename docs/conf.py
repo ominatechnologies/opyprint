@@ -48,7 +48,8 @@ extensions = [
     'sphinx.ext.extlinks',
     'sphinx.ext.intersphinx',
     'sphinx.ext.mathjax',
-    # 'sphinx-jsonschema',
+    # 'sphinx-jsonschema'
+    # 'sphinxcontrib.bibtex',
     'pydata_sphinx_theme',
 ]
 

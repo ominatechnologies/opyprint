@@ -8,10 +8,10 @@ version = release
 name = "opyprint"
 
 # capitalized label
-project = "OPYPRINT"
+project = "OPyPrint"
 
 description = "An opinionated pretty-print library for Python."
-author = "Wouter Van den Broeck"
-author_email = "wouter@addith.be"
+author = "Omina Technologies"
+author_email = "info@ominatechnologies.com"
 copyright = "2020, Omina Technologies"
 repo = "https://github.com/ominatechnologies/opyprint"

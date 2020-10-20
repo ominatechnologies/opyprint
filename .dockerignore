@@ -2,4 +2,5 @@
 .github
 .mypy_cache
 .tox
-opyprint.egg-info
+*.egg-info
+build

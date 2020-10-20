@@ -14,3 +14,7 @@ __pycache__/
 *.ipynb_checkpoints
 *.py[cdo]
 *.so
+build/
+dist/
+tests/reports/
+venv/
