@@ -4,5 +4,4 @@ recursive-include docs *
 include opyprint/py.typed
 include LICENSE
 include README.rst
-include requirements.test.txt
 include setup.cfg
