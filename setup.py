@@ -15,7 +15,7 @@ install_requires = [
     "typing-extensions==3.7.4.3",
 
     # 1st-party run-time requirements:
-    ("frozendict @ git+https://github.com/ominatechnologies/"
+    ("frozendict @ git+ssh://git@github.com/ominatechnologies/"
      "frozendict.git@2020.10.14#egg=frozendict"),
 ]
 

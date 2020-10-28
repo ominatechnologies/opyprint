@@ -77,7 +77,7 @@ To run the tests, use::
 
     $ pip install -r requirements.test.txt
     $ pip install --editable .
-    $ python -m pytest
+    $ python3 -m pytest
 
 or::
 

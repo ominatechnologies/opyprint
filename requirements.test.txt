@@ -9,4 +9,4 @@ pytest-cov==2.10.1
 pytest-flake8==1.0.6
 pytest-mypy==0.7.0
 # pytest-watch==4.2.0
--e git+https://github.com/wouter-vdb/pytest-watch@4.3.0-fork#egg=pytest-watch
+-e git+ssh://git@github.com/wouter-vdb/pytest-watch@4.3.0-fork#egg=pytest-watch
