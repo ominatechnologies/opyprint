@@ -341,7 +341,10 @@ class PPContext:
             return self._format_kv_pair(key, dct[key], bullet or "",
                                         style=style, key_style=key_style)
         else:
-            kvs = [(key, dct[key]) for key in sorted(dct.keys())]
+            try:
+                kvs = [(key, dct[key]) for key in sorted(dct.keys())]
+            except TypeError:
+                kvs = dct.items()
 
             truncated = False
             if self._truncate and len(kvs) > self._truncate:
