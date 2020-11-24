@@ -430,6 +430,8 @@ class PPContext:
         # the value is a key-value mapping or the formatted value seems
         # to be bulletted:
         if not is_dict(value):
+            if unstyled == "":
+                return "{}".format(apply_style(bullet + key, key_style))
             lines = unstyled.splitlines()
             trimmed = lines[0].lstrip()
             if (not self.bullet_regex.match(trimmed) and
