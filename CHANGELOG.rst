@@ -103,5 +103,12 @@ v0.13 - 2020-09-06
 - chore: Update dependencies.
 
 
+2020.11.25
+++++++++++
+- fix: Various improvements and fixes.
+- setup: Add tox-based testing.
+- chore: Update dependencies.
+
+
 Head
 ++++
