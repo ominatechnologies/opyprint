@@ -1,4 +1,4 @@
-Logger Class
-============
+Logger Protocol
+===============
 
-.. automodule:: opyprint.logger.logger
+.. autoclass:: opyprint.logger.logger.Logger

@@ -1,4 +1,4 @@
 VoidLogger Class
 ================
 
-.. automodule:: opyprint.logger.void_logger
+.. autoclass:: opyprint.logger.logger.VoidLogger

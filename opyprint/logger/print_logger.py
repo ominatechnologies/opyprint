@@ -1,9 +1,11 @@
 from __future__ import annotations
 
-from .logger import Logger
+from abc import ABC
+
+from .logger import LoggerBase
 
 
-class PrintLogger(Logger):
+class PrintLogger(LoggerBase, ABC):
     """Logger that simply prints to stdout."""
 
     def handle_log(self,
@@ -11,7 +13,7 @@ class PrintLogger(Logger):
                    bullet=None,
                    indent="",
                    key_style=None,
-                   level=Logger.TRACE,
+                   level=LoggerBase.TRACE,
                    margin=0,
                    style=None,
                    truncate=None):

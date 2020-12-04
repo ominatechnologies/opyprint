@@ -1,11 +1,11 @@
 from .logged_mixin import LoggedMixin
-from .logger import Logger
+from .logger import Logger, LoggerBase, VoidLogger
 from .print_logger import PrintLogger
-from .void_logger import VoidLogger
 
 __all__ = [
-    "LoggedMixin",
     "Logger",
+    "LoggedMixin",
+    "LoggerBase",
     "PrintLogger",
     "VoidLogger",
 ]

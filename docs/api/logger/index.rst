@@ -4,6 +4,7 @@ logger Module
    :maxdepth: 2
 
    logger
-   print_logger
+   logger_base
    void_logger
+   print_logger
    logged_mixin
