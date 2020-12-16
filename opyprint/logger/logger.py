@@ -2,7 +2,12 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from contextlib import contextmanager
-from typing import ClassVar, Optional, Protocol, runtime_checkable
+from typing import ClassVar, Optional
+
+try:
+    from typing import Protocol, runtime_checkable
+except ImportError:
+    from typing_extensions import Protocol, runtime_checkable  # type: ignore
 
 from ..pp_context import PPContext
 from ..pp_styles import PPStyles

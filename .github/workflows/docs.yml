@@ -25,7 +25,7 @@ jobs:
           pip install tox
       - name: Build the docs
         run: |
-          tox -e docs-html
+          tox -e docs-dev-html
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
