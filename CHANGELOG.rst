@@ -110,5 +110,14 @@ v0.13 - 2020-09-06
 - chore: Update dependencies.
 
 
+2020.12.16
+++++++++++
+- refactor: Redefine 'Logger' as a protocol to simplify the 'LoggedMixin' class
+  and customizations.
+- test: Add a separate type checking tox env that produces more intelligible
+  error information compared to when using the pytest-mypy plugin.
+- chore: Update dependencies.
+
+
 Head
 ++++
