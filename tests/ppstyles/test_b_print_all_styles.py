@@ -7,7 +7,7 @@ from pytest import mark  # noqa: F401
 from opyprint import PPStyles, print  # noqa: F401
 
 
-@mark.skip
+@mark.skip("Demonstrates all the foreground styles")
 def test_all_fg():
     p()
     p(PPStyles.b_blue_l1)
@@ -98,7 +98,7 @@ def test_all_fg():
     p(PPStyles.grey_5)
 
 
-@mark.skip
+@mark.skip("Demonstrates all the background styles")
 def test_all_bg():
     p()
     p(PPStyles.bg_blue)
