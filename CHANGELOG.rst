@@ -119,5 +119,10 @@ v0.13 - 2020-09-06
 - chore: Update dependencies.
 
 
+2020.12.29
+++++++++++
+- chore: Update dependencies.
+
+
 Head
 ++++

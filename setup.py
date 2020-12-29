@@ -20,7 +20,7 @@ install_requires = [
 # 1st-party requirements:
 if "OSOURCE" in environ and environ["OSOURCE"] == "local":
     install_requires += [
-        "frozendict==2020.12.16",
+        "frozendict==2020.12.29",
     ]
 elif "OSOURCE" in environ and environ["OSOURCE"] == "dev":
     install_requires += [
@@ -30,7 +30,7 @@ elif "OSOURCE" in environ and environ["OSOURCE"] == "dev":
 else:
     install_requires += [
         ("frozendict @ git+https://github.com/ominatechnologies/"
-         "frozendict@2020.12.16#egg=frozendict"),
+         "frozendict@2020.12.29#egg=frozendict"),
     ]
 
 setup(
