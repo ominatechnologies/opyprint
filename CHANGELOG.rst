@@ -124,5 +124,11 @@ v0.13 - 2020-09-06
 - chore: Update dependencies.
 
 
+2021.01.07
+++++++++++
+- fix: Adjust green color for use on white background.
+- setup: Minor updates.
+
+
 Head
 ++++

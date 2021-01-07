@@ -1,7 +1,7 @@
 # Single-sourced project configuration values:
 
 # the full version, including alpha/beta/rc tags
-release = "2020.12.29"
+release = "2021.01.07"
 version = release
 
 # distribution package name
