@@ -59,7 +59,7 @@ class PPContext:
     string starts with a bullet.
     """
 
-    key_end_regex = compile(r"^.*[:;=->]$")
+    key_end_regex = compile(r"^.*[-:;=>]$")
 
     default_width: ClassVar[int] = 100
     """The default content width, including indentation and bullets."""
