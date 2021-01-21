@@ -126,3 +126,4 @@ v0.13 - 2020-09-06
 
 Head
 ++++
+- fix: The dash should be the first character in the regex.
