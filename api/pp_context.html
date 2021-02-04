@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PPContext Class &#8212; OPyPrint 2020.12.29 documentation</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PPStyles Enum" href="pp_styles.html" />
+    <link rel="prev" title="OPyPrint API" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../index.html">
+    
+      <img src="../_static/logo_small.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../readme.html">Readme</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="index.html">OPyPrint API</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../changelog.html">Changelog</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">Readme</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">OPyPrint API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">PPContext Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pp_styles.html">PPStyles Enum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="print.html">print()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logger/index.html">logger Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/index.html">Utils Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="module-opyprint.pp_context">
+<span id="ppcontext-class"></span><h1>PPContext Class<a class="headerlink" href="#module-opyprint.pp_context" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="opyprint.pp_context.PPContext">
+<em class="property">class </em><code class="sig-prename descclassname">opyprint.pp_context.</code><code class="sig-name descname">PPContext</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">truncate</span><span class="o">=</span><span class="default_value">14</span></em>, <em class="sig-param"><span class="n">bullet</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">indent</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">default_bullet</span><span class="o">=</span><span class="default_value">'- '</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.pp_context.PPContext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Represents a pretty-printing context for constructing structured,
+human-readable representation of complex, composite data structures.</p>
+<p>This context provides three groups of methods and is callable itself.</p>
+<ol class="arabic">
+<li><p>The <a class="reference internal" href="#opyprint.pp_context.PPContext.format" title="opyprint.pp_context.PPContext.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">format()</span></code></a> method format objects and returns the resulting
+pretty-printed string.</p></li>
+<li><p>When calling a PPContext object as a function, then the given arguments
+are formatted and collected. Use the <a class="reference internal" href="#opyprint.pp_context.PPContext.flush" title="opyprint.pp_context.PPContext.flush"><code class="xref py py-meth docutils literal notranslate"><span class="pre">flush()</span></code></a> method to get (and
+clear) the collected content or the <a class="reference internal" href="#opyprint.pp_context.PPContext.print" title="opyprint.pp_context.PPContext.print"><code class="xref py py-meth docutils literal notranslate"><span class="pre">print()</span></code></a> method to print (and
+clear) the collected content.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="n">ppc</span><span class="p">:</span> <span class="n">PPContext</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">ppc</span> <span class="o">=</span> <span class="n">ppc</span> <span class="ow">or</span> <span class="n">PPContext</span><span class="p">()</span>
+    <span class="n">ppc</span><span class="p">(</span><span class="s2">&quot;A foobar object, with:&quot;</span><span class="p">)</span>
+    <span class="n">ppc</span><span class="p">(</span><span class="s2">&quot;* alpha&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+    <span class="n">ppc</span><span class="p">(</span><span class="s2">&quot;* beta&quot;</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ppc</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p>The <em>context managers</em> (e.g. <a class="reference internal" href="#opyprint.pp_context.PPContext.indent" title="opyprint.pp_context.PPContext.indent"><code class="xref py py-meth docutils literal notranslate"><span class="pre">indent()</span></code></a> or <code class="xref py py-meth docutils literal notranslate"><span class="pre">bullet()</span></code>)
+temporarily adjust the pretty-print context.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Total width in characters, including bullets and
+indentation. Defaults to the value of the <a class="reference internal" href="#opyprint.pp_context.PPContext.default_width" title="opyprint.pp_context.PPContext.default_width"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_width</span></code></a>
+class attribute.</p></li>
+<li><p><strong>truncate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The truncation setting. When this value is 0, no
+truncation is applied. When any other positive integer value <em>n</em> is
+given, then no more than <em>n</em> list/tuple/set elements or dictionary
+items will be included and no more than <em>n</em> lines of a wrapped
+string will be included. Defaults to the value of the
+<a class="reference internal" href="#opyprint.pp_context.PPContext.default_truncate" title="opyprint.pp_context.PPContext.default_truncate"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_truncate</span></code></a> class attribute.</p></li>
+<li><p><strong>bullet</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Optional bullet prefix string.</p></li>
+<li><p><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The indentation prefix string.</p></li>
+<li><p><strong>default_bullet</strong> (<em>ClassVar</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="opyprint.pp_context.PPContext.bullet_regex">
+<code class="sig-name descname">bullet_regex</code><em class="property"> = re.compile('^([-+=|:~&lt;&gt;#$%^&amp;&#64;*\\[\\]?!]{1,3} )')</em><a class="headerlink" href="#opyprint.pp_context.PPContext.bullet_regex" title="Permalink to this definition">¶</a></dt>
+<dd><p>A compiled regular expression that is used to determine if a formatted
+string starts with a bullet.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_context.PPContext.key_end_regex">
+<code class="sig-name descname">key_end_regex</code><em class="property"> = re.compile('^.*[-:;=&gt;]$')</em><a class="headerlink" href="#opyprint.pp_context.PPContext.key_end_regex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_context.PPContext.default_width">
+<code class="sig-name descname">default_width</code><em class="property">: ClassVar<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></em><em class="property"> = 100</em><a class="headerlink" href="#opyprint.pp_context.PPContext.default_width" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default content width, including indentation and bullets.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_context.PPContext.default_truncate">
+<code class="sig-name descname">default_truncate</code><em class="property">: ClassVar<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></em><em class="property"> = 14</em><a class="headerlink" href="#opyprint.pp_context.PPContext.default_truncate" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default truncation setting. When this value is 0, no truncation is
+applied. When any other positive integer value <em>n</em> is given, then no more
+than <em>n</em> list/tuple/set elements or dictionary items will be included and
+no more than <em>n</em> lines of a wrapped string will be included.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_context.PPContext.default_bullet">
+<code class="sig-name descname">default_bullet</code><em class="property">: ClassVar<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></em><em class="property"> = '- '</em><a class="headerlink" href="#opyprint.pp_context.PPContext.default_bullet" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default bullet prefix string.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_context.PPContext.default_indent">
+<code class="sig-name descname">default_indent</code><em class="property">: ClassVar<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></em><em class="property"> = '  '</em><a class="headerlink" href="#opyprint.pp_context.PPContext.default_indent" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default single indentation string.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_context.PPContext.print_name_value_pairs">
+<code class="sig-name descname">print_name_value_pairs</code><em class="property">: ClassVar<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">]</span></em><em class="property"> = True</em><a class="headerlink" href="#opyprint.pp_context.PPContext.print_name_value_pairs" title="Permalink to this definition">¶</a></dt>
+<dd><p>When true, calling the <a class="reference internal" href="#opyprint.pp_context.PPContext.print" title="opyprint.pp_context.PPContext.print"><code class="xref py py-meth docutils literal notranslate"><span class="pre">print()</span></code></a> method with two arguments will
+print them as a name-value pair.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.pp_context.PPContext.indentation">
+<em class="property">property </em><code class="sig-name descname">indentation</code><a class="headerlink" href="#opyprint.pp_context.PPContext.indentation" title="Permalink to this definition">¶</a></dt>
+<dd><p>The current indentation string.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.pp_context.PPContext.truncation">
+<em class="property">property </em><code class="sig-name descname">truncation</code><a class="headerlink" href="#opyprint.pp_context.PPContext.truncation" title="Permalink to this definition">¶</a></dt>
+<dd><p>The current indentation string.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.pp_context.PPContext.format">
+<code class="sig-name descname">format</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">bullet</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">style</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">key_style</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.pp_context.PPContext.format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a pretty-printed representation of the given arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> – Values to be formatted. When you provide one argument,
+then it will be pretty-printed normally. When you provide two
+arguments, then they will be formatted as a name-value pair (in a
+dict). When you provide three or more arguments, then these will be
+formatted as a list.</p></li>
+<li><p><strong>bullet</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>]</em><em>]</em>) – When given, prefix the formatted result with a bullet,
+when this is not yet the case. The argument may be either a
+non-empty string, the first character of which is taken
+as the bullet, or true to use the current or default bullet.</p></li>
+<li><p><strong>style</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Any</em><em>]</em><em>]</em><em>]</em><em>]</em><em>]</em>) – Optional style specifications.</p></li>
+<li><p><strong>key_style</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Any</em><em>]</em><em>]</em><em>]</em><em>]</em><em>]</em>) – Optional style specifications for the key part of
+key-value pairs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.pp_context.PPContext.indent">
+<code class="sig-name descname">indent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">indent</span><span class="o">=</span><span class="default_value">'  '</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.pp_context.PPContext.indent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indents the pretty-printing context.</p>
+<p>Use this context-manager in a <code class="docutils literal notranslate"><span class="pre">with</span></code> statement as shown in the
+following example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ppc</span> <span class="o">=</span> <span class="n">PPContext</span><span class="p">()</span>
+<span class="n">ppc</span><span class="p">(</span><span class="s2">&quot;v_1&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">ppc</span><span class="o">.</span><span class="n">indent</span><span class="p">():</span>
+    <span class="n">ppc</span><span class="p">(</span><span class="s2">&quot;v_2&quot;</span><span class="p">)</span>
+    <span class="n">ppc</span><span class="p">(</span><span class="s2">&quot;v_3&quot;</span><span class="p">)</span>
+<span class="n">ppc</span><span class="p">(</span><span class="s2">&quot;v_4&quot;</span><span class="p">)</span>
+<span class="n">ppc</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The above will print the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v1</span>
+  <span class="n">v2</span>
+  <span class="n">v3</span>
+<span class="n">v4</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The optional indentation prefix string. Defaults to the
+value of the static <a class="reference internal" href="#opyprint.pp_context.PPContext.default_indent" title="opyprint.pp_context.PPContext.default_indent"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_indent</span></code></a> attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.pp_context.PPContext.truncate">
+<code class="sig-name descname">truncate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">truncation</span><span class="o">=</span><span class="default_value">14</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.pp_context.PPContext.truncate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the given truncation for the wrapped pp-context commands.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>truncation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.pp_context.PPContext.bullets">
+<code class="sig-name descname">bullets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bullet</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.pp_context.PPContext.bullets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prefixes each formatted object in the pretty-printing context with a
+bullet.</p>
+<p>Use this context-manager in a <code class="docutils literal notranslate"><span class="pre">with</span></code> statement as shown in the
+following example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ppc</span> <span class="o">=</span> <span class="n">PPContext</span><span class="p">()</span>
+<span class="n">ppc</span><span class="p">(</span><span class="s2">&quot;v_1&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">ppc</span><span class="o">.</span><span class="n">bullet</span><span class="p">():</span>
+    <span class="n">ppc</span><span class="p">(</span><span class="s2">&quot;v_2&quot;</span><span class="p">)</span>
+    <span class="n">ppc</span><span class="p">(</span><span class="s2">&quot;v_3&quot;</span><span class="p">)</span>
+<span class="n">ppc</span><span class="p">(</span><span class="s2">&quot;v_4&quot;</span><span class="p">)</span>
+<span class="n">ppc</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The above will print the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v1</span>
+<span class="o">-</span> <span class="n">v2</span>
+<span class="o">-</span> <span class="n">v3</span>
+<span class="n">v4</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bullet</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The bullet prefix string. Defaults to the value of
+the static <a class="reference internal" href="#opyprint.pp_context.PPContext.default_bullet" title="opyprint.pp_context.PPContext.default_bullet"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_bullet</span></code></a> attribute or when this context
+is nested in another ‘bullets’ context, the bullet for that
+context.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.pp_context.PPContext.newline">
+<code class="sig-name descname">newline</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.pp_context.PPContext.newline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a newline in the collected content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.pp_context.PPContext.dump">
+<code class="sig-name descname">dump</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.pp_context.PPContext.dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns (and clears) the pretty-printed content collected by calling
+the context as a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.pp_context.PPContext.flush">
+<code class="sig-name descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.pp_context.PPContext.flush" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.pp_context.PPContext.print">
+<code class="sig-name descname">print</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">bullet</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">style</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">key_style</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.pp_context.PPContext.print" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pretty-prints the given arguments or the pretty-printed content
+collected by calling the context as a function.</p>
+<p>Additional keyword arguments are passed to the native Python ‘print’
+function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> – When called without arguments the pretty-printed
+content collected by calling the context as a function is printed.
+When called with two argument and the
+<a class="reference internal" href="#opyprint.pp_context.PPContext.print_name_value_pairs" title="opyprint.pp_context.PPContext.print_name_value_pairs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">print_name_value_pairs</span></code></a> attributes is true, then the
+arguments are printed as a name-value pair (in a dict). Otherwise
+multiple arguments are printed as list.</p></li>
+<li><p><strong>bullet</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>]</em><em>]</em>) – When given, prefix the formatted result with bullet,
+when this is not yet the case. The argument may be either a
+non-empty string, the first character of which is taken
+as the bullet, or true to use the current or default bullet.
+This parameter is ignored when this method is called with (other)
+arguments.</p></li>
+<li><p><strong>style</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Any</em><em>]</em><em>]</em><em>]</em><em>]</em><em>]</em>) – Optional style specifications.</p></li>
+<li><p><strong>key_style</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Any</em><em>]</em><em>]</em><em>]</em><em>]</em><em>]</em>) – Optional style specifications for the key part of
+key-value pairs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">OPyPrint API</a>
+    <a class='right-next' id="next-link" href="pp_styles.html" title="next page">PPStyles Enum</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Omina Technologies.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

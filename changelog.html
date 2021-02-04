@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Changelog &#8212; OPyPrint 2020.12.29 documentation</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Predicates" href="api/utils/predicates.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="index.html">
+    
+      <img src="_static/logo_small.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="readme.html">Readme</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="api/index.html">OPyPrint API</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="">Changelog</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar">
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">Readme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">OPyPrint API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v0-1-2019-01-02">v0.1 - 2019-01-02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-2-2019-01-06">v0.2 - 2019-01-06</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-3-2019-01-07">v0.3 - 2019-01-07</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-4-2020-01-09">v0.4 - 2020-01-09</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-5-2020-01-11">v0.5 - 2020-01-11</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-6-2020-01-14">v0.6 - 2020-01-14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-7-2020-03-23">v0.7 - 2020-03-23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-8-2020-04-13">v0.8 - 2020-04-13</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-9-2020-05-26">v0.9 - 2020-05-26</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-10-2020-06-02">v0.10 - 2020-06-02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-11-2020-06-03">v0.11 - 2020-06-03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-12-2020-06-08">v0.12 - 2020-06-08</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-13-2020-09-06">v0.13 - 2020-09-06</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">2020.10.14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2020.11.25</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">2020.12.16</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">2020.12.29</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#head">Head</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#v0-1-2019-01-02" class="nav-link">v0.1 - 2019-01-02</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#v0-2-2019-01-06" class="nav-link">v0.2 - 2019-01-06</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#v0-3-2019-01-07" class="nav-link">v0.3 - 2019-01-07</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#v0-4-2020-01-09" class="nav-link">v0.4 - 2020-01-09</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#v0-5-2020-01-11" class="nav-link">v0.5 - 2020-01-11</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#v0-6-2020-01-14" class="nav-link">v0.6 - 2020-01-14</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#v0-7-2020-03-23" class="nav-link">v0.7 - 2020-03-23</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#v0-8-2020-04-13" class="nav-link">v0.8 - 2020-04-13</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#v0-9-2020-05-26" class="nav-link">v0.9 - 2020-05-26</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#v0-10-2020-06-02" class="nav-link">v0.10 - 2020-06-02</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#v0-11-2020-06-03" class="nav-link">v0.11 - 2020-06-03</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#v0-12-2020-06-08" class="nav-link">v0.12 - 2020-06-08</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#v0-13-2020-09-06" class="nav-link">v0.13 - 2020-09-06</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#id1" class="nav-link">2020.10.14</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#id2" class="nav-link">2020.11.25</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#id3" class="nav-link">2020.12.16</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#id4" class="nav-link">2020.12.29</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#head" class="nav-link">Head</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v0-1-2019-01-02">
+<h2>v0.1 - 2019-01-02<a class="headerlink" href="#v0-1-2019-01-02" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Added the ‘PPContext’ class and the ‘print’ function.</p></li>
+</ul>
+</div>
+<div class="section" id="v0-2-2019-01-06">
+<h2>v0.2 - 2019-01-06<a class="headerlink" href="#v0-2-2019-01-06" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Name-value pairs are now also bulletted.</p></li>
+<li><p>Added optional ‘bullet’ parameter for the ‘__call__’, ‘format’ and ‘print’
+methods.</p></li>
+</ul>
+</div>
+<div class="section" id="v0-3-2019-01-07">
+<h2>v0.3 - 2019-01-07<a class="headerlink" href="#v0-3-2019-01-07" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Added ‘bullet’ and ‘width’ parameters for the ‘print’ function.</p></li>
+</ul>
+</div>
+<div class="section" id="v0-4-2020-01-09">
+<h2>v0.4 - 2020-01-09<a class="headerlink" href="#v0-4-2020-01-09" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The ‘print’ function is now a proper drop-in replacement for the native one.</p></li>
+<li><p>Added support for implementations of the ‘__str__’ method that take an
+optional ‘PPContext’ object as parameters.</p></li>
+</ul>
+</div>
+<div class="section" id="v0-5-2020-01-11">
+<h2>v0.5 - 2020-01-11<a class="headerlink" href="#v0-5-2020-01-11" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Added Sphinx-based docs.</p></li>
+<li><p>Added ‘lt’ and ‘dict_lt’ utilities.</p></li>
+<li><p>Added code linting using Flake8.</p></li>
+</ul>
+</div>
+<div class="section" id="v0-6-2020-01-14">
+<h2>v0.6 - 2020-01-14<a class="headerlink" href="#v0-6-2020-01-14" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Renamed ‘wpyprint’ to ‘opyprint’.</p></li>
+<li><p>Various improvements.</p></li>
+</ul>
+</div>
+<div class="section" id="v0-7-2020-03-23">
+<h2>v0.7 - 2020-03-23<a class="headerlink" href="#v0-7-2020-03-23" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Add support for styled formatting.</p></li>
+<li><p>Upgrade to Python v3.8.</p></li>
+<li><p>Migrated to our own frozendict.</p></li>
+</ul>
+</div>
+<div class="section" id="v0-8-2020-04-13">
+<h2>v0.8 - 2020-04-13<a class="headerlink" href="#v0-8-2020-04-13" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Add support for ‘indent’, ‘style’ and ‘truncate’ parameters in the ‘print’
+function replacement.</p></li>
+</ul>
+</div>
+<div class="section" id="v0-9-2020-05-26">
+<h2>v0.9 - 2020-05-26<a class="headerlink" href="#v0-9-2020-05-26" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>feat: Add ‘key_style’ option.</p></li>
+<li><p>feat: Add additional styling options.</p></li>
+<li><p>feat: Explicitly support the parameters for the native ‘print’ function for
+its drop-in replacement to improve auto-completion and documentation.</p></li>
+<li><p>fix: Handle classes that implement a ‘describe’ method that does not return
+a string.</p></li>
+</ul>
+</div>
+<div class="section" id="v0-10-2020-06-02">
+<h2>v0.10 - 2020-06-02<a class="headerlink" href="#v0-10-2020-06-02" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>feat: Add additional color styling options.</p></li>
+</ul>
+</div>
+<div class="section" id="v0-11-2020-06-03">
+<h2>v0.11 - 2020-06-03<a class="headerlink" href="#v0-11-2020-06-03" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>refactor: Change the color naming scheme.</p></li>
+</ul>
+</div>
+<div class="section" id="v0-12-2020-06-08">
+<h2>v0.12 - 2020-06-08<a class="headerlink" href="#v0-12-2020-06-08" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>feat: Add the ‘Logger’, ‘PrintLogger’ and ‘VoidLogger’ classes (copied from
+‘hails’).</p></li>
+<li><p>feat: Add the ‘LoggedMixin’ mixin class.</p></li>
+<li><p>feat: Add the ‘debug_indent’ and the ‘trace_indent’ methods in the ‘Logger’
+class.</p></li>
+<li><p>feat: Add the ‘format’ utility.</p></li>
+</ul>
+</div>
+<div class="section" id="v0-13-2020-09-06">
+<h2>v0.13 - 2020-09-06<a class="headerlink" href="#v0-13-2020-09-06" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>feat: Add the ‘truncate’ parameter for the ‘Logger’ constructor.</p></li>
+<li><p>feat: Add the <cite>with PPContext.truncate</cite> context manager, add the
+<cite>PPContext.truncation</cite> property, and add support for the <cite>truncate</cite> parameter
+in <cite>PPContext.__call__</cite>, <cite>Logger.debug</cite>, <cite>Logger.trace</cite> and <cite>Logger.info</cite>.</p></li>
+<li><p>feat: Accept <cite>&gt;</cite> as key demarcation character.</p></li>
+<li><p>fix: Use white text instead of default text color on colored background in
+the logging.</p></li>
+<li><p>fix: Use the default string representation for class objects and do not try
+to delegate to the describe method.</p></li>
+<li><p>chore: Update dependencies.</p></li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2>2020.10.14<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>fix: Various minor improvements and fixes.</p></li>
+<li><p>chore: Update dependencies.</p></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>2020.11.25<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>fix: Various improvements and fixes.</p></li>
+<li><p>setup: Add tox-based testing.</p></li>
+<li><p>chore: Update dependencies.</p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>2020.12.16<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>refactor: Redefine ‘Logger’ as a protocol to simplify the ‘LoggedMixin’ class
+and customizations.</p></li>
+<li><p>test: Add a separate type checking tox env that produces more intelligible
+error information compared to when using the pytest-mypy plugin.</p></li>
+<li><p>chore: Update dependencies.</p></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>2020.12.29<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>chore: Update dependencies.</p></li>
+</ul>
+</div>
+<div class="section" id="head">
+<h2>Head<a class="headerlink" href="#head" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>fix: The dash should be the first character in the regex.</p></li>
+<li><p>chore: Update dependencies.</p></li>
+</ul>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="api/utils/predicates.html" title="previous page">Predicates</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Omina Technologies.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

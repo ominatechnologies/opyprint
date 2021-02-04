@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Readme &#8212; OPyPrint 2020.12.29 documentation</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="OPyPrint API" href="api/index.html" />
+    <link rel="prev" title="OPyPrint Documentation" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="index.html">
+    
+      <img src="_static/logo_small.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="">Readme</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="api/index.html">OPyPrint API</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="changelog.html">Changelog</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar">
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Readme</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#design-goals">Design Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#project-setup">Project Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">OPyPrint API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#design-goals" class="nav-link">Design Goals</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#usage" class="nav-link">Usage</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#project-setup" class="nav-link">Project Setup</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="readme">
+<span id="id1"></span><h1>Readme<a class="headerlink" href="#readme" title="Permalink to this headline">¶</a></h1>
+<p>An opinionated pretty-printing library for Python.</p>
+<p><a class="reference external" href="https://ominatechnologies.github.io/opyprint/">API-Docs</a></p>
+<div class="section" id="design-goals">
+<h2>Design Goals<a class="headerlink" href="#design-goals" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>You want to pretty-print complex data-structures that do not only consist
+of dicts, lists and other native data-structures and primitive values, but
+also includes custom data types.</p></li>
+<li><p>You want to be able to write functions that carefully pretty-print
+your custom data types, with consistent indentation and wrapping when such
+objects occur nested in other data structure.</p></li>
+<li><p>You don’t care about obtaining a pretty-printed form that can be used as
+input to the interpreter. Human readability is your main (and only) concern.</p></li>
+<li><p>You want some truncation control to limit the number of printed list
+elements, or the number of printed lines in wrapped strings.</p></li>
+</ul>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>To pretty-print native data-structures you want to use the ‘print’ function
+provided in this package instead of the native ‘print’ function provided in
+Python. This custom ‘print’ function is a drop-in replacement that support all
+the keyword-arguments supported by the native function.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">opyprint</span> <span class="kn">import</span> <span class="nb">print</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">({</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;beta&#39;</span><span class="p">:</span> <span class="s2">&quot;satisfied&quot;</span><span class="p">})</span>
+<span class="go">- alpha: [1, 2, 3]</span>
+<span class="go">- beta: satisfied</span>
+</pre></div>
+</div>
+<p>To support pretty-printing in your custom data types, you need to implement
+their ‘__str__’ method as follows:</p>
+<ul>
+<li><p>The method should accept a <em>PPContext</em> object as <code class="docutils literal notranslate"><span class="pre">ppc</span></code> keyword argument. It
+should default to <code class="docutils literal notranslate"><span class="pre">None</span></code>, in which case the pp-context object should be
+initialized in the method body.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">ppc</span></code> object (as a function) to add formatted content in the
+context queue.</p></li>
+<li><p>Return the result of <code class="docutils literal notranslate"><span class="pre">ppc.flush()</span></code>, as shown in the following example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Alpha</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop_1</span><span class="p">,</span> <span class="n">prop_2</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prop_1</span> <span class="o">=</span> <span class="n">prop_1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prop_2</span> <span class="o">=</span> <span class="n">prop_2</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ppc</span><span class="p">:</span> <span class="n">PPContext</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">ppc</span> <span class="o">=</span> <span class="n">ppc</span> <span class="ow">or</span> <span class="n">PPContext</span><span class="p">()</span>
+        <span class="n">ppc</span><span class="p">(</span><span class="s2">&quot;An Alpha object with:&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">ppc</span><span class="o">.</span><span class="n">bullets</span><span class="p">():</span>
+            <span class="n">ppc</span><span class="p">(</span><span class="s2">&quot;prop_1&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prop_1</span><span class="p">)</span>
+            <span class="n">ppc</span><span class="p">(</span><span class="s2">&quot;prop_2&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prop_2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ppc</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="project-setup">
+<h2>Project Setup<a class="headerlink" href="#project-setup" title="Permalink to this headline">¶</a></h2>
+<p>This project requires Python 3.7 or higher. It is supported for Python 3.7, 3.8
+and 3.9.</p>
+<p>This project uses <a class="reference external" href="https://docs.pytest.org">pytest</a> as testing framework and our code provides type
+hinting (see <a class="reference external" href="https://www.python.org/dev/peps/pep-0484">PEP-484</a> and <a class="reference external" href="https://www.python.org/dev/peps/pep-0561">PEP-561</a>) to enable static type checking using <a class="reference external" href="http://mypy-lang.org">mypy</a>.
+For test-driven development, we use <a class="reference external" href="https://github.com/joeyespo/pytest-watch">pytest-watch</a>. We use <a class="reference external" href="http://flake8.pycqa.org">flake8</a> for code
+linting. Linting and static type checking are integrated in the standard
+<a class="reference external" href="https://docs.pytest.org">pytest</a>-managed testing.</p>
+<p>This project uses <a class="reference external" href="http://www.sphinx-doc.org">sphinx</a> to generate its documentation. To be able to build
+the docs as latex/pdf, you need to install the proper tex tools.
+On MacOS, install <a class="reference external" href="http://www.tug.org/mactex/mactex-download.html">MacTex</a> and <a class="reference external" href="https://mg.readthedocs.io/latexmk.html">latexmk</a>.</p>
+<p>To install the package for normal use in your application, use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install .
+</pre></div>
+</div>
+<p>To run the tests, use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -r requirements.test.txt
+$ pip install --editable .
+$ python3 -m pytest
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tox -e pytest-dev-py38
+</pre></div>
+</div>
+<p>For test-driven development, use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -r requirements.test.txt
+$ pip install --editable .
+$ pytest-watch
+</pre></div>
+</div>
+<p>To enforce code formatting, install the git hook:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ flake8 --install-hook git
+$ git config --bool flake8.strict true
+</pre></div>
+</div>
+<p>To build the docs as html, use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tox -e pytest-html
+</pre></div>
+</div>
+<p>To build the docs as pdf, use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tox -e pytest-pdf
+</pre></div>
+</div>
+<p>Pytest, mypy and flake8 are configured in the <em>setup.cfg</em> file. Sphinx and
+its plugins are configured in <em>docs/conf.py</em>.</p>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">OPyPrint Documentation</a>
+    <a class='right-next' id="next-link" href="api/index.html" title="next page">OPyPrint API</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Omina Technologies.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logger Protocol &#8212; OPyPrint 2020.12.29 documentation</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="LoggerBase Class" href="logger_base.html" />
+    <link rel="prev" title="logger Module" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../../index.html">
+    
+      <img src="../../_static/logo_small.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../readme.html">Readme</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="../index.html">OPyPrint API</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../changelog.html">Changelog</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Readme</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">OPyPrint API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../pp_context.html">PPContext Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pp_styles.html">PPStyles Enum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print.html">print()</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">logger Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/index.html">Utils Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="logger-protocol">
+<h1>Logger Protocol<a class="headerlink" href="#logger-protocol" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="opyprint.logger.logger.Logger">
+<em class="property">class </em><code class="sig-prename descclassname">opyprint.logger.logger.</code><code class="sig-name descname">Logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Protocol</span></code></p>
+<p>Abstract base class for concrete Logger classes.</p>
+<dl class="py attribute">
+<dt id="opyprint.logger.logger.Logger.DISABLED">
+<code class="sig-name descname">DISABLED</code><em class="property">: ClassVar<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></em><em class="property"> = 0</em><a class="headerlink" href="#opyprint.logger.logger.Logger.DISABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.logger.logger.Logger.DEBUG">
+<code class="sig-name descname">DEBUG</code><em class="property">: ClassVar<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></em><em class="property"> = 1</em><a class="headerlink" href="#opyprint.logger.logger.Logger.DEBUG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.logger.logger.Logger.TRACE">
+<code class="sig-name descname">TRACE</code><em class="property">: ClassVar<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></em><em class="property"> = 2</em><a class="headerlink" href="#opyprint.logger.logger.Logger.TRACE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.logger.logger.Logger.INFO">
+<code class="sig-name descname">INFO</code><em class="property">: ClassVar<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></em><em class="property"> = 3</em><a class="headerlink" href="#opyprint.logger.logger.Logger.INFO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.logger.logger.Logger.Void">
+<code class="sig-name descname">Void</code><em class="property">: ClassVar<span class="p">[</span><a class="reference internal" href="#opyprint.logger.logger.Logger" title="opyprint.logger.logger.Logger">opyprint.logger.logger.Logger</a><span class="p">]</span></em><em class="property"> = &lt;opyprint.logger.logger.VoidLogger object&gt;</em><a class="headerlink" href="#opyprint.logger.logger.Logger.Void" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.enabled">
+<em class="property">abstract property </em><code class="sig-name descname">enabled</code><a class="headerlink" href="#opyprint.logger.logger.Logger.enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>True when the logger is enabled, i.e. when the log level is not 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.debug_enabled">
+<em class="property">property </em><code class="sig-name descname">debug_enabled</code><a class="headerlink" href="#opyprint.logger.logger.Logger.debug_enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>True when the ‘debug’ log level is enabled.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.trace_enabled">
+<em class="property">property </em><code class="sig-name descname">trace_enabled</code><a class="headerlink" href="#opyprint.logger.logger.Logger.trace_enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>True when the ‘trace’ log level is enabled.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.info_enabled">
+<em class="property">property </em><code class="sig-name descname">info_enabled</code><a class="headerlink" href="#opyprint.logger.logger.Logger.info_enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>True when the ‘info’ log level is enabled.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.disabled">
+<em class="property">property </em><code class="sig-name descname">disabled</code><a class="headerlink" href="#opyprint.logger.logger.Logger.disabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>True when the logger is disabled, i.e. when the log level is 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.indent_depth">
+<em class="property">property </em><code class="sig-name descname">indent_depth</code><a class="headerlink" href="#opyprint.logger.logger.Logger.indent_depth" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of space characters the current indentation consists of.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.indentation">
+<em class="property">property </em><code class="sig-name descname">indentation</code><a class="headerlink" href="#opyprint.logger.logger.Logger.indentation" title="Permalink to this definition">¶</a></dt>
+<dd><p>The current indentation string.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.level">
+<em class="property">property </em><code class="sig-name descname">level</code><a class="headerlink" href="#opyprint.logger.logger.Logger.level" title="Permalink to this definition">¶</a></dt>
+<dd><p>The current log level.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.width">
+<em class="property">property </em><code class="sig-name descname">width</code><a class="headerlink" href="#opyprint.logger.logger.Logger.width" title="Permalink to this definition">¶</a></dt>
+<dd><p>The current width at which line breaking is preferred.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.parent">
+<em class="property">property </em><code class="sig-name descname">parent</code><a class="headerlink" href="#opyprint.logger.logger.Logger.parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>The parent logger.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.ppc">
+<em class="property">property </em><code class="sig-name descname">ppc</code><a class="headerlink" href="#opyprint.logger.logger.Logger.ppc" title="Permalink to this definition">¶</a></dt>
+<dd><p>The pretty-print context object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.handle_log">
+<code class="sig-name descname">handle_log</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">msgs</span></em>, <em class="sig-param"><span class="n">bullet</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indent</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">key_style</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">level</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">margin</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">style</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">truncate</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger.handle_log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle a log message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msgs</strong> – The messages.</p></li>
+<li><p><strong>bullet</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – Optional bullet.  See opyprint.pp_context for more
+details.</p></li>
+<li><p><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The indentation prefix string. See opyprint.pp_context
+for more details.</p></li>
+<li><p><strong>key_style</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Any</em><em>]</em><em>]</em><em>]</em><em>]</em><em>]</em>) – Optional style specifications for the key part of
+key-value pairs. See opyprint.pp_context for more details.</p></li>
+<li><p><strong>level</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Optional log level.</p></li>
+<li><p><strong>margin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Optional margin.</p></li>
+<li><p><strong>style</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Any</em><em>]</em><em>]</em><em>]</em><em>]</em><em>]</em>) – Optional styling. See opyprint.pp_context for more
+details.</p></li>
+<li><p><strong>truncate</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – Optional truncation. See opyprint.pp_context for more
+details.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.enable">
+<code class="sig-name descname">enable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">level</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger.enable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable the LOGGER and set the given log level (default: “trade”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>level</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#opyprint.logger.logger.Logger" title="opyprint.logger.logger.Logger">opyprint.logger.logger.Logger</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.disable">
+<code class="sig-name descname">disable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger.disable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disable the LOGGER.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#opyprint.logger.logger.Logger" title="opyprint.logger.logger.Logger">opyprint.logger.logger.Logger</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.indent">
+<code class="sig-name descname">indent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger.indent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increase the indentation for the subsequent log calls if the log level
+is info or higher.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.debug_indent">
+<code class="sig-name descname">debug_indent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger.debug_indent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increase the indentation for the subsequent log calls if the log level
+is debug or higher.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.trace_indent">
+<code class="sig-name descname">trace_indent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger.trace_indent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increase the indentation for the subsequent log calls if the log level
+is debug or higher.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.indent_once">
+<code class="sig-name descname">indent_once</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">to</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger.indent_once" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increase the indentation for the subsequent log calls.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>to</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.dedent">
+<code class="sig-name descname">dedent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger.dedent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decrease the indentation for the subsequent log calls.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.debug">
+<code class="sig-name descname">debug</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">msgs</span></em>, <em class="sig-param"><span class="n">bullet</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indent</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">key_style</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">margin</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">style</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">truncate</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log at level 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msgs</strong> – The messages.</p></li>
+<li><p><strong>bullet</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – Optional bullet.</p></li>
+<li><p><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The indentation prefix string.</p></li>
+<li><p><strong>key_style</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Any</em><em>]</em><em>]</em><em>]</em><em>]</em><em>]</em>) – Optional style specifications for the key part of
+key-value pairs.</p></li>
+<li><p><strong>margin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Optional margin.</p></li>
+<li><p><strong>style</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Any</em><em>]</em><em>]</em><em>]</em><em>]</em><em>]</em>) – Optional styling.</p></li>
+<li><p><strong>truncate</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – Optional truncation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.trace">
+<code class="sig-name descname">trace</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">msgs</span></em>, <em class="sig-param"><span class="n">bullet</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indent</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">key_style</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">margin</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">style</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">truncate</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger.trace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log at level 2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msgs</strong> – The messages.</p></li>
+<li><p><strong>bullet</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – Optional bullet.</p></li>
+<li><p><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The indentation prefix string.</p></li>
+<li><p><strong>key_style</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Any</em><em>]</em><em>]</em><em>]</em><em>]</em><em>]</em>) – Optional style specifications for the key part of
+key-value pairs.</p></li>
+<li><p><strong>margin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Optional margin.</p></li>
+<li><p><strong>style</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Any</em><em>]</em><em>]</em><em>]</em><em>]</em><em>]</em>) – Optional styling.</p></li>
+<li><p><strong>truncate</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – Optional truncation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.info">
+<code class="sig-name descname">info</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">msgs</span></em>, <em class="sig-param"><span class="n">bullet</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indent</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">key_style</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">margin</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">style</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">truncate</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log at level 3.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msgs</strong> – The messages.</p></li>
+<li><p><strong>bullet</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – Optional bullet.</p></li>
+<li><p><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The indentation prefix string.</p></li>
+<li><p><strong>key_style</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Any</em><em>]</em><em>]</em><em>]</em><em>]</em><em>]</em>) – Optional style specifications for the key part of
+key-value pairs.</p></li>
+<li><p><strong>margin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Optional margin.</p></li>
+<li><p><strong>style</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Any</em><em>]</em><em>]</em><em>]</em><em>]</em><em>]</em>) – Optional styling.</p></li>
+<li><p><strong>truncate</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – Optional truncation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.log">
+<code class="sig-name descname">log</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">msgs</span></em>, <em class="sig-param"><span class="n">bullet</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indent</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">key_style</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">level</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">margin</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">style</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">truncate</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log at the given level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msgs</strong> – The messages. When you provide one argument,
+then it will be pretty-printed normally. When you provide two
+arguments, then they will be formatted as a name-value pair (in a
+dict). When you provide three or more arguments, then these will be
+formatted as a list.</p></li>
+<li><p><strong>bullet</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – Optional bullet.</p></li>
+<li><p><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The indentation prefix string.</p></li>
+<li><p><strong>key_style</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Any</em><em>]</em><em>]</em><em>]</em><em>]</em><em>]</em>) – Optional style specifications for the key part of
+key-value pairs.</p></li>
+<li><p><strong>level</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Optional log level.</p></li>
+<li><p><strong>margin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Optional margin.</p></li>
+<li><p><strong>style</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../pp_styles.html#opyprint.pp_styles.PPStyles" title="opyprint.pp_styles.PPStyles"><em>opyprint.pp_styles.PPStyles</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Collection</em><em>[</em><em>Any</em><em>]</em><em>]</em><em>]</em><em>]</em><em>]</em>) – Optional styling.</p></li>
+<li><p><strong>truncate</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – Optional truncation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the LOGGER, i.e. resets indentation to 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opyprint.logger.logger.Logger.log_connectum">
+<code class="sig-name descname">log_connectum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cnm</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">all</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">bindings</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">binding_sources</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">checked</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">history</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">label</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">level</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">resolve_state</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">sub_connecta</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">truncate</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.logger.logger.Logger.log_connectum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log the given connectum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>all</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Include all details, i.e. bindings, binding_sources,
+checked, history, resolve state and sub-connecta.</p></li>
+<li><p><strong>cnm</strong> – The connectum to log.</p></li>
+<li><p><strong>bindings</strong> – Provide true (the default) to include the bindings.</p></li>
+<li><p><strong>binding_sources</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Include the binding source information. Implies
+bindings.</p></li>
+<li><p><strong>checked</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Include the gate and link ‘checked’ status.</p></li>
+<li><p><strong>history</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Include the resolve/build history.</p></li>
+<li><p><strong>label</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – Optional connectum label.</p></li>
+<li><p><strong>level</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The logger level.</p></li>
+<li><p><strong>resolve_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Include the blocks’ resolve state.</p></li>
+<li><p><strong>sub_connecta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Provide true (the default) to include
+recursive descriptions of the composite sub-connecta.</p></li>
+<li><p><strong>truncate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The truncation setting. When this value is 0, no
+truncation is applied. When any other positive integer value <em>n</em> is
+given, then no more than <em>n</em> list/tuple/set elements or dictionary
+items will be included and no more than <em>n</em> lines of a wrapped
+string will be included. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">logger Module</a>
+    <a class='right-next' id="next-link" href="logger_base.html" title="next page">LoggerBase Class</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Omina Technologies.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

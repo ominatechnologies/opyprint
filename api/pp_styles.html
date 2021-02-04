@@ -1,0 +1,876 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PPStyles Enum &#8212; OPyPrint 2020.12.29 documentation</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="print()" href="print.html" />
+    <link rel="prev" title="PPContext Class" href="pp_context.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../index.html">
+    
+      <img src="../_static/logo_small.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../readme.html">Readme</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="index.html">OPyPrint API</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../changelog.html">Changelog</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">Readme</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">OPyPrint API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pp_context.html">PPContext Class</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">PPStyles Enum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="print.html">print()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logger/index.html">logger Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/index.html">Utils Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="module-opyprint.pp_styles">
+<span id="ppstyles-enum"></span><h1>PPStyles Enum<a class="headerlink" href="#module-opyprint.pp_styles" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="opyprint.pp_styles.PPStyles">
+<em class="property">class </em><code class="sig-prename descclassname">opyprint.pp_styles.</code><code class="sig-name descname">PPStyles</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opyprint.pp_styles.PPStyles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.blink">
+<code class="sig-name descname">blink</code><em class="property"> = 'blink'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.blink" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.blink_end">
+<code class="sig-name descname">blink_end</code><em class="property"> = 'blink_end'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.blink_end" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bold">
+<code class="sig-name descname">bold</code><em class="property"> = 'bold'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bold" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.default">
+<code class="sig-name descname">default</code><em class="property"> = 'default'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.dim">
+<code class="sig-name descname">dim</code><em class="property"> = 'dim'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.dim" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.inverse">
+<code class="sig-name descname">inverse</code><em class="property"> = 'inverse'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.inverse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.inverse_end">
+<code class="sig-name descname">inverse_end</code><em class="property"> = 'inverse_end'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.inverse_end" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.invert">
+<code class="sig-name descname">invert</code><em class="property"> = 'invert'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.invert" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.invert_end">
+<code class="sig-name descname">invert_end</code><em class="property"> = 'invert_end'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.invert_end" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.italic">
+<code class="sig-name descname">italic</code><em class="property"> = 'italic'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.italic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.normal">
+<code class="sig-name descname">normal</code><em class="property"> = 'normal'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.normal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.reset">
+<code class="sig-name descname">reset</code><em class="property"> = 'reset'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.strike">
+<code class="sig-name descname">strike</code><em class="property"> = 'strike'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.strike" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.strike_end">
+<code class="sig-name descname">strike_end</code><em class="property"> = 'strike_end'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.strike_end" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.underline">
+<code class="sig-name descname">underline</code><em class="property"> = 'underline'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.underline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.black">
+<code class="sig-name descname">black</code><em class="property"> = 'black'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.black" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.blue">
+<code class="sig-name descname">blue</code><em class="property"> = 'blue'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.blue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.blue_d1">
+<code class="sig-name descname">blue_d1</code><em class="property"> = 'blue_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.blue_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.blue_d2">
+<code class="sig-name descname">blue_d2</code><em class="property"> = 'blue_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.blue_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.blue_l1">
+<code class="sig-name descname">blue_l1</code><em class="property"> = 'blue_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.blue_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.cyan">
+<code class="sig-name descname">cyan</code><em class="property"> = 'cyan'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.cyan" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.cyan_d1">
+<code class="sig-name descname">cyan_d1</code><em class="property"> = 'cyan_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.cyan_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.cyan_d2">
+<code class="sig-name descname">cyan_d2</code><em class="property"> = 'cyan_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.cyan_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.cyan_l1">
+<code class="sig-name descname">cyan_l1</code><em class="property"> = 'cyan_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.cyan_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.green">
+<code class="sig-name descname">green</code><em class="property"> = 'green'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.green" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.green_d1">
+<code class="sig-name descname">green_d1</code><em class="property"> = 'green_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.green_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.green_d2">
+<code class="sig-name descname">green_d2</code><em class="property"> = 'green_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.green_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.green_l1">
+<code class="sig-name descname">green_l1</code><em class="property"> = 'green_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.green_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.magenta">
+<code class="sig-name descname">magenta</code><em class="property"> = 'magenta'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.magenta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.magenta_d1">
+<code class="sig-name descname">magenta_d1</code><em class="property"> = 'magenta_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.magenta_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.magenta_d2">
+<code class="sig-name descname">magenta_d2</code><em class="property"> = 'magenta_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.magenta_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.magenta_l1">
+<code class="sig-name descname">magenta_l1</code><em class="property"> = 'magenta_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.magenta_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.pink">
+<code class="sig-name descname">pink</code><em class="property"> = 'pink'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.pink" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.pink_d1">
+<code class="sig-name descname">pink_d1</code><em class="property"> = 'pink_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.pink_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.pink_d2">
+<code class="sig-name descname">pink_d2</code><em class="property"> = 'pink_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.pink_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.pink_l1">
+<code class="sig-name descname">pink_l1</code><em class="property"> = 'pink_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.pink_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.orange">
+<code class="sig-name descname">orange</code><em class="property"> = 'orange'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.orange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.orange_d1">
+<code class="sig-name descname">orange_d1</code><em class="property"> = 'orange_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.orange_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.orange_d2">
+<code class="sig-name descname">orange_d2</code><em class="property"> = 'orange_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.orange_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.orange_l1">
+<code class="sig-name descname">orange_l1</code><em class="property"> = 'orange_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.orange_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.red">
+<code class="sig-name descname">red</code><em class="property"> = 'red'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.red" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.red_d1">
+<code class="sig-name descname">red_d1</code><em class="property"> = 'red_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.red_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.red_d2">
+<code class="sig-name descname">red_d2</code><em class="property"> = 'red_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.red_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.red_l1">
+<code class="sig-name descname">red_l1</code><em class="property"> = 'red_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.red_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.white">
+<code class="sig-name descname">white</code><em class="property"> = 'white'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.white" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.yellow">
+<code class="sig-name descname">yellow</code><em class="property"> = 'yellow'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.yellow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.yellow_d1">
+<code class="sig-name descname">yellow_d1</code><em class="property"> = 'yellow_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.yellow_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.yellow_d2">
+<code class="sig-name descname">yellow_d2</code><em class="property"> = 'yellow_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.yellow_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.yellow_l1">
+<code class="sig-name descname">yellow_l1</code><em class="property"> = 'yellow_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.yellow_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_black">
+<code class="sig-name descname">b_black</code><em class="property"> = 'b_black'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_black" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_blue">
+<code class="sig-name descname">b_blue</code><em class="property"> = 'b_blue'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_blue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_blue_d1">
+<code class="sig-name descname">b_blue_d1</code><em class="property"> = 'b_blue_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_blue_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_blue_d2">
+<code class="sig-name descname">b_blue_d2</code><em class="property"> = 'b_blue_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_blue_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_blue_l1">
+<code class="sig-name descname">b_blue_l1</code><em class="property"> = 'b_blue_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_blue_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_cyan">
+<code class="sig-name descname">b_cyan</code><em class="property"> = 'b_cyan'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_cyan" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_cyan_d1">
+<code class="sig-name descname">b_cyan_d1</code><em class="property"> = 'b_cyan_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_cyan_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_cyan_d2">
+<code class="sig-name descname">b_cyan_d2</code><em class="property"> = 'b_cyan_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_cyan_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_cyan_l1">
+<code class="sig-name descname">b_cyan_l1</code><em class="property"> = 'b_cyan_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_cyan_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_green">
+<code class="sig-name descname">b_green</code><em class="property"> = 'b_green'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_green" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_green_d1">
+<code class="sig-name descname">b_green_d1</code><em class="property"> = 'b_green_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_green_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_green_d2">
+<code class="sig-name descname">b_green_d2</code><em class="property"> = 'b_green_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_green_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_green_l1">
+<code class="sig-name descname">b_green_l1</code><em class="property"> = 'b_green_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_green_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_magenta">
+<code class="sig-name descname">b_magenta</code><em class="property"> = 'b_magenta'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_magenta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_magenta_d1">
+<code class="sig-name descname">b_magenta_d1</code><em class="property"> = 'b_magenta_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_magenta_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_magenta_d2">
+<code class="sig-name descname">b_magenta_d2</code><em class="property"> = 'b_magenta_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_magenta_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_magenta_l1">
+<code class="sig-name descname">b_magenta_l1</code><em class="property"> = 'b_magenta_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_magenta_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_pink">
+<code class="sig-name descname">b_pink</code><em class="property"> = 'b_pink'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_pink" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_pink_d1">
+<code class="sig-name descname">b_pink_d1</code><em class="property"> = 'b_pink_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_pink_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_pink_d2">
+<code class="sig-name descname">b_pink_d2</code><em class="property"> = 'b_pink_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_pink_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_pink_l1">
+<code class="sig-name descname">b_pink_l1</code><em class="property"> = 'b_pink_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_pink_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_orange">
+<code class="sig-name descname">b_orange</code><em class="property"> = 'b_orange'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_orange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_orange_d1">
+<code class="sig-name descname">b_orange_d1</code><em class="property"> = 'b_orange_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_orange_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_orange_d2">
+<code class="sig-name descname">b_orange_d2</code><em class="property"> = 'b_orange_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_orange_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_orange_l1">
+<code class="sig-name descname">b_orange_l1</code><em class="property"> = 'b_orange_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_orange_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_red">
+<code class="sig-name descname">b_red</code><em class="property"> = 'b_red'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_red" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_red_d1">
+<code class="sig-name descname">b_red_d1</code><em class="property"> = 'b_red_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_red_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_red_d2">
+<code class="sig-name descname">b_red_d2</code><em class="property"> = 'b_red_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_red_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_red_l1">
+<code class="sig-name descname">b_red_l1</code><em class="property"> = 'b_red_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_red_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_white">
+<code class="sig-name descname">b_white</code><em class="property"> = 'b_white'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_white" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_yellow">
+<code class="sig-name descname">b_yellow</code><em class="property"> = 'b_yellow'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_yellow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_yellow_d1">
+<code class="sig-name descname">b_yellow_d1</code><em class="property"> = 'b_yellow_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_yellow_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_yellow_d2">
+<code class="sig-name descname">b_yellow_d2</code><em class="property"> = 'b_yellow_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_yellow_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_yellow_l1">
+<code class="sig-name descname">b_yellow_l1</code><em class="property"> = 'b_yellow_l1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_yellow_l1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_black">
+<code class="sig-name descname">bg_black</code><em class="property"> = 'bg_black'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_black" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_blue">
+<code class="sig-name descname">bg_blue</code><em class="property"> = 'bg_blue'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_blue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_cyan">
+<code class="sig-name descname">bg_cyan</code><em class="property"> = 'bg_cyan'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_cyan" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_green">
+<code class="sig-name descname">bg_green</code><em class="property"> = 'bg_green'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_green" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_grey">
+<code class="sig-name descname">bg_grey</code><em class="property"> = 'bg_grey'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_grey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_magenta">
+<code class="sig-name descname">bg_magenta</code><em class="property"> = 'bg_magenta'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_magenta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_orange">
+<code class="sig-name descname">bg_orange</code><em class="property"> = 'bg_orange'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_orange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_red">
+<code class="sig-name descname">bg_red</code><em class="property"> = 'bg_red'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_red" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_white">
+<code class="sig-name descname">bg_white</code><em class="property"> = 'bg_white'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_white" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_yellow">
+<code class="sig-name descname">bg_yellow</code><em class="property"> = 'bg_yellow'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_yellow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_blue_d1">
+<code class="sig-name descname">bg_blue_d1</code><em class="property"> = 'bg_blue_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_blue_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_blue_d2">
+<code class="sig-name descname">bg_blue_d2</code><em class="property"> = 'bg_blue_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_blue_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_blue_d3">
+<code class="sig-name descname">bg_blue_d3</code><em class="property"> = 'bg_blue_d3'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_blue_d3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_cyan_d1">
+<code class="sig-name descname">bg_cyan_d1</code><em class="property"> = 'bg_cyan_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_cyan_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_cyan_d2">
+<code class="sig-name descname">bg_cyan_d2</code><em class="property"> = 'bg_cyan_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_cyan_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_green_d1">
+<code class="sig-name descname">bg_green_d1</code><em class="property"> = 'bg_green_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_green_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_green_d2">
+<code class="sig-name descname">bg_green_d2</code><em class="property"> = 'bg_green_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_green_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_grey_d1">
+<code class="sig-name descname">bg_grey_d1</code><em class="property"> = 'bg_grey_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_grey_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_grey_d2">
+<code class="sig-name descname">bg_grey_d2</code><em class="property"> = 'bg_grey_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_grey_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_grey_d3">
+<code class="sig-name descname">bg_grey_d3</code><em class="property"> = 'bg_grey_d3'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_grey_d3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_grey_d4">
+<code class="sig-name descname">bg_grey_d4</code><em class="property"> = 'bg_grey_d4'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_grey_d4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_magenta_d1">
+<code class="sig-name descname">bg_magenta_d1</code><em class="property"> = 'bg_magenta_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_magenta_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_magenta_d2">
+<code class="sig-name descname">bg_magenta_d2</code><em class="property"> = 'bg_magenta_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_magenta_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_magenta_d3">
+<code class="sig-name descname">bg_magenta_d3</code><em class="property"> = 'bg_magenta_d3'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_magenta_d3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_red_d1">
+<code class="sig-name descname">bg_red_d1</code><em class="property"> = 'bg_red_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_red_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_red_d2">
+<code class="sig-name descname">bg_red_d2</code><em class="property"> = 'bg_red_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_red_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_red_d3">
+<code class="sig-name descname">bg_red_d3</code><em class="property"> = 'bg_red_d3'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_red_d3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_orange_d1">
+<code class="sig-name descname">bg_orange_d1</code><em class="property"> = 'bg_orange_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_orange_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_orange_d2">
+<code class="sig-name descname">bg_orange_d2</code><em class="property"> = 'bg_orange_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_orange_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_orange_d3">
+<code class="sig-name descname">bg_orange_d3</code><em class="property"> = 'bg_orange_d3'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_orange_d3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_yellow_d1">
+<code class="sig-name descname">bg_yellow_d1</code><em class="property"> = 'bg_yellow_d1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_yellow_d1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_yellow_d2">
+<code class="sig-name descname">bg_yellow_d2</code><em class="property"> = 'bg_yellow_d2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_yellow_d2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_b_black">
+<code class="sig-name descname">bg_b_black</code><em class="property"> = 'bg_b_black'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_b_black" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_b_blue">
+<code class="sig-name descname">bg_b_blue</code><em class="property"> = 'bg_b_blue'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_b_blue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_b_cyan">
+<code class="sig-name descname">bg_b_cyan</code><em class="property"> = 'bg_b_cyan'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_b_cyan" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_b_green">
+<code class="sig-name descname">bg_b_green</code><em class="property"> = 'bg_b_green'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_b_green" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_b_grey">
+<code class="sig-name descname">bg_b_grey</code><em class="property"> = 'bg_b_grey'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_b_grey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_b_magenta">
+<code class="sig-name descname">bg_b_magenta</code><em class="property"> = 'bg_b_magenta'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_b_magenta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_b_orange">
+<code class="sig-name descname">bg_b_orange</code><em class="property"> = 'bg_b_orange'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_b_orange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_b_red">
+<code class="sig-name descname">bg_b_red</code><em class="property"> = 'bg_b_red'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_b_red" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_b_white">
+<code class="sig-name descname">bg_b_white</code><em class="property"> = 'bg_b_white'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_b_white" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.bg_b_yellow">
+<code class="sig-name descname">bg_b_yellow</code><em class="property"> = 'bg_b_yellow'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.bg_b_yellow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.grey">
+<code class="sig-name descname">grey</code><em class="property"> = 'grey'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.grey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.grey_0">
+<code class="sig-name descname">grey_0</code><em class="property"> = 'grey_0'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.grey_0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.grey_1">
+<code class="sig-name descname">grey_1</code><em class="property"> = 'grey_1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.grey_1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.grey_2">
+<code class="sig-name descname">grey_2</code><em class="property"> = 'grey_2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.grey_2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.grey_3">
+<code class="sig-name descname">grey_3</code><em class="property"> = 'grey_3'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.grey_3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.grey_4">
+<code class="sig-name descname">grey_4</code><em class="property"> = 'grey_4'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.grey_4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.grey_5">
+<code class="sig-name descname">grey_5</code><em class="property"> = 'grey_5'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.grey_5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_grey">
+<code class="sig-name descname">b_grey</code><em class="property"> = 'b_grey'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_grey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_grey_0">
+<code class="sig-name descname">b_grey_0</code><em class="property"> = 'b_grey_0'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_grey_0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_grey_1">
+<code class="sig-name descname">b_grey_1</code><em class="property"> = 'b_grey_1'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_grey_1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_grey_2">
+<code class="sig-name descname">b_grey_2</code><em class="property"> = 'b_grey_2'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_grey_2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_grey_3">
+<code class="sig-name descname">b_grey_3</code><em class="property"> = 'b_grey_3'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_grey_3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_grey_4">
+<code class="sig-name descname">b_grey_4</code><em class="property"> = 'b_grey_4'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_grey_4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="opyprint.pp_styles.PPStyles.b_grey_5">
+<code class="sig-name descname">b_grey_5</code><em class="property"> = 'b_grey_5'</em><a class="headerlink" href="#opyprint.pp_styles.PPStyles.b_grey_5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="pp_context.html" title="previous page">PPContext Class</a>
+    <a class='right-next' id="next-link" href="print.html" title="next page">print()</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Omina Technologies.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
