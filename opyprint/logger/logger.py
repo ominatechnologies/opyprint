@@ -275,28 +275,23 @@ class Logger(Protocol):
                       *,
                       all: bool = False,
                       bindings=False,
-                      binding_sources: bool = False,
                       checked: bool = False,
                       history: bool = False,
                       label: str = None,
                       level: int = DEBUG,
-                      resolve_state: bool = True,
                       sub_connecta: bool = True,
                       truncate: int = 0) -> None:
         """
         Log the given connectum.
 
-        :param all: Include all details, i.e. bindings, binding_sources,
-            checked, history, resolve state and sub-connecta.
+        :param all: Include all details, i.e. bindings, checked, history,
+            resolve state and sub-connecta.
         :param cnm: The connectum to log.
         :param bindings: Provide true (the default) to include the bindings.
-        :param binding_sources: Include the binding source information. Implies
-            bindings.
         :param checked: Include the gate and link 'checked' status.
         :param history: Include the resolve/build history.
         :param label: Optional connectum label.
         :param level: The logger level.
-        :param resolve_state: Include the blocks' resolve state.
         :param sub_connecta: Provide true (the default) to include
             recursive descriptions of the composite sub-connecta.
         :param truncate: The truncation setting. When this value is 0, no
@@ -326,7 +321,6 @@ class LoggerBase(Logger, ABC):
         "_indent",
         "_level",
         "_log_history",
-        "_log_resolve_state",
         "_parent",
         "_ppc",
         "_width",
@@ -340,14 +334,12 @@ class LoggerBase(Logger, ABC):
     def __init__(self,
                  level: int = 2,
                  log_history: bool = False,
-                 log_resolve_state: bool = True,
                  parent: Logger = None,
                  truncate: int = 0,
                  width: int = 100):
         """
         :param level: log level
         :param log_history: See 'log_connectum' method.
-        :param log_resolve_state: See 'log_connectum' method.
         :param parent: When given, the indentation of this parent logger is
             added to the indentation of this "dependent" logger.
         :param truncate: The truncation setting. When this value is 0, no
@@ -360,7 +352,6 @@ class LoggerBase(Logger, ABC):
         self._indent = 0
         self._level = level
         self._log_history = log_history
-        self._log_resolve_state = log_resolve_state
         self._parent = parent
         self._ppc = PPContext(width=width, truncate=truncate)
         self._width = width
@@ -579,12 +570,10 @@ class LoggerBase(Logger, ABC):
                       *,
                       all=False,
                       bindings=False,
-                      binding_sources=False,
                       checked=False,
                       history=False,
                       label=None,
                       level=DEBUG,
-                      resolve_state=True,
                       sub_connecta=True,
                       truncate=0) -> None:
         raise NotImplementedError()
@@ -654,12 +643,10 @@ class VoidLogger(LoggerBase):
                       *,
                       all=False,
                       bindings=False,
-                      binding_sources=False,
                       checked=False,
                       history=False,
                       label=None,
                       level=LoggerBase.DEBUG,
-                      resolve_state=True,
                       sub_connecta=True,
                       truncate=0):
         pass

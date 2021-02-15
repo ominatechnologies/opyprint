@@ -132,3 +132,7 @@ v0.13 - 2020-09-06
 
 Head
 ++++
+- refactor: Drop the `binding_sources` param for the `log_connectum`
+  functionality.
+- fix: The dash should be the first character in the regex.
+- setup: Update dependencies.
