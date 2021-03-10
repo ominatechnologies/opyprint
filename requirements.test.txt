@@ -1,7 +1,7 @@
 # Testing requirements:
 #
 flake8==3.8.4
-mypy==0.800
+mypy==0.812
 numpy==1.19.5
 pytest==6.2.2
 pytest-asyncio==0.14.0

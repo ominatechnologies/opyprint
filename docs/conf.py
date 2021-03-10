@@ -35,7 +35,7 @@ repo = config.repo
 version = config.version
 
 # If your documentation needs a minimal Sphinx version, state it here.
-needs_sphinx = '3.4.3'
+needs_sphinx = '3.5.2'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
