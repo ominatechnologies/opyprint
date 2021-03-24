@@ -56,7 +56,7 @@ their '__str__' method as follows:
 
 Project Setup
 -------------
-This project requires Python 3.7 or higher. It is supported for Python 3.7, 3.8
+This project requires Python 3.8 or higher. It is supported for Python 3.8
 and 3.9.
 
 This project uses pytest_ as testing framework and our code provides type

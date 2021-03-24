@@ -30,7 +30,7 @@ if "OSOURCE" in environ and environ["OSOURCE"] == "local":
 else:
     install_requires += [
         ("frozendict @ git+https://github.com/ominatechnologies/"
-         "frozendict.git@refactor_21#egg=frozendict"),
+         "frozendict@refactor_21#egg=frozendict"),
     ]
 
 setup(
@@ -38,7 +38,6 @@ setup(
     author_email=author_email,
     classifiers=[
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
     ],
