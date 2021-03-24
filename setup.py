@@ -22,15 +22,15 @@ if "OSOURCE" in environ and environ["OSOURCE"] == "local":
     install_requires += [
         "frozendict==2021.01.07",
     ]
-elif "OSOURCE" in environ and environ["OSOURCE"] == "dev":
-    install_requires += [
-        ("frozendict @ git+https://github.com/ominatechnologies/"
-         "frozendict#egg=frozendict"),
-    ]
+# elif "OSOURCE" in environ and environ["OSOURCE"] == "dev":
+#     install_requires += [
+#         ("frozendict @ git+https://github.com/ominatechnologies/"
+#          "frozendict#egg=frozendict"),
+#     ]
 else:
     install_requires += [
         ("frozendict @ git+https://github.com/ominatechnologies/"
-         "frozendict@2021.01.07#egg=frozendict"),
+         "frozendict.git@refactor_21#egg=frozendict"),
     ]
 
 setup(
