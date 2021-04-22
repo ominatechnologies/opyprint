@@ -140,7 +140,7 @@ class Logger(Protocol):
         raise NotImplementedError()
 
     @contextmanager
-    def indent(self):
+    def indent(self, steps: int = 1):
         """
         Increase the indentation for the subsequent log calls if the log level
         is info or higher.
@@ -427,10 +427,10 @@ class LoggerBase(Logger, ABC):
         return self
 
     @contextmanager
-    def indent(self):
+    def indent(self, steps=1):
         if self.info_enabled:
             prev_indent = self._indent
-            self._indent += 1
+            self._indent += steps
             try:
                 with self._ppc.indent():
                     yield
