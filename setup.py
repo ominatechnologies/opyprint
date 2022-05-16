@@ -13,7 +13,7 @@ def readme():
 # 3rd-party run-time requirements:
 install_requires = [
     "colorama==0.4.4",
-    "numpy==1.20.0",
+    "numpy==1.21.0",
     "typing-extensions==3.7.4.3",
 ]
 
